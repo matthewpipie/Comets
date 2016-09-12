@@ -11,7 +11,7 @@ public:
 	void initPos();
 	void moveComet(bool isBack = false);
 	bool isAlive;
-	void modifyTrueAngle(double xSpeed, double ySpeed);
+	void modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle, double initSpeed, double altSpeed);
 	void setSpeedMP(double newMP);
 	double getSpeedMP();
 	bool isColliding(Comet *testComet);

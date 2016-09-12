@@ -132,9 +132,12 @@ void Comet::resolveCollision(Comet *resolveComet) {
 	double finalY1 = collision.getFinalY();
 	double finalX2 = collision.getSwappedX();
 	double finalY2 = collision.getSwappedY();
+	double speedMP1 = getSpeedMP();
+	double speedMP2 = resolveComet->getSpeedMP();
+	double angle = collision.getCollisionAngle();
 
-	modifyTrueAngle(finalX1, finalY1);
-	resolveComet->modifyTrueAngle(finalX2, finalY2);
+	modifyTrueAngle(finalX1, finalY1, angle, speedMP1, speedMP2);
+	resolveComet->modifyTrueAngle(finalX2, finalY2, angle, speedMP2, speedMP1);
 
 	/*double tempMP = resolveComet->getSpeedMP();
 	resolveComet->setSpeedMP(getSpeedMP());
@@ -143,13 +146,14 @@ void Comet::resolveCollision(Comet *resolveComet) {
 
 void Comet::setSpeedMP(double newMP) {
 	_speedMultiplier = newMP;
+	std::cout << "setting speed to " << newMP << std::endl;
 }
 
 double Comet::getSpeedMP() {
 	return _speedMultiplier;
 }
 
-void Comet::modifyTrueAngle(double xSpeed, double ySpeed) {
+void Comet::modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle, double initSpeed, double altSpeed) {
 	double angle = atan(ySpeed / xSpeed) * 180.0 / M_PI;
 	if (angle < 180) {
 		_initSide = Side::BOTTOM;
@@ -157,7 +161,11 @@ void Comet::modifyTrueAngle(double xSpeed, double ySpeed) {
 	else {
 		_initSide = Side::TOP;
 	}
-	_initDegree = 180 - angle;
+
+	std::cout << altSpeed << " " << collisionAngle * 180.0 / M_PI << " " << initSpeed << std::endl;
+
+	_initDegree = 180.0 - angle;
+	setSpeedMP(abs(sin(collisionAngle) * initSpeed) + abs(cos(collisionAngle) * altSpeed));
 }
 
 double Comet::getR() {

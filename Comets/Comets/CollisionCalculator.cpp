@@ -26,6 +26,10 @@ double CollisionCalculator::getSwappedY() {
 	return calculate(_comet2, _comet1, [](double d) {return sin(d); });
 }
 
+double CollisionCalculator::getCollisionAngle() {
+	return atan((_comet1->getY() - _comet2->getY()) / (_comet1->getX() - _comet2->getX()));
+}
+
 double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::function<double(double)> func) {
 	double comet1XSpeedInit = comet1->getXSpeed();
 	double comet1YSpeedInit = comet1->getYSpeed();
@@ -41,7 +45,7 @@ double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::functio
 	//double collisionPointX = ((getX() * resolveComet->getR()) + (resolveComet->getX() * getR())) / (getR() + resolveComet->getR());
 	//double collisionPointY = ((getY() * resolveComet->getR()) + (resolveComet->getY() * getR())) / (getR() + resolveComet->getR());
 
-	double collisionAngle = atan((comet1->getY() - comet2->getY()) / (comet1->getX() - comet2->getX()));
+	double collisionAngle = getCollisionAngle();
 
 	return ((comet1ScalarSpeed * cos((double)comet1Angle - collisionAngle) * (comet1Mass - comet2Mass) +
 		(2 * comet2Mass * comet2ScalarSpeed * cos((double)comet2Angle - collisionAngle))) / (comet1Mass + comet2Mass)) *

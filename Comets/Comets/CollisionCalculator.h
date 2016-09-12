@@ -9,6 +9,7 @@ public:
 	double getFinalY();
 	double getSwappedX();
 	double getSwappedY();
+	double getCollisionAngle();
 private:
 	double calculate(Comet *comet1, Comet *comet2, std::function<double(double)> func);
 	Comet *_comet1;
