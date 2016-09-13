@@ -1,5 +1,4 @@
 /* Copyright (C) 2016 Matthew Giordano
-:xa
  * You may use, distribute, and modify this code under the
  * terms of the GPL license.
  *
@@ -8,7 +7,7 @@
  */
 #pragma once
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <stdio.h>
 #include <cmath>
 #include <ctime>
