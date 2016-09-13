@@ -1,3 +1,12 @@
+/* Copyright (C) 2016 Matthew Pipie
+ * You may use, distribute, and modify this code under the
+ * terms of the GPL license.
+ *
+ * You should have recieved a copy of the GPL license with
+ * this file. If not, please visit https://github.com/matthewpipie/Comets
+ */
+#include <string>
+#include <utility>
 #include "stdafx.h"
 #include "Comet.h"
 #include "CollisionCalculator.h"
@@ -6,20 +15,22 @@
 
 SDL_Texture *Comet::cometTexture = nullptr;
 
-Comet::Comet() : Sprite(Constants::STAR_TEXTURE), _initPos(0), _initDegree(0), _speedMultiplier(1), _initSide(Side::TOP), isAlive(true)
-{
-}
+Comet::Comet() :
+	Sprite(Constants::STAR_TEXTURE),
+	_initPos(0),
+	_initDegree(0),
+	_speedMultiplier(1),
+	_initSide(Side::TOP),
+	isAlive(true) {}
 
 
-Comet::~Comet()
-{
-}
+Comet::~Comet() {}
 
 void Comet::initCometTexture(SDL_Renderer *rend) {
 	cometTexture = IMG_LoadTexture(rend, Constants::COMET_TEXTURE);
 	std::cout << "Comet image has been loaded: " << std::endl;
 	if (cometTexture == nullptr) {
-		//SDL_DestroyTexture(texture);
+		// SDL_DestroyTexture(texture);
 		fatalError("Failed to load image (comet)!  SDL_Error: " + std::string(SDL_GetError()));
 	}
 }
@@ -27,18 +38,21 @@ void Comet::initCometTexture(SDL_Renderer *rend) {
 void Comet::initPos() {
 	setSize(Constants::COMET_SIZE, Constants::COMET_SIZE);
 	isAlive = true;
-	_initPos = (double)(rand() % 101);
+	_initPos = static_cast<double>(rand() % 101);
 	_initDegree = (rand() % 179) + 1;
 	_initSide = (Side)(rand() % 4);
-	_speedMultiplier = (Constants::COMET_SPEED_MULTIPLIER_MAX - Constants::COMET_SPEED_MULTIPLIER_MIN) * ((double)rand() / (double)RAND_MAX) + Constants::COMET_SPEED_MULTIPLIER_MIN;
+	_speedMultiplier = (Constants::COMET_SPEED_MULTIPLIER_MAX
+		- Constants::COMET_SPEED_MULTIPLIER_MIN)
+		* (static_cast<double>(rand()) / static_cast<double>(RAND_MAX))
+		+ Constants::COMET_SPEED_MULTIPLIER_MIN;
 
-	//switch
+	// switch
 	/* if side is 0, setPos(_initPos, 0)
 	if 1, setPos(100, _initPos)
 	if 2, setPos(_initPos, 100)
 	if 3, setPos(0, _initPos)*/
 
-	switch ((int)_initSide) {
+	switch (static_cast<int>(_initSide)) {
 		case 0:
 			setPos(_initPos, 0.0);
 			break;
@@ -54,9 +68,6 @@ void Comet::initPos() {
 		default:
 			fatalError("Failed to set position!");
 	}
-
-
-
 }
 
 void Comet::moveComet(bool isBack) {
@@ -75,33 +86,34 @@ void Comet::moveComet(bool isBack) {
 			isAlive = false;
 			return;
 		}
-		xMovement = (double)Constants::COMET_SPEED * getXSpeed() * getSpeedMP();
-		yMovement = (double)Constants::COMET_SPEED * getYSpeed() * getSpeedMP();
-	}
-	
-	else {
-		//std::cout << "initial thigo!" << std::endl;
+		xMovement = static_cast<double>(Constants::COMET_SPEED) * getXSpeed() * getSpeedMP();
+		yMovement = static_cast<double>(Constants::COMET_SPEED) * getYSpeed() * getSpeedMP();
+	} else {
+		// std::cout << "initial thigo!" << std::endl;
 		switch (_initSide) {
 		case Side::TOP:
 			xMovement = 0;
-			yMovement = (-0.6 * getW()) / (.01 * (double)Constants::SCREEN_HEIGHT_CALC);
+			yMovement = (-0.6 * getW())
+				/ (.01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
 			break;
 		case Side::RIGHT:
-			xMovement = (0.6 * getH()) / (.01 * (double)Constants::SCREEN_WIDTH_CALC);
+			xMovement = (0.6 * getH())
+				/ (.01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC));
 			yMovement = 0;
 			break;
 		case Side::BOTTOM:
 			xMovement = 0;
-			yMovement = (0.6 * getW()) / (.01 * (double)Constants::SCREEN_HEIGHT_CALC);
+			yMovement = (0.6 * getW())
+				/ (.01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
 			break;
 		case Side::LEFT:
-			xMovement = (-0.6 * getH()) / (.01 * (double)Constants::SCREEN_WIDTH_CALC);
+			xMovement = (-0.6 * getH())
+				/ (.01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC));
 			yMovement = 0;
 			break;
 		default:
 			fatalError("Failed to read position!");
 		}
-
 	}
 
 	move(xMovement, yMovement);
@@ -110,14 +122,13 @@ void Comet::moveComet(bool isBack) {
 		std::cout << "init: moving comet x:" << _x << " y: " << _y << std::endl;
 
 	}*/
-
 }
 
 bool Comet::isColliding(Comet *testComet) {
 	double distanceBetweenCometsSquared = pow(getX() - testComet->getX(), 2.0) + pow(getY() - testComet->getY(), 2.0);
 	double maxCollisionDistanceSquared = pow(getR() + testComet->getR(), 2.0);
 
-	//std::cout << maxCollisionDistanceSquared << " " << distanceBetweenCometsSquared << std::endl;
+	// std::cout << maxCollisionDistanceSquared << " " << distanceBetweenCometsSquared << std::endl;
 
 	if (distanceBetweenCometsSquared <= maxCollisionDistanceSquared) {
 		return true;
@@ -126,7 +137,6 @@ bool Comet::isColliding(Comet *testComet) {
 }
 
 void Comet::resolveCollision(Comet *resolveComet) {
-
 	CollisionCalculator collision(this, resolveComet);
 	double finalX1 = collision.getFinalX();
 	double finalY1 = collision.getFinalY();
@@ -157,8 +167,7 @@ void Comet::modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle,
 	double angle = atan(ySpeed / xSpeed) * 180.0 / M_PI;
 	if (angle < 180) {
 		_initSide = Side::BOTTOM;
-	}
-	else {
+	} else {
 		_initSide = Side::TOP;
 	}
 
@@ -176,16 +185,16 @@ double Comet::getXSpeed() {
 	double xSpeed;
 	switch (_initSide) {
 	case Side::TOP:
-		xSpeed = cos((double)_initDegree * M_PI / 180.0);
+		xSpeed = cos(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::RIGHT:
-		xSpeed = -1.0 * sin((double)_initDegree * M_PI / 180.0);
+		xSpeed = -1.0 * sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::BOTTOM:
-		xSpeed = -1.0 * cos((double)_initDegree * M_PI / 180.0);
+		xSpeed = -1.0 * cos(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::LEFT:
-		xSpeed = sin((double)_initDegree * M_PI / 180.0);
+		xSpeed = sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	default:
 		fatalError("Failed to read position!");
@@ -197,16 +206,16 @@ double Comet::getYSpeed() {
 	double ySpeed;
 	switch(_initSide) {
 	case Side::TOP:
-		ySpeed = sin((double)_initDegree * M_PI / 180.0);
+		ySpeed = sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::RIGHT:
-		ySpeed = cos((double)_initDegree * M_PI / 180.0);
+		ySpeed = cos(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::BOTTOM:
-		ySpeed = -1.0 * sin((double)_initDegree * M_PI / 180.0);
+		ySpeed = -1.0 * sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::LEFT:
-		ySpeed = -1.0 * cos((double)_initDegree * M_PI / 180.0);
+		ySpeed = -1.0 * cos(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	default:
 		fatalError("Failed to read position!");
