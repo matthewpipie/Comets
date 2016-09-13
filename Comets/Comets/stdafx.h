@@ -1,20 +1,17 @@
-// stdafx.h : include file for standard system include files,
-// or project specific include files that are used frequently, but
-// are changed infrequently
-//
-
+/* Copyright (C) 2016 Matthew Giordano
+ * You may use, distribute, and modify this code under the
+ * terms of the GPL license.
+ *
+ * You should have recieved a copy of the GPL license with
+ * this file. If not, please visit https://github.com/matthewpipie/Comets
+ */
 #pragma once
 
-#include <stdio.h>
-
-
-
-// TODO: reference additional headers your program requires here
-
 #include <SDL.h>
-#include <iostream>
 #include <stdio.h>
-#include <string>
-#include <vector>
+#include <cmath>
 #include <ctime>
 #include <functional>
+#include <iostream>
+#include <string>
+#include <vector>

@@ -1,22 +1,27 @@
+/* Copyright (C) 2016 Matthew Giordano
+ * You may use, distribute, and modify this code under the
+ * terms of the GPL license.
+ *
+ * You should have recieved a copy of the GPL license with
+ * this file. If not, please visit https://github.com/matthewpipie/Comets
+ */
+#include <stdlib.h>
+#include <string>
 #include "stdafx.h"
 #include "MainGame.h"
 #include "Errors.h"
-#include <stdlib.h>
 
 int MainGame::frameCount = 0;
 
 MainGame::MainGame() : _window(nullptr), _maxFPS(60.0f), _gameState(GameState::PLAY), pause(false) {
-	//_sprites.push_back(Star());
-	//_sprites.push_back(Sprite());
-	//_sprites.push_back(Sprite());
-	//_sprites.push_back(Sprite());
-	//_sprites.push_back(Sprite());
-	
-
+	// _sprites.push_back(Star());
+	// _sprites.push_back(Sprite());
+	// _sprites.push_back(Sprite());
+	// _sprites.push_back(Sprite());
+	// _sprites.push_back(Sprite());
 }
 
 MainGame::~MainGame() {
-
 }
 
 void MainGame::run() {
@@ -27,16 +32,16 @@ void MainGame::run() {
 	makeComets();
 	makeStars();
 
-	//_sprites[0].initTexture(_renderer);
-	//_sprites[1].initTexture(_renderer, "resources/comet.bmp");
-	//_sprites[2].initTexture(_renderer, "resources/comet.bmp");
-	//_sprites[3].initTexture(_renderer, "resources/comet.bmp");
-	//_sprites[4].initTexture(_renderer, "resources/comet.bmp");
-	//_sprites[0].setPixelAttributes(00, 0, 64, 64);
-	//_sprites[1].setPixelAttributes(16, 0, 32, 32);
-	//_sprites[2].setPixelAttributes(16 + 32, 0, 63, 63);
-	//_sprites[3].setPixelAttributes(16 + 32 + 63, 0, 126, 126);
-	//_sprites[0].setAttributes(16 + 32 + 63 + 126, 0, 20, 20);
+	// _sprites[0].initTexture(_renderer);
+	// _sprites[1].initTexture(_renderer, "resources/comet.bmp");
+	// _sprites[2].initTexture(_renderer, "resources/comet.bmp");
+	// _sprites[3].initTexture(_renderer, "resources/comet.bmp");
+	// _sprites[4].initTexture(_renderer, "resources/comet.bmp");
+	// _sprites[0].setPixelAttributes(00, 0, 64, 64);
+	// _sprites[1].setPixelAttributes(16, 0, 32, 32);
+	// _sprites[2].setPixelAttributes(16 + 32, 0, 63, 63);
+	// _sprites[3].setPixelAttributes(16 + 32 + 63, 0, 126, 126);
+	// _sprites[0].setAttributes(16 + 32 + 63 + 126, 0, 20, 20);
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
 	/*_sprites[0].rect.x = 0;
 	_sprites[0].rect.y = 0;
@@ -96,11 +101,11 @@ void MainGame::gameLoop() {
 			fixCollision();
 			drawGame();
 		}
-		
+
 		float frameTicks = SDL_GetTicks() - startTicks;
 
 		if (MainGame::frameCount % 60 == 0) {
-			//std::cout << MainGame::frameCount << std::endl;
+			// std::cout << MainGame::frameCount << std::endl;
 		}
 
 		if (1000.0f / _maxFPS > frameTicks) {
@@ -110,7 +115,7 @@ void MainGame::gameLoop() {
 			MainGame::frameCount++;
 		}
 	}
-	//X button pressed
+	// X button pressed
 	SDL_DestroyTexture(Star::starTexture);
 	SDL_DestroyTexture(Comet::cometTexture);
 	SDL_DestroyRenderer(_renderer);
@@ -122,21 +127,20 @@ void MainGame::gameLoop() {
 void MainGame::processInput() {
 	SDL_Event evnt;
 
-	//Will keep looping until there are no more events to process
+	// Will keep looping until there are no more events to process
 	while (SDL_PollEvent(&evnt)) {
 		switch (evnt.type) {
 		case SDL_QUIT:
 			_gameState = GameState::EXIT;
 			break;
 		case SDL_MOUSEMOTION:
-			//std::cout << evnt.motion.x << " " << evnt.motion.y << std::endl;
+			// std::cout << evnt.motion.x << " " << evnt.motion.y << std::endl;
 			if (evnt.motion.x == 0) {
 				pause = true;
-			}
-			else {
+			} else {
 				pause = false;
 			}
-			//_sprites[0].setMiddlePixelPos(evnt.motion.x, evnt.motion.y);
+			// _sprites[0].setMiddlePixelPos(evnt.motion.x, evnt.motion.y);
 			break;
 		}
 	}
@@ -145,35 +149,39 @@ void MainGame::processInput() {
 void MainGame::drawGame() {
 	/*Get window surface
 	SDL_Surface *screenSurface = SDL_GetWindowSurface(_window);
-	
-	//Fill the surface white
+
+	// Fill the surface white
 	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 
-	//Update the surface
+	// Update the surface
 	SDL_UpdateWindowSurface(_window);*/
 
 	SDL_RenderClear(_renderer);
 
-	for (_starI = _stars.begin(); _starI != _stars.end(); ++_starI) { //render stars first, before anything else, so they are in the bkg
+	for (_starI = _stars.begin(); _starI != _stars.end(); ++_starI) {  // render stars first, before anything else, so they are in the bkg
 		_starI->fixRect();
-		SDL_RenderCopy(_renderer, Star::starTexture, NULL, &_starI->getRect());
-		//std::cout << "Star copying @ X:" << _starI->_x << " Y: " << _starI->_y << " W: " << _starI->_w << " H: " << _starI->_h << " TXT: " << _starI->texture << std::endl;
+		SDL_Rect temprect = _starI->getRect();
+		SDL_RenderCopy(_renderer, Star::starTexture, NULL, &temprect);
+		// std::cout << "Star copying @ X:" << _starI->_x << " Y: " << _starI->_y << " W: " << _starI->_w << " H: " << _starI->_h << " TXT: " << _starI->texture << std::endl;
 	}
 	for (_cometI = _comets.begin(); _cometI != _comets.end(); ++_cometI) {
 		_cometI->fixRect();
-		SDL_RenderCopy(_renderer, Comet::cometTexture, NULL, &_cometI->getRect());
+		SDL_Rect temprect = _cometI->getRect();
+		SDL_RenderCopy(_renderer, Comet::cometTexture, NULL, &temprect);
 	}
 
 	SDL_RenderPresent(_renderer);
-	//std::cout << "DONE!" << std::endl;
+	// std::cout << "DONE!" << std::endl;
 }
 
-void MainGame::moveStuff() {/*
+void MainGame::moveStuff() {
+	/*
 	if (MainGame::frameCount % 1 == 0) {
 		for (_i = _sprites.begin(); _i != _sprites.end(); ++_i) {
 			_i->setPos(MainGame::frameCount % 100, 0);
 		}
 	}*/
+
 	for (_starI = _stars.begin(); _starI != _stars.end(); ++_starI) {
 		_starI->twinkle();
 	}
@@ -185,8 +193,6 @@ void MainGame::moveStuff() {/*
 	if (MainGame::frameCount % 5 == 0) {
 		makeComet();
 	}
-	
-	
 }
 
 void MainGame::fixCollision() {
@@ -203,12 +209,11 @@ void MainGame::cleanComets() {
 	for (_cometI = _comets.begin(); _cometI != _comets.end(); /*++_cometI*/) {
 		if (!_cometI->isAlive) {
 			_cometI = _comets.erase(_cometI);
-		}
-		else {
+		} else {
 			++_cometI;
 		}
 	}
-	//std::cout << _comets.size() << std::endl;
+	// std::cout << _comets.size() << std::endl;
 }
 
 void MainGame::makeComet() {

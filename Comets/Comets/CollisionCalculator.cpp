@@ -1,17 +1,20 @@
+/* Copyright (C) 2016 Matthew Giordano
+ * You may use, distribute, and modify this code under the
+ * terms of the GPL license.
+ *
+ * You should have recieved a copy of the GPL license with
+ * this file. If not, please visit https://github.com/matthewpipie/Comets
+ */
 #include "stdafx.h"
 #include "CollisionCalculator.h"
 
-
-CollisionCalculator::CollisionCalculator(Comet *comet1, Comet *comet2)
-{
+CollisionCalculator::CollisionCalculator(Comet *comet1, Comet *comet2) {
 	_comet1 = comet1;
 	_comet2 = comet2;
 }
 
 
-CollisionCalculator::~CollisionCalculator()
-{
-}
+CollisionCalculator::~CollisionCalculator() {}
 
 double CollisionCalculator::getFinalX() {
 	return calculate(_comet1, _comet2, [](double d) {return cos(d); });
@@ -27,7 +30,8 @@ double CollisionCalculator::getSwappedY() {
 }
 
 double CollisionCalculator::getCollisionAngle() {
-	return atan((_comet1->getY() - _comet2->getY()) / (_comet1->getX() - _comet2->getX()));
+	return atan((_comet1->getY() - _comet2->getY())
+		/ (_comet1->getX() - _comet2->getX()));
 }
 
 double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::function<double(double)> func) {
@@ -47,8 +51,11 @@ double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::functio
 
 	double collisionAngle = getCollisionAngle();
 
-	return ((comet1ScalarSpeed * cos((double)comet1Angle - collisionAngle) * (comet1Mass - comet2Mass) +
-		(2 * comet2Mass * comet2ScalarSpeed * cos((double)comet2Angle - collisionAngle))) / (comet1Mass + comet2Mass)) *
-		func(collisionAngle) + (comet1ScalarSpeed * sin((double)comet1Angle - collisionAngle) *
-		func((double)collisionAngle + M_PI / 2));
+	return ((comet1ScalarSpeed
+			* cos(static_cast<double>(comet1Angle) - collisionAngle)
+			* (comet1Mass - comet2Mass) + (2 * comet2Mass * comet2ScalarSpeed
+			* cos(static_cast<double>(comet2Angle) - collisionAngle)))
+			/ (comet1Mass + comet2Mass)) * func(collisionAngle)
+			+ (comet1ScalarSpeed * sin(static_cast<double>(comet1Angle)
+			- collisionAngle) * func(static_cast<double>(collisionAngle) + M_PI / 2));
 }

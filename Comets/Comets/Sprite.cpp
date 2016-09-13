@@ -1,3 +1,12 @@
+/* Copyright (C) 2016 Matthew Giordano
+ * You may use, distribute, and modify this code under the
+ * terms of the GPL license.
+ *
+ * You should have recieved a copy of the GPL license with
+ * this file. If not, please visit https://github.com/matthewpipie/Comets
+ */
+#include <utility>
+#include <string>
 #include "stdafx.h"
 #include "Sprite.h"
 #include "Constants.h"
@@ -21,9 +30,9 @@ Sprite::~Sprite() {
 
 void Sprite::initTexture(SDL_Renderer *rend) {
 	_texture = IMG_LoadTexture(rend, _path);
-	std::cout << "Sprite has been created: " << _path << std::endl;
+	/* std::cout << "Sprite has been created: " << _path << std::endl; */
 	if (_texture == nullptr) {
-		//SDL_DestroyTexture(texture);
+		// SDL_DestroyTexture(texture);
 		fatalError("Failed to load image!  SDL_Error: " + std::string(SDL_GetError()));
 	}
 }
@@ -33,7 +42,11 @@ void Sprite::querySize() {
 }
 
 void Sprite::setAttributes(double x, double y, double w, double h) {
-	setPixelAttributes(x * .01 * (double)Constants::SCREEN_WIDTH_CALC, y * .01 * (double)Constants::SCREEN_HEIGHT_CALC, w * .01 * (double)Constants::SCREEN_HEIGHT_CALC, h * .01 * (double)Constants::SCREEN_HEIGHT_CALC);
+	setPixelAttributes(x * .01
+	* static_cast<double>(Constants::SCREEN_WIDTH_CALC), y * .01
+	* static_cast<double>(Constants::SCREEN_HEIGHT_CALC), w * .01
+	* static_cast<double>(Constants::SCREEN_HEIGHT_CALC), h * .01
+	* static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
 }
 
 void Sprite::setPixelAttributes(double x, double y, double w, double h) {
@@ -44,7 +57,7 @@ void Sprite::setPixelAttributes(double x, double y, double w, double h) {
 }
 
 void Sprite::setPixelPos(double x, double y) {
-	//std::cout << "Setting stuff to x:" << x << " y: " << y << std::endl;
+	// std::cout << "Setting stuff to x:" << x << " y: " << y << std::endl;
 	setPixelAttributes(x, y, getW(), getH());
 }
 
@@ -57,15 +70,19 @@ void Sprite::movePixel(double x, double y) {
 }
 
 void Sprite::move(double x, double y) {
-	setPixelPos(x * .01 * (double)Constants::SCREEN_WIDTH_CALC + getX(), y * .01 * (double)Constants::SCREEN_HEIGHT_CALC + getY());
+	setPixelPos(x * .01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC)
+	+ getX(), y * .01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC) + getY());
 }
 
 void Sprite::setPos(double x, double y) {
-	setPixelPos(x * .01 * (double)Constants::SCREEN_WIDTH_CALC, y * .01 * (double)Constants::SCREEN_HEIGHT_CALC);
+	setPixelPos(x * .01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC), y
+	* .01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
 }
 
 void Sprite::setSize(double w, double h) {
-	setPixelAttributes(getX(), getY(), w * .01 * (double)Constants::SCREEN_HEIGHT_CALC, h * .01 * (double)Constants::SCREEN_HEIGHT_CALC);
+	setPixelAttributes(getX(), getY(), w * .01
+	* static_cast<double>(Constants::SCREEN_HEIGHT_CALC), h * .01
+	* static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
 }
 
 void Sprite::fixRect() {

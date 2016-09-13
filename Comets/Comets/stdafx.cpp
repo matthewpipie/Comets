@@ -1,8 +1,8 @@
-// stdafx.cpp : source file that includes just the standard includes
-// MegaMetro.pch will be the pre-compiled header
-// stdafx.obj will contain the pre-compiled type information
-
+/* Copyright (C) 2016 Matthew Giordano
+ * You may use, distribute, and modify this code under the
+ * terms of the GPL license.
+ *
+ * You should have recieved a copy of the GPL license with
+ * this file. If not, please visit https://github.com/matthewpipie/Comets
+ */
 #include "stdafx.h"
-
-// TODO: reference any additional headers you need in STDAFX.H
-// and not in this file

@@ -1,10 +1,12 @@
-// MegaMetro.cpp : Defines the entry point for the console application.
-//
-
+/* Copyright (C) 2016 Matthew Giordano
+ * You may use, distribute, and modify this code under the
+ * terms of the GPL license.
+ *
+ * You should have recieved a copy of the GPL license with
+ * this file. If not, please visit https://github.com/matthewpipie/Comets
+ */
 #include "stdafx.h"
 #include "MainGame.h"
-
-
 
 int main(int argc, char *args[]) {
 	srand(time(NULL));
@@ -12,4 +14,3 @@ int main(int argc, char *args[]) {
 	mainGame.run();
 	return 0;
 }
-
