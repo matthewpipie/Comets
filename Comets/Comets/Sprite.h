@@ -1,4 +1,4 @@
-/* Copyright (C) 2016 Matthew Pipie
+/* Copyright (C) 2016 Matthew Giordano
  * You may use, distribute, and modify this code under the
  * terms of the GPL license.
  *
