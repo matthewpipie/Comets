@@ -39,17 +39,21 @@ double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::functio
 	double comet1YSpeedInit = comet1->getYSpeed();
 	double comet1ScalarSpeed = comet1->getSpeed();
 	double comet1Mass = comet1->getR();
-	int comet1Angle = comet1->getRealAngle();
+	double comet1Angle = static_cast<double>(comet1->getRealAngle());
 	double comet2XSpeedInit = comet2->getXSpeed();
 	double comet2YSpeedInit = comet2->getYSpeed();
 	double comet2ScalarSpeed = comet2->getSpeed();
 	double comet2Mass = comet2->getR();
-	int comet2Angle = comet2->getRealAngle();
+	double comet2Angle = static_cast<double>(comet2->getRealAngle());
 
 	//double collisionPointX = ((getX() * resolveComet->getR()) + (resolveComet->getX() * getR())) / (getR() + resolveComet->getR());
 	//double collisionPointY = ((getY() * resolveComet->getR()) + (resolveComet->getY() * getR())) / (getR() + resolveComet->getR());
 
 	double collisionAngle = getCollisionAngle();
+
+	// Thanks to https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional_collision_with_two_moving_objects
+	
+	double numerator = comet1ScalarSpeed * std::cos(comet1Angle - collisionAngle) * (comet1Mass - comet2Mass) + 2 * comet1Mass * comet2Mass * std::cos(comet2Angle - collisionAngle);
 
 	return ((comet1ScalarSpeed
 			* std::cos(static_cast<double>(comet1Angle) - collisionAngle)
