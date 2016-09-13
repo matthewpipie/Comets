@@ -111,14 +111,12 @@ void MainGame::gameLoop() {
 		}
 	}
 	//X button pressed
-	_CrtDumpMemoryLeaks();
 	SDL_DestroyTexture(Star::starTexture);
 	SDL_DestroyTexture(Comet::cometTexture);
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
 	SDL_Quit();
 	exit(0);
-	_CrtDumpMemoryLeaks();
 }
 
 void MainGame::processInput() {
