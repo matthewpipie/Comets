@@ -174,7 +174,7 @@ void Comet::modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle,
 	std::cout << altSpeed << " " << collisionAngle * 180.0 / M_PI << " " << initSpeed << std::endl;
 
 	_initDegree = 180.0 - angle;
-	setSpeedMP(abs(sin(collisionAngle) * initSpeed) + abs(cos(collisionAngle) * altSpeed));
+	setSpeedMP(abs(std::sin(collisionAngle) * initSpeed) + abs(std::cos(collisionAngle) * altSpeed));
 }
 
 double Comet::getR() {
@@ -185,16 +185,16 @@ double Comet::getXSpeed() {
 	double xSpeed;
 	switch (_initSide) {
 	case Side::TOP:
-		xSpeed = cos(static_cast<double>(_initDegree) * M_PI / 180.0);
+		xSpeed = std::cos(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::RIGHT:
-		xSpeed = -1.0 * sin(static_cast<double>(_initDegree) * M_PI / 180.0);
+		xSpeed = -1.0 * std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::BOTTOM:
-		xSpeed = -1.0 * cos(static_cast<double>(_initDegree) * M_PI / 180.0);
+		xSpeed = -1.0 * std::cos(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::LEFT:
-		xSpeed = sin(static_cast<double>(_initDegree) * M_PI / 180.0);
+		xSpeed = std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	default:
 		fatalError("Failed to read position!");
@@ -206,16 +206,16 @@ double Comet::getYSpeed() {
 	double ySpeed;
 	switch(_initSide) {
 	case Side::TOP:
-		ySpeed = sin(static_cast<double>(_initDegree) * M_PI / 180.0);
+		ySpeed = std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::RIGHT:
-		ySpeed = cos(static_cast<double>(_initDegree) * M_PI / 180.0);
+		ySpeed = std::cos(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::BOTTOM:
-		ySpeed = -1.0 * sin(static_cast<double>(_initDegree) * M_PI / 180.0);
+		ySpeed = -1.0 * std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	case Side::LEFT:
-		ySpeed = -1.0 * cos(static_cast<double>(_initDegree) * M_PI / 180.0);
+		ySpeed = -1.0 * std::cos(static_cast<double>(_initDegree) * M_PI / 180.0);
 		break;
 	default:
 		fatalError("Failed to read position!");

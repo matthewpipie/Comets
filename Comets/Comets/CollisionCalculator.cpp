@@ -17,16 +17,16 @@ CollisionCalculator::CollisionCalculator(Comet *comet1, Comet *comet2) {
 CollisionCalculator::~CollisionCalculator() {}
 
 double CollisionCalculator::getFinalX() {
-	return calculate(_comet1, _comet2, [](double d) {return cos(d); });
+	return calculate(_comet1, _comet2, [](double d) {return std::cos(d); });
 }
 double CollisionCalculator::getFinalY() {
-	return calculate(_comet1, _comet2, [](double d) {return sin(d); });
+	return calculate(_comet1, _comet2, [](double d) {return std::sin(d); });
 }
 double CollisionCalculator::getSwappedX() {
-	return calculate(_comet2, _comet1, [](double d) {return cos(d); });
+	return calculate(_comet2, _comet1, [](double d) {return std::cos(d); });
 }
 double CollisionCalculator::getSwappedY() {
-	return calculate(_comet2, _comet1, [](double d) {return sin(d); });
+	return calculate(_comet2, _comet1, [](double d) {return std::sin(d); });
 }
 
 double CollisionCalculator::getCollisionAngle() {
@@ -52,10 +52,10 @@ double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::functio
 	double collisionAngle = getCollisionAngle();
 
 	return ((comet1ScalarSpeed
-			* cos(static_cast<double>(comet1Angle) - collisionAngle)
+			* std::cos(static_cast<double>(comet1Angle) - collisionAngle)
 			* (comet1Mass - comet2Mass) + (2 * comet2Mass * comet2ScalarSpeed
-			* cos(static_cast<double>(comet2Angle) - collisionAngle)))
+			* std::cos(static_cast<double>(comet2Angle) - collisionAngle)))
 			/ (comet1Mass + comet2Mass)) * func(collisionAngle)
-			+ (comet1ScalarSpeed * sin(static_cast<double>(comet1Angle)
+			+ (comet1ScalarSpeed * std::sin(static_cast<double>(comet1Angle)
 			- collisionAngle) * func(static_cast<double>(collisionAngle) + M_PI / 2));
 }
