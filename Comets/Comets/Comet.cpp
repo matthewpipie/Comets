@@ -128,8 +128,8 @@ bool Comet::isColliding(Comet *testComet) {
 
 
 
-	double distanceBetweenCometsSquared = pow(getX() - testComet->getX(), 2.0) + pow(getY() - testComet->getY(), 2.0);
-	double maxCollisionDistanceSquared = pow(getR() + testComet->getR(), 2.0);
+	double distanceBetweenCometsSquared = std::pow(getX() - testComet->getX(), 2.0) + std::pow(getY() - testComet->getY(), 2.0);
+	double maxCollisionDistanceSquared = std::pow(getR() + testComet->getR(), 2.0);
 
 	// std::cout << maxCollisionDistanceSquared << " " << distanceBetweenCometsSquared << std::endl;
 
@@ -250,5 +250,5 @@ int Comet::getRealAngle() {
 }
 
 double Comet::getSpeed() {
-	return sqrt(pow(getXSpeed(), 2.0) + pow(getYSpeed(), 2.0));
+	return sqrt(std::pow(getXSpeed(), 2.0) + std::pow(getYSpeed(), 2.0));
 }

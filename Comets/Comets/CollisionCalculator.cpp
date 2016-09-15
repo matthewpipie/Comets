@@ -30,8 +30,8 @@ double CollisionCalculator::getSwappedY() {
 }
 
 double CollisionCalculator::getCollisionAngle() {
-	return atan((_comet1->getY() - _comet2->getY())
-		/ (_comet1->getX() - _comet2->getX()));
+	return atan2((_comet1->getY() - _comet2->getY())
+		, (_comet1->getX() - _comet2->getX()));
 }
 
 double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::function<double(double)> func) {
