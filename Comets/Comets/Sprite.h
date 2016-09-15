@@ -6,7 +6,7 @@
  * this file. If not, please visit https://github.com/matthewpipie/Comets
  */
 #pragma once
-#include <SDL2/SDL_image.h>
+#include <SDL_image.h>
 #include <utility>
 
 class Sprite {

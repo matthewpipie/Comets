@@ -1,4 +1,4 @@
 ﻿  Comet.cpp
-c:\users\matth\source\repos\comets\comets\comets\comet.cpp(30): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\matth\source\repos\comets\comets\comets\comet.cpp(166): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\comet.cpp(41): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\comet.cpp(181): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   Comets.vcxproj -> C:\Users\matth\Source\Repos\Comets\Comets\Debug\Comets.exe

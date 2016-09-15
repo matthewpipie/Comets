@@ -53,13 +53,16 @@ double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::functio
 
 	// Thanks to https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional_collision_with_two_moving_objects
 	
-	double numerator = comet1ScalarSpeed * std::cos(comet1Angle - collisionAngle) * (comet1Mass - comet2Mass) + 2 * comet1Mass * comet2Mass * std::cos(comet2Angle - collisionAngle);
+	double numerator = comet1ScalarSpeed * std::cos(comet1Angle - collisionAngle)
+			* (comet1Mass - comet2Mass) + 2 * comet1Mass * comet2Mass
+			* std::cos(comet2Angle - collisionAngle);
 
-	return ((comet1ScalarSpeed
-			* std::cos(static_cast<double>(comet1Angle) - collisionAngle)
-			* (comet1Mass - comet2Mass) + (2 * comet2Mass * comet2ScalarSpeed
-			* std::cos(static_cast<double>(comet2Angle) - collisionAngle)))
-			/ (comet1Mass + comet2Mass)) * func(collisionAngle)
-			+ (comet1ScalarSpeed * std::sin(static_cast<double>(comet1Angle)
-			- collisionAngle) * func(static_cast<double>(collisionAngle) + M_PI / 2));
+	double denominator = comet1Mass + comet2Mass;
+
+	double multiplier = func(collisionAngle);
+
+	double addedTo = comet1ScalarSpeed * std::sin(comet1Angle - collisionAngle)
+			* func(collisionAngle + M_PI / 2);
+
+	return (numerator / denominator) * multiplier + addedTo;
 }
