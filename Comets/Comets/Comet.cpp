@@ -12,21 +12,20 @@
 #include "CollisionCalculator.h"
 #include "Constants.h"
 #include "Errors.h"
+#include "RNGCalculator.h"
 
 SDL_Texture *Comet::cometTexture = nullptr;
 
 Comet::Comet() :
-	Sprite(Constants::STAR_TEXTURE),
-	_initPos(0),
+	Sprite(),
 	_initDegree(0),
-	_speedMultiplier(1),
-	_initSide(Side::TOP),
+	_speed(1),
 	isAlive(true) {}
 
 
 Comet::~Comet() {}
 
-void Comet::initCometTexture(SDL_Renderer *rend) {
+void Comet::initCometTexture(SDL_Renderer *rend) { // Static method
 	cometTexture = IMG_LoadTexture(rend, Constants::COMET_TEXTURE);
 	std::cout << "Comet image has been loaded: " << std::endl;
 	if (cometTexture == nullptr) {
@@ -37,33 +36,35 @@ void Comet::initCometTexture(SDL_Renderer *rend) {
 
 void Comet::initPos() {
 	setSize(Constants::COMET_SIZE, Constants::COMET_SIZE);
-	isAlive = true;
-	_initPos = static_cast<double>(rand() % 101);
-	_initDegree = (rand() % 179) + 1;
+	_initPos = RNGCalculator::randomDouble(0, 100);
+	//TODO: Make _initPos a scope variable
+	// _initDegree = (rand() % 179) + 1;
 	_initSide = (Side)(rand() % 4);
-	_speedMultiplier = (Constants::COMET_SPEED_MULTIPLIER_MAX
-		- Constants::COMET_SPEED_MULTIPLIER_MIN)
-		* (static_cast<double>(rand()) / static_cast<double>(RAND_MAX))
-		+ Constants::COMET_SPEED_MULTIPLIER_MIN;
 
+	_speed = RNGCalculator::randomDouble(Constants::COMET_SPEED_MULTIPLIER_MAX, Constants::COMET_SPEED_MULTIPLIER_MIN);
+	//_speed = RNGCalculator(0.5, 1.5);
 	// switch
 	/* if side is 0, setPos(_initPos, 0)
 	if 1, setPos(100, _initPos)
 	if 2, setPos(_initPos, 100)
 	if 3, setPos(0, _initPos)*/
 
-	switch (static_cast<int>(_initSide)) {
+	switch ((int)_initSide) {
 		case 0:
-			setPos(_initPos, 0.0);
+			setPos(_initPos, 100.0);
+			_initDegree = RNGCalculator::randomDouble(180.0, 360.0);
 			break;
 		case 1:
 			setPos(100.0, _initPos);
+			_initDegree = RNGCalculator::randomDouble(90.0, 270.0);
 			break;
 		case 2:
-			setPos(_initPos, 100.0);
+			setPos(_initPos, 0.0);
+			_initDegree = RNGCalculator::randomDouble(0.0, 180.0);
 			break;
 		case 3:
-			setPos(0, _initPos);
+			setPos(0.0, _initPos);
+			_initDegree = RNGCalculator::randomDouble(270.0, 450.0);
 			break;
 		default:
 			fatalError("Failed to set position!");
@@ -86,9 +87,10 @@ void Comet::moveComet(bool isBack) {
 			isAlive = false;
 			return;
 		}
-		xMovement = static_cast<double>(Constants::COMET_SPEED) * getXSpeed() * getSpeedMP();
-		yMovement = static_cast<double>(Constants::COMET_SPEED) * getYSpeed() * getSpeedMP();
+		xMovement = static_cast<double>(Constants::COMET_SPEED) * getXSpeed() * getSpeed();
+		yMovement = static_cast<double>(Constants::COMET_SPEED) * getYSpeed() * getSpeed();
 	} else {
+		//TODO
 		// std::cout << "initial thigo!" << std::endl;
 		switch (_initSide) {
 		case Side::TOP:
@@ -145,8 +147,8 @@ void Comet::resolveCollision(Comet *resolveComet) {
 	double finalY1 = collision.getFinalY();
 	double finalX2 = collision.getSwappedX();
 	double finalY2 = collision.getSwappedY();
-	double speedMP1 = getSpeedMP();
-	double speedMP2 = resolveComet->getSpeedMP();
+	double speedMP1 = getSpeed();
+	double speedMP2 = resolveComet->getSpeed();
 	double angle = collision.getCollisionAngle();
 
 	// std::cout << speedMP1 << " " << speedMP2 << std::endl;
@@ -154,18 +156,18 @@ void Comet::resolveCollision(Comet *resolveComet) {
 	modifyTrueAngle(finalX1, finalY1, angle, speedMP1, speedMP2);
 	resolveComet->modifyTrueAngle(finalX2, finalY2, angle, speedMP2, speedMP1);
 
-	/*double tempMP = resolveComet->getSpeedMP();
-	resolveComet->setSpeedMP(getSpeedMP());
-	setSpeedMP(tempMP);*/
+	/*double tempMP = resolveComet->getSpeed();
+	resolveComet->setSpeed(getSpeed());
+	setSpeed(tempMP);*/
 }
 
-void Comet::setSpeedMP(double newMP) {
-	_speedMultiplier = newMP;
+void Comet::setSpeed(double newSpeed) {
+	_speed = newSpeed;
 	// std::cout << "setting speed to " << newMP << std::endl;
 }
 
-double Comet::getSpeedMP() {
-	return _speedMultiplier;
+double Comet::getSpeed() {
+	return _speed;
 }
 
 void Comet::modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle, double initSpeed, double altSpeed) {
@@ -179,7 +181,7 @@ void Comet::modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle,
 	// std::cout << altSpeed << " " << collisionAngle << "/" << collisionAngle * 180.0 / M_PI << " " << initSpeed << std::endl;
 
 	_initDegree = 180.0 - angle;
-	setSpeedMP(std::pow(std::sin(collisionAngle), 2) * initSpeed + std::pow(std::cos(collisionAngle), 2) * altSpeed);
+	setSpeed(std::pow(std::sin(collisionAngle), 2) * initSpeed + std::pow(std::cos(collisionAngle), 2) * altSpeed);
 }
 
 double Comet::getR() {
@@ -187,68 +189,17 @@ double Comet::getR() {
 }
 
 double Comet::getXSpeed() {
-	double xSpeed;
-	switch (_initSide) {
-	case Side::TOP:
-		xSpeed = std::cos(static_cast<double>(_initDegree) * M_PI / 180.0);
-		break;
-	case Side::RIGHT:
-		xSpeed = -1.0 * std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
-		break;
-	case Side::BOTTOM:
-		xSpeed = -1.0 * std::cos(static_cast<double>(_initDegree) * M_PI / 180.0);
-		break;
-	case Side::LEFT:
-		xSpeed = std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
-		break;
-	default:
-		fatalError("Failed to read position!");
-	}
-	return xSpeed;
+	return std::cos(static_cast<double>(_initDegree) * M_PI / 180.0);
 }
 
 double Comet::getYSpeed() {
-	double ySpeed;
-	switch(_initSide) {
-	case Side::TOP:
-		ySpeed = std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
-		break;
-	case Side::RIGHT:
-		ySpeed = std::cos(static_cast<double>(_initDegree) * M_PI / 180.0);
-		break;
-	case Side::BOTTOM:
-		ySpeed = -1.0 * std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
-		break;
-	case Side::LEFT:
-		ySpeed = -1.0 * std::cos(static_cast<double>(_initDegree) * M_PI / 180.0);
-		break;
-	default:
-		fatalError("Failed to read position!");
-	}
-	return ySpeed;
+	return std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 }
 
 int Comet::getRealAngle() {
-	int degree = 0;
-	switch (_initSide) {
-	case Side::TOP:
-		degree = -_initDegree;
-		break;
-	case Side::RIGHT:
-		degree = 270 - _initDegree;
-		break;
-	case Side::BOTTOM:
-		degree = 180 - _initDegree;
-		break;
-	case Side::LEFT:
-		degree = 90 - _initDegree;
-		break;
-	default:
-		fatalError("Failed to read position!");
-	}
-	return degree;
+	return _initDegree;
 }
 
-double Comet::getSpeed() {
+double Comet::getFrameSpeed() {
 	return sqrt(std::pow(getXSpeed(), 2.0) + std::pow(getYSpeed(), 2.0));
 }

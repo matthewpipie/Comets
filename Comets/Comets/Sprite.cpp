@@ -12,15 +12,16 @@
 #include "Constants.h"
 #include "Errors.h"
 
-Sprite::Sprite(const char *path) : _texture(nullptr), _x(0.0), _y(0.0), _w(0.0), _h(0.0) {
+Sprite::Sprite() : _texture(nullptr), _x(0.0), _y(0.0), _w(0.0), _h(0.0) {
 	_rect.x = 0;
 	_rect.y = 0;
 	_rect.w = 0;
 	_rect.h = 0;
+}
+Sprite::Sprite(const char *path) {
+	Sprite();
 	_path = path;
 }
-
-Sprite::Sprite() {}
 
 Sprite::~Sprite() {
 	if (_texture != nullptr) {
@@ -87,7 +88,7 @@ void Sprite::setSize(double w, double h) {
 
 void Sprite::fixRect() {
 	_rect.x = getX() - getW() / 2.0;
-	_rect.y = getY() - getH() / 2.0;
+	_rect.y = static_cast<double>(Constants::SCREEN_HEIGHT_CALC) - (getY() + getH() / 2.0);
 	_rect.h = getH();
 	_rect.w = getW();
 }
