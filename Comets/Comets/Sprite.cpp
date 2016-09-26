@@ -104,9 +104,15 @@ SDL_Texture *Sprite::getTexture() {
 double Sprite::getX() {
 	return _x;
 }
+double Sprite::getPercentX() {
+	return _x / (.01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC));
+}
 
 double Sprite::getY() {
 	return _y;
+}
+double Sprite::getPercentY() {
+	return _y / (.01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
 }
 
 double Sprite::getW() {
@@ -115,4 +121,8 @@ double Sprite::getW() {
 
 double Sprite::getH() {
 	return _h;
+}
+
+double Sprite::getR() {
+	return (getW() + getH()) / 4.0;
 }

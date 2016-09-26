@@ -9,7 +9,8 @@
 #include "MainGame.h"
 
 int main(int argc, char *args[]) {
-	srand(time(NULL));
+	//srand(time(NULL));
+	srand(0);
 	MainGame mainGame;
 	mainGame.run();
 	return 0;

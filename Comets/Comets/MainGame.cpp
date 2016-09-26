@@ -81,6 +81,15 @@ void MainGame::makeComets() {
 	for (int i = 0; i < Constants::COMET_COUNT; i++) {
 		makeComet();
 	}
+
+	//makeComet();
+	//makeComet();
+	//_comets[0].setPos(0, 0);
+	//_comets[0].setAngle(45);
+	//_comets[0].setSpeed(.3);
+	//_comets[1].setPos(100, 100);
+	//_comets[1].setAngle(225);
+	//_comets[1].setSpeed(.3);
 }
 
 void MainGame::makeStars() {
@@ -190,16 +199,22 @@ void MainGame::moveStuff() {
 		_cometI->moveComet();
 	}
 
-	if (MainGame::frameCount % 5 == 0) {
+	if (MainGame::frameCount % 3 == 0) {
 		makeComet();
+		std::cout << _comets.size() << std::endl;
+		std::cout << "Frame: " << MainGame::frameCount << std::endl;
 	}
 }
 
 void MainGame::fixCollision() {
 	for (int i = 0; i < _comets.size(); i++) {
-		for (int j = i + 1; j < _comets.size() - 1; j++) {
+		for (int j = i + 1; j < _comets.size(); j++) {
 			if (_comets[i].isColliding(&_comets[j])) {
 				_comets[i].resolveCollision(&_comets[j]);
+				if (_comets[i].isColliding(&_comets[j])) {
+					_comets[i].isAlive = false;
+					_comets[j].isAlive = false;
+				}
 			}
 		}
 	}
@@ -223,7 +238,6 @@ void MainGame::makeComet() {
 	do {
 		canExist = true;
 		testComet.initPos();
-		testComet.moveComet(true);
 		for (int i = 0; i < _comets.size(); i++) {
 			if (testComet.isColliding(&_comets[i])) {
 				canExist = false;

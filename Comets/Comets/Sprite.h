@@ -28,9 +28,12 @@ class Sprite {
 		SDL_Rect getRect();
 		SDL_Texture *getTexture();
 		double getX();
+		double getPercentX();
 		double getY();
+		double getPercentY();
 		double getW();
 		double getH();
+		double getR();
 
 	private:
 		SDL_Texture *_texture;

@@ -9,10 +9,10 @@
 #include <utility>
 #include "stdafx.h"
 #include "Comet.h"
-#include "CollisionCalculator.h"
 #include "Constants.h"
 #include "Errors.h"
 #include "RNGCalculator.h"
+#include "CollisionCalculator.h"
 
 SDL_Texture *Comet::cometTexture = nullptr;
 
@@ -36,10 +36,7 @@ void Comet::initCometTexture(SDL_Renderer *rend) { // Static method
 
 void Comet::initPos() {
 	setSize(Constants::COMET_SIZE, Constants::COMET_SIZE);
-	_initPos = RNGCalculator::randomDouble(0, 100);
-	//TODO: Make _initPos a scope variable
-	// _initDegree = (rand() % 179) + 1;
-	_initSide = (Side)(rand() % 4);
+	double initPos = RNGCalculator::randomDouble(0, 100);
 
 	_speed = RNGCalculator::randomDouble(Constants::COMET_SPEED_MULTIPLIER_MAX, Constants::COMET_SPEED_MULTIPLIER_MIN);
 	//_speed = RNGCalculator(0.5, 1.5);
@@ -49,26 +46,38 @@ void Comet::initPos() {
 	if 2, setPos(_initPos, 100)
 	if 3, setPos(0, _initPos)*/
 
-	switch ((int)_initSide) {
+	double xMovement = 0;
+	double yMovement = 0;
+
+	switch (rand() % 4) {
 		case 0:
-			setPos(_initPos, 100.0);
+			setPos(initPos, 100.0);
 			_initDegree = RNGCalculator::randomDouble(180.0, 360.0);
+			yMovement = (0.6 * getH())
+				/ (.01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
 			break;
 		case 1:
-			setPos(100.0, _initPos);
+			setPos(100.0, initPos);
 			_initDegree = RNGCalculator::randomDouble(90.0, 270.0);
+			xMovement = (0.6 * getW())
+				/ (.01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC));
 			break;
 		case 2:
-			setPos(_initPos, 0.0);
+			setPos(initPos, 0.0);
 			_initDegree = RNGCalculator::randomDouble(0.0, 180.0);
+			yMovement = (-0.6 * getH())
+				/ (.01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
 			break;
 		case 3:
-			setPos(0.0, _initPos);
+			setPos(0.0, initPos);
 			_initDegree = RNGCalculator::randomDouble(270.0, 450.0);
+			xMovement = (-0.6 * getW())
+				/ (.01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC));
 			break;
 		default:
 			fatalError("Failed to set position!");
 	}
+	move(xMovement, yMovement);
 }
 
 void Comet::moveComet(bool isBack) {
@@ -92,30 +101,7 @@ void Comet::moveComet(bool isBack) {
 	} else {
 		//TODO
 		// std::cout << "initial thigo!" << std::endl;
-		switch (_initSide) {
-		case Side::TOP:
-			xMovement = 0;
-			yMovement = (-0.6 * getW())
-				/ (.01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
-			break;
-		case Side::RIGHT:
-			xMovement = (0.6 * getH())
-				/ (.01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC));
-			yMovement = 0;
-			break;
-		case Side::BOTTOM:
-			xMovement = 0;
-			yMovement = (0.6 * getW())
-				/ (.01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
-			break;
-		case Side::LEFT:
-			xMovement = (-0.6 * getH())
-				/ (.01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC));
-			yMovement = 0;
-			break;
-		default:
-			fatalError("Failed to read position!");
-		}
+		
 	}
 
 	move(xMovement, yMovement);
@@ -128,38 +114,70 @@ void Comet::moveComet(bool isBack) {
 
 bool Comet::isColliding(Comet *testComet) {
 
-
-
 	double distanceBetweenCometsSquared = std::pow(getX() - testComet->getX(), 2.0) + std::pow(getY() - testComet->getY(), 2.0);
 	double maxCollisionDistanceSquared = std::pow(getR() + testComet->getR(), 2.0);
 
-	// std::cout << maxCollisionDistanceSquared << " " << distanceBetweenCometsSquared << std::endl;
+	//std::cout << maxCollisionDistanceSquared << " " << distanceBetweenCometsSquared << std::endl;
 
-	if (distanceBetweenCometsSquared <= maxCollisionDistanceSquared) {
+	bool areColliding = distanceBetweenCometsSquared <= maxCollisionDistanceSquared;
+
+	if (areColliding) {
+		//std::cout << "collision!" << std::endl;
 		return true;
 	}
 	return false;
 }
 
 void Comet::resolveCollision(Comet *resolveComet) {
-	CollisionCalculator collision(this, resolveComet);
+	Comet temp = *this;
+	//TODO: print the before and after angle of the line below
+	//std::cout << "Before: " << resolveComet->getAngle() << std::endl;
+	//std::cout << "Before: " << getAngle() << std::endl;
+	setCollision(this, resolveComet);
+	//std::cout << "After: " << resolveComet->getAngle() << std::endl;
+	//std::cout << "After: " << getAngle() << std::endl;
+
+	//std::cout << "Before2: " << resolveComet->getAngle() << std::endl;
+	//std::cout << "Before2: " << temp.getAngle() << std::endl;
+	resolveComet->setCollision(resolveComet, &temp);
+	//std::cout << "After2: " << resolveComet->getAngle() << std::endl;
+	//std::cout << "After2: " << temp.getAngle() << std::endl;
+	//std::cout << "After3: " << getAngle() << std::endl;
+	//std::cout << "After4: " << resolveComet->getAngle() * M_PI / 180.0 << std::endl;
+	//resolveComet->setCollision(this, resolveComet);
+	//setSpeed(.4);
+	//resolveComet->setSpeed(.2);
+
+	while (isColliding(resolveComet)) {
+		moveComet();
+		resolveComet->moveComet();
+	}
+
+	/* OLD
 	double finalX1 = collision.getFinalX();
 	double finalY1 = collision.getFinalY();
 	double finalX2 = collision.getSwappedX();
 	double finalY2 = collision.getSwappedY();
-	double speedMP1 = getSpeed();
-	double speedMP2 = resolveComet->getSpeed();
+	double speed1 = getSpeed();
+	double speed2 = resolveComet->getSpeed();
 	double angle = collision.getCollisionAngle();
 
 	// std::cout << speedMP1 << " " << speedMP2 << std::endl;
 
-	modifyTrueAngle(finalX1, finalY1, angle, speedMP1, speedMP2);
-	resolveComet->modifyTrueAngle(finalX2, finalY2, angle, speedMP2, speedMP1);
+	modifyTrueAngle(finalX1, finalY1, angle, speed1, speed2);
+	resolveComet->modifyTrueAngle(finalX2, finalY2, angle, speed2, speed1);
 
 	/*double tempMP = resolveComet->getSpeed();
 	resolveComet->setSpeed(getSpeed());
 	setSpeed(tempMP);*/
 }
+
+void Comet::setCollision(Comet *comet1, Comet *comet2) {
+	CollisionCalculator collision(comet1, comet2);
+	setSpeed(collision.getFinalSpeed());
+	setAngle(collision.getFinalAngle() * 180.0 / M_PI);
+}
+
 
 void Comet::setSpeed(double newSpeed) {
 	_speed = newSpeed;
@@ -170,22 +188,13 @@ double Comet::getSpeed() {
 	return _speed;
 }
 
-void Comet::modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle, double initSpeed, double altSpeed) {
+void Comet::modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle, double initSpeed, double altSpeed) { // OLD
 	double angle = atan(ySpeed / xSpeed) * 180.0 / M_PI;
-	if (angle < 180) {
-		_initSide = Side::BOTTOM;
-	} else {
-		_initSide = Side::TOP;
-	}
 
 	// std::cout << altSpeed << " " << collisionAngle << "/" << collisionAngle * 180.0 / M_PI << " " << initSpeed << std::endl;
 
 	_initDegree = 180.0 - angle;
 	setSpeed(std::pow(std::sin(collisionAngle), 2) * initSpeed + std::pow(std::cos(collisionAngle), 2) * altSpeed);
-}
-
-double Comet::getR() {
-	return (getW() + getH()) / 4.0;
 }
 
 double Comet::getXSpeed() {
@@ -196,10 +205,14 @@ double Comet::getYSpeed() {
 	return std::sin(static_cast<double>(_initDegree) * M_PI / 180.0);
 }
 
-int Comet::getRealAngle() {
-	return _initDegree;
+double Comet::getRadAngle() {
+	return _initDegree * M_PI / 180;
 }
 
 double Comet::getFrameSpeed() {
 	return sqrt(std::pow(getXSpeed(), 2.0) + std::pow(getYSpeed(), 2.0));
+}
+
+void Comet::setAngle(double angle) {
+	_initDegree = angle;
 }

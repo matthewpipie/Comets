@@ -15,12 +15,12 @@ const int Constants::SCREEN_WIDTH_CALC = SCREEN_WIDTH - 1;
 const int Constants::SCREEN_HEIGHT_CALC = SCREEN_HEIGHT - 1;
 
 // Multipliers
-const double Constants::COMET_SPEED_MULTIPLIER_MAX = 1.3;
-const double Constants::COMET_SPEED_MULTIPLIER_MIN = 0.6;
+const double Constants::COMET_SPEED_MULTIPLIER_MAX = 1.6;
+const double Constants::COMET_SPEED_MULTIPLIER_MIN = 0.8;
 
 // Cou qnts
 const int Constants::STAR_COUNT = 30;
-const int Constants::COMET_COUNT = 30;
+const int Constants::COMET_COUNT = 20;
 
 // Time stuffs
 const int Constants::STAR_MAX_NONTWINKLE_TIME = 5 * 60;  // Frames

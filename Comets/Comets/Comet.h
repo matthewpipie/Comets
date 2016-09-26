@@ -17,23 +17,22 @@ class Comet :
 			void initPos();
 			void moveComet(bool isBack = false);
 			bool isAlive;
-			void modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle, double initSpeed, double altSpeed);
+			void modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle, double initSpeed, double altSpeed); // OLD
 			void setSpeed(double newSpeed);
 			double getSpeed();
 			bool isColliding(Comet *testComet);
 			void resolveCollision(Comet *resolveComet);
-			double getR();
 			double getXSpeed();
 			double getYSpeed();
 			double getFrameSpeed();
-			int getRealAngle();
+			double getRadAngle();
+			void setAngle(double angle);
 
 			static SDL_Texture *cometTexture;
 			static void initCometTexture(SDL_Renderer *rend);
 
 		private:
-			int _initDegree;  // 0-359
+			void setCollision(Comet *comet1, Comet *comet2);
+			double _initDegree;  // 0-359
 			double _speed;
-			Side _initSide;
-			double _initPos;
 	};

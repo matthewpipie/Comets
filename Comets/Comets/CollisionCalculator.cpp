@@ -15,7 +15,7 @@ CollisionCalculator::CollisionCalculator(Comet *comet1, Comet *comet2) {
 
 
 CollisionCalculator::~CollisionCalculator() {}
-
+/* OLD
 double CollisionCalculator::getFinalX() {
 	return calculate(_comet1, _comet2, [](double d) {return std::cos(d); });
 }
@@ -27,11 +27,6 @@ double CollisionCalculator::getSwappedX() {
 }
 double CollisionCalculator::getSwappedY() {
 	return calculate(_comet2, _comet1, [](double d) {return std::sin(d); });
-}
-
-double CollisionCalculator::getCollisionAngle() {
-	return atan2((_comet1->getY() - _comet2->getY())
-		, (_comet1->getX() - _comet2->getX()));
 }
 
 double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::function<double(double)> func) {
@@ -65,4 +60,45 @@ double CollisionCalculator::calculate(Comet *comet1, Comet *comet2, std::functio
 			* func(collisionAngle + M_PI / 2);
 
 	return (numerator / denominator) * multiplier + addedTo;
+}
+*/
+
+double CollisionCalculator::getCollisionAngle() {
+	//std::cout << "Collision Angle: " << atan2((_comet1->getY() - _comet2->getY()),
+	//	(_comet1->getX() - _comet2->getX())) << std::endl;
+	return atan2((_comet1->getPercentY() - _comet2->getPercentY()),
+		(_comet1->getPercentX() - _comet2->getPercentX()));
+}
+
+double CollisionCalculator::getNewCoord(Comet *comet, bool isX) {
+	double temp;
+	if (isX) {
+		temp = std::cos(comet->getRadAngle() - getCollisionAngle());
+	}
+	else {
+		temp = std::sin(comet->getRadAngle() - getCollisionAngle());
+		//std::cout << "asdf: " << temp << std::endl;
+		//std::cout << "1: " << comet->getRadAngle() << std::endl;
+		//std::cout << "2: " << getCollisionAngle() << std::endl;
+		//return 0;
+	}
+	return comet->getSpeed() * temp;
+}
+
+double CollisionCalculator::getFinalX() {
+	return (getNewCoord(_comet1, true) * (_comet1->getR() - _comet2->getR())
+		+ 2 * _comet2->getR() * getNewCoord(_comet2, true))
+		/ (_comet1->getR() + _comet2->getR());
+}
+
+double CollisionCalculator::getFinalAngle() {
+	//return getCollisionAngle();
+	//std::cout << getNewCoord(_comet1, false) << std::endl;
+	//std::cout << getFinalX() << std::endl;
+
+	return atan2(getNewCoord(_comet1, false), getFinalX()) + getCollisionAngle();
+}
+
+double CollisionCalculator::getFinalSpeed() {
+	return std::sqrt(std::pow(getFinalX(), 2.0) + std::pow(getNewCoord(_comet1, false), 2.0));
 }

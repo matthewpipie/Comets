@@ -14,7 +14,7 @@
 
 SDL_Texture *Star::starTexture = nullptr;
 
-Star::Star() : Sprite(Constants::STAR_TEXTURE), _isTwinkling(false), _actionFrame(-1) {}
+Star::Star() : Sprite(), _isTwinkling(false), _actionFrame(-1) {}
 
 Star::~Star() {}
 
