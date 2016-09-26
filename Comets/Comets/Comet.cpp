@@ -114,6 +114,10 @@ void Comet::moveComet(bool isBack) {
 
 bool Comet::isColliding(Comet *testComet) {
 
+	if (!isAlive || !testComet->isAlive) {
+		return false;
+	}
+
 	double distanceBetweenCometsSquared = std::pow(getX() - testComet->getX(), 2.0) + std::pow(getY() - testComet->getY(), 2.0);
 	double maxCollisionDistanceSquared = std::pow(getR() + testComet->getR(), 2.0);
 
@@ -122,54 +126,39 @@ bool Comet::isColliding(Comet *testComet) {
 	bool areColliding = distanceBetweenCometsSquared <= maxCollisionDistanceSquared;
 
 	if (areColliding) {
-		//std::cout << "collision!" << std::endl;
+		std::cout << "collision!" << std::endl;
 		return true;
 	}
 	return false;
 }
 
 void Comet::resolveCollision(Comet *resolveComet) {
+
+	double totalSpeed = getSpeed() + resolveComet->getSpeed();
+	double xDist = getPercentX() - resolveComet->getPercentX();
+	double yDist = getPercentY() - resolveComet->getPercentY();
+	double distance = std::sqrt(std::pow(xDist, 2.0) + std::pow(yDist, 2.0));
+	CollisionCalculator tempColl(this, resolveComet);
+	double collisionAngle = tempColl.getCollisionAngle();
+
+	double intersectingSpace = getR() + resolveComet->getR() - distance;
+	double xTotalIntersect = intersectingSpace * std::cos(collisionAngle);
+	double yTotalIntersect = intersectingSpace * std::sin(collisionAngle);
+	//TODO: determine which one to move negative?
+	move(-xDist * (getSpeed() / totalSpeed), 3.0);
+
 	Comet temp = *this;
-	//TODO: print the before and after angle of the line below
-	//std::cout << "Before: " << resolveComet->getAngle() << std::endl;
-	//std::cout << "Before: " << getAngle() << std::endl;
+
 	setCollision(this, resolveComet);
-	//std::cout << "After: " << resolveComet->getAngle() << std::endl;
-	//std::cout << "After: " << getAngle() << std::endl;
 
-	//std::cout << "Before2: " << resolveComet->getAngle() << std::endl;
-	//std::cout << "Before2: " << temp.getAngle() << std::endl;
 	resolveComet->setCollision(resolveComet, &temp);
-	//std::cout << "After2: " << resolveComet->getAngle() << std::endl;
-	//std::cout << "After2: " << temp.getAngle() << std::endl;
-	//std::cout << "After3: " << getAngle() << std::endl;
-	//std::cout << "After4: " << resolveComet->getAngle() * M_PI / 180.0 << std::endl;
-	//resolveComet->setCollision(this, resolveComet);
-	//setSpeed(.4);
-	//resolveComet->setSpeed(.2);
 
-	while (isColliding(resolveComet)) {
-		moveComet();
-		resolveComet->moveComet();
-	}
 
-	/* OLD
-	double finalX1 = collision.getFinalX();
-	double finalY1 = collision.getFinalY();
-	double finalX2 = collision.getSwappedX();
-	double finalY2 = collision.getSwappedY();
-	double speed1 = getSpeed();
-	double speed2 = resolveComet->getSpeed();
-	double angle = collision.getCollisionAngle();
+	//while (isColliding(resolveComet)) {
+	//	moveComet();
+	//	resolveComet->moveComet();
+	//}
 
-	// std::cout << speedMP1 << " " << speedMP2 << std::endl;
-
-	modifyTrueAngle(finalX1, finalY1, angle, speed1, speed2);
-	resolveComet->modifyTrueAngle(finalX2, finalY2, angle, speed2, speed1);
-
-	/*double tempMP = resolveComet->getSpeed();
-	resolveComet->setSpeed(getSpeed());
-	setSpeed(tempMP);*/
 }
 
 void Comet::setCollision(Comet *comet1, Comet *comet2) {
@@ -214,5 +203,6 @@ double Comet::getFrameSpeed() {
 }
 
 void Comet::setAngle(double angle) {
+	std::cout << "setting angle to " << angle << std::endl;
 	_initDegree = angle;
 }

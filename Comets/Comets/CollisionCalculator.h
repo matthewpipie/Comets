@@ -12,6 +12,7 @@ class CollisionCalculator {
 		CollisionCalculator(Comet *comet1, Comet *comet2);
 		~CollisionCalculator();
 		double getFinalSpeed();
+		double getCollisionAngle();
 		double getFinalAngle();
 		//double getFinalY();
 		//double getSwappedX();
@@ -21,7 +22,6 @@ class CollisionCalculator {
 		//double calculate(Comet *comet1, Comet *comet2, std::function<double(double)> func);
 		Comet *_comet1;
 		Comet *_comet2;
-		double getCollisionAngle();
 		double getNewCoord(Comet *comet,  bool isX);
 		double getFinalX();
 };
