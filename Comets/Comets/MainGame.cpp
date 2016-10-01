@@ -81,6 +81,7 @@ void MainGame::loadTextures() {
 }
 
 void MainGame::makeComets() {
+	_comets.resize(0);
 	for (int i = 0; i < Constants::COMET_COUNT; i++) {
 		makeComet();
 	}
@@ -103,6 +104,7 @@ void MainGame::makeStars() {
 }
 
 void MainGame::makePlayers() {
+	_players.resize(0);
 	for (int i = 0; i < Constants::PLAYER_COUNT; i++) {
 		_players.push_back(Player());
 		_players[i].initPos();
@@ -119,7 +121,9 @@ void MainGame::gameLoop() {
 			movePlayer();
 			fixCollision();
 			if (!checkPlayers()) {
-				_gameState = GameState::EXIT;
+				makeComets();
+				makePlayers();
+				continue;
 			}
 			cleanComets();
 			drawGame();
