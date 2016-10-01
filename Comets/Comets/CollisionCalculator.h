@@ -24,4 +24,5 @@ class CollisionCalculator {
 		Comet *_comet2;
 		double getNewCoord(Comet *comet,  bool isX);
 		double getFinalX();
+		double formatCollisionAngle();
 };

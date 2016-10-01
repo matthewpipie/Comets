@@ -13,7 +13,7 @@ class Star :
 			Star();
 			~Star();
 			void twinkle();
-			void initStar(SDL_Renderer *rend);
+			void initStar();
 			static SDL_Texture *starTexture;
 			static void initStarTexture(SDL_Renderer *rend);
 		private:

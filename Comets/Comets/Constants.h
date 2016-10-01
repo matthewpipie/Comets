@@ -21,6 +21,7 @@ class Constants {
 		// Counts
 		static const int STAR_COUNT;
 		static const int COMET_COUNT;
+		static const int PLAYER_COUNT;
 
 		// Time stuffs
 		static const int STAR_MAX_NONTWINKLE_TIME;  // Frames

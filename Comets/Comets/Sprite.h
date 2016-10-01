@@ -26,6 +26,7 @@ class Sprite {
 		void fixRect();
 		void querySize();
 		SDL_Rect getRect();
+		SDL_Rect getFixedRect();
 		SDL_Texture *getTexture();
 		double getX();
 		double getPercentX();
@@ -34,6 +35,9 @@ class Sprite {
 		double getW();
 		double getH();
 		double getR();
+		bool isAlive();
+		void setAlive(bool newAlive);
+		bool isColliding(Sprite *testComet);
 
 	private:
 		SDL_Texture *_texture;
@@ -43,4 +47,5 @@ class Sprite {
 		double _w;
 		double _h;
 		const char *_path;
+		bool _alive = true;
 };

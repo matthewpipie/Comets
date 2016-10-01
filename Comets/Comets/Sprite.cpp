@@ -126,3 +126,38 @@ double Sprite::getH() {
 double Sprite::getR() {
 	return (getW() + getH()) / 4.0;
 }
+
+bool Sprite::isAlive() {
+	return _alive;
+}
+void Sprite::setAlive(bool newAlive) {
+	_alive = newAlive;
+	std::cout << "set dedaefasdf" << std::endl;
+	std::cout << newAlive << std::endl;
+
+}
+
+SDL_Rect Sprite::getFixedRect() {
+	fixRect();
+	return getRect();
+}
+
+bool Sprite::isColliding(Sprite *testComet) {
+
+	if (!isAlive() || !testComet->isAlive()) {
+		return false;
+	}
+
+	double distanceBetweenCometsSquared = std::pow(getX() - testComet->getX(), 2.0) + std::pow(getY() - testComet->getY(), 2.0);
+	double maxCollisionDistanceSquared = std::pow(getR() + testComet->getR(), 2.0);
+
+	//std::cout << maxCollisionDistanceSquared << " " << distanceBetweenCometsSquared << std::endl;
+
+	bool areColliding = distanceBetweenCometsSquared <= maxCollisionDistanceSquared;
+
+	if (areColliding) {
+		std::cout << "collision!" << std::endl;
+		return true;
+	}
+	return false;
+}

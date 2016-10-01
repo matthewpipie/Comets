@@ -9,8 +9,8 @@
 #include "Constants.h"
 
 // Screen dimension constants
-const int Constants::SCREEN_WIDTH = 1024;
-const int Constants::SCREEN_HEIGHT = 768;
+const int Constants::SCREEN_WIDTH = 1600;
+const int Constants::SCREEN_HEIGHT = 900;
 const int Constants::SCREEN_WIDTH_CALC = SCREEN_WIDTH - 1;
 const int Constants::SCREEN_HEIGHT_CALC = SCREEN_HEIGHT - 1;
 
@@ -21,6 +21,7 @@ const double Constants::COMET_SPEED_MULTIPLIER_MIN = 0.8;
 // Cou qnts
 const int Constants::STAR_COUNT = 30;
 const int Constants::COMET_COUNT = 20;
+const int Constants::PLAYER_COUNT = 1;
 
 // Time stuffs
 const int Constants::STAR_MAX_NONTWINKLE_TIME = 5 * 60;  // Frames
@@ -30,7 +31,7 @@ const int Constants::STAR_TWINKLE_TIME = 20;  // Frames
 const int Constants::COMET_SIZE = 9;
 const int Constants::STAR_SIZE = 2;
 const int Constants::STAR_SIZE_TWINKLE = 3;
-const int Constants::PLAYER_SIZE = 4;
+const int Constants::PLAYER_SIZE = 6;
 
 // Speed
 const int Constants::COMET_SPEED = 1;  // pix-units

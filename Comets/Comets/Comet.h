@@ -15,12 +15,10 @@ class Comet :
 			Comet();
 			~Comet();
 			void initPos();
-			void moveComet(bool isBack = false);
-			bool isAlive;
+			void moveComet();
 			void modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle, double initSpeed, double altSpeed); // OLD
 			void setSpeed(double newSpeed);
 			double getSpeed();
-			bool isColliding(Comet *testComet);
 			void resolveCollision(Comet *resolveComet);
 			double getXSpeed();
 			double getYSpeed();

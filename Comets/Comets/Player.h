@@ -7,11 +7,18 @@
  */
 #pragma once
 #include "Sprite.h"
+#include "Comet.h"
 
 class Player :
 	public Sprite {
 		public:
-			explicit Player(char *path);
+			Player();
 			~Player();
+			void initPos();
+			void resolveCollision();
+			void movePlayer(double x, double y);
+
+			static SDL_Texture *playerTexture;
+			static void initPlayerTexture(SDL_Renderer *rend);
 		private:
 	};

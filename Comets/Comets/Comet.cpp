@@ -19,8 +19,7 @@ SDL_Texture *Comet::cometTexture = nullptr;
 Comet::Comet() :
 	Sprite(),
 	_initDegree(0),
-	_speed(1),
-	isAlive(true) {}
+	_speed(1) {}
 
 
 Comet::~Comet() {}
@@ -80,11 +79,10 @@ void Comet::initPos() {
 	move(xMovement, yMovement);
 }
 
-void Comet::moveComet(bool isBack) {
+void Comet::moveComet() {
 	double xMovement;
 	double yMovement;
 
-	if (!isBack) {
 		/*if (_isOut && (_x < 0 || _x > Constants::SCREEN_WIDTH || _y < 0 || _y > Constants::SCREEN_HEIGHT)) { // IS TRIGGERING AND IT SHUDNT BE
 			isAlive = false;
 			return;
@@ -93,16 +91,11 @@ void Comet::moveComet(bool isBack) {
 			_isOut = true;
 		}*/
 		if (getX() < -getW() || getX() > Constants::SCREEN_WIDTH + getW() || getY() < -getH() || getY() > Constants::SCREEN_HEIGHT + getH()) {
-			isAlive = false;
+			setAlive(false);
 			return;
 		}
 		xMovement = static_cast<double>(Constants::COMET_SPEED) * getXSpeed() * getSpeed();
 		yMovement = static_cast<double>(Constants::COMET_SPEED) * getYSpeed() * getSpeed();
-	} else {
-		//TODO
-		// std::cout << "initial thigo!" << std::endl;
-		
-	}
 
 	move(xMovement, yMovement);
 
@@ -110,26 +103,6 @@ void Comet::moveComet(bool isBack) {
 		std::cout << "init: moving comet x:" << _x << " y: " << _y << std::endl;
 
 	}*/
-}
-
-bool Comet::isColliding(Comet *testComet) {
-
-	if (!isAlive || !testComet->isAlive) {
-		return false;
-	}
-
-	double distanceBetweenCometsSquared = std::pow(getX() - testComet->getX(), 2.0) + std::pow(getY() - testComet->getY(), 2.0);
-	double maxCollisionDistanceSquared = std::pow(getR() + testComet->getR(), 2.0);
-
-	//std::cout << maxCollisionDistanceSquared << " " << distanceBetweenCometsSquared << std::endl;
-
-	bool areColliding = distanceBetweenCometsSquared <= maxCollisionDistanceSquared;
-
-	if (areColliding) {
-		std::cout << "collision!" << std::endl;
-		return true;
-	}
-	return false;
 }
 
 void Comet::resolveCollision(Comet *resolveComet) {
@@ -145,7 +118,7 @@ void Comet::resolveCollision(Comet *resolveComet) {
 	double xTotalIntersect = intersectingSpace * std::cos(collisionAngle);
 	double yTotalIntersect = intersectingSpace * std::sin(collisionAngle);
 	//TODO: determine which one to move negative?
-	move(-xDist * (getSpeed() / totalSpeed), 3.0);
+	//move(-xDist * (getSpeed() / totalSpeed), 3.0);
 
 	Comet temp = *this;
 
@@ -154,17 +127,20 @@ void Comet::resolveCollision(Comet *resolveComet) {
 	resolveComet->setCollision(resolveComet, &temp);
 
 
-	//while (isColliding(resolveComet)) {
-	//	moveComet();
-	//	resolveComet->moveComet();
+	//while (isColliding(resolveComet)) { //TODO: make this not make comets move a lot more than they should when they collide badly
+		moveComet();
+		resolveComet->moveComet();
 	//}
 
 }
 
 void Comet::setCollision(Comet *comet1, Comet *comet2) {
 	CollisionCalculator collision(comet1, comet2);
+	//std::cout << "oldspeed: " << getSpeed() << " oldangle: " << _initDegree << std::endl;
 	setSpeed(collision.getFinalSpeed());
 	setAngle(collision.getFinalAngle() * 180.0 / M_PI);
+	//std::cout << "newspeed: " << getSpeed() << " newangle: " << _initDegree << std::endl;
+
 }
 
 

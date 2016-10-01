@@ -12,6 +12,7 @@
 #include "Sprite.h"
 #include "Comet.h"
 #include "Star.h"
+#include "Player.h"
 
 class MainGame {
 	public:
@@ -29,17 +30,24 @@ class MainGame {
 		void makeWindow();
 		void makeRenderer();
 		void moveStuff();
+		void movePlayer();
 		void makeComets();
 		void makeStars();
+		void makePlayers();
 		void loadTextures();
 		void fixCollision();
 		void cleanComets();
 		void makeComet();
+		bool checkPlayers();
 
+		int _mouseX;
+		int _mouseY;
 		SDL_Window *_window;
 		SDL_Renderer *_renderer;
 		int _maxFPS;
 		GameState _gameState;
+		std::vector<Player> _players;
+		std::vector<Player>::iterator _playerI;
 		std::vector<Comet> _comets;
 		std::vector<Comet>::iterator _cometI;
 		std::vector<Star> _stars;

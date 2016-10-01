@@ -13,13 +13,12 @@
 
 int MainGame::frameCount = 0;
 
-MainGame::MainGame() : _window(nullptr), _maxFPS(20.0f), _gameState(GameState::PLAY), pause(false) {
-	// _sprites.push_back(Star());
-	// _sprites.push_back(Sprite());
-	// _sprites.push_back(Sprite());
-	// _sprites.push_back(Sprite());
-	// _sprites.push_back(Sprite());
-}
+MainGame::MainGame() : _window(nullptr), 
+	_maxFPS(60.0f), 
+	_gameState(GameState::PLAY), 
+	pause(false),
+	_mouseX(Constants::SCREEN_WIDTH_CALC / 2.0),
+	_mouseY(Constants::SCREEN_HEIGHT_CALC / 2.0) {}
 
 MainGame::~MainGame() {
 }
@@ -31,6 +30,7 @@ void MainGame::run() {
 	loadTextures();
 	makeComets();
 	makeStars();
+	makePlayers();
 
 	// _sprites[0].initTexture(_renderer);
 	// _sprites[1].initTexture(_renderer, "resources/comet.bmp");
@@ -55,6 +55,8 @@ void MainGame::initSDL() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		fatalError("SDL could not initialize! SDL_Error: " + std::string(SDL_GetError()));
 	}
+	SDL_GL_SetSwapInterval(0);
+	SDL_ShowCursor(0);
 }
 
 void MainGame::makeWindow() {
@@ -65,7 +67,7 @@ void MainGame::makeWindow() {
 }
 
 void MainGame::makeRenderer() {
-	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
 	if (_renderer == nullptr) {
 		SDL_DestroyWindow(_window);
 		fatalError("SDL Renderer could not initialize! SDL_Error: " + std::string(SDL_GetError()));
@@ -75,27 +77,35 @@ void MainGame::makeRenderer() {
 void MainGame::loadTextures() {
 	Comet::initCometTexture(_renderer);
 	Star::initStarTexture(_renderer);
+	Player::initPlayerTexture(_renderer);
 }
 
 void MainGame::makeComets() {
-	//for (int i = 0; i < Constants::COMET_COUNT; i++) {
-	//	makeComet();
-	//}
+	for (int i = 0; i < Constants::COMET_COUNT; i++) {
+		makeComet();
+	}
 
+	/*makeComet();
 	makeComet();
-	makeComet();
-	_comets[0].setPos(0, 0);
-	_comets[0].setAngle(51);
-	_comets[0].setSpeed(1);
-	_comets[1].setPos(100, 100);
-	_comets[1].setAngle(225);
-	_comets[1].setSpeed(1.3);
+	_comets[0].setPos(0., 0.);
+	_comets[0].setAngle(45.);
+	_comets[0].setSpeed(.011);
+	_comets[1].setPos(100., 100.);
+	_comets[1].setAngle(225.);
+	_comets[1].setSpeed(.011);*/
 }
 
 void MainGame::makeStars() {
 	for (int i = 0; i < Constants::STAR_COUNT; i++) {
 		_stars.push_back(Star());
-		_stars[i].initStar(_renderer);
+		_stars[i].initStar();
+	}
+}
+
+void MainGame::makePlayers() {
+	for (int i = 0; i < Constants::PLAYER_COUNT; i++) {
+		_players.push_back(Player());
+		_players[i].initPos();
 	}
 }
 
@@ -106,15 +116,19 @@ void MainGame::gameLoop() {
 		processInput();
 		if (!pause) {
 			moveStuff();
-			cleanComets();
+			movePlayer();
 			fixCollision();
+			if (!checkPlayers()) {
+				_gameState = GameState::EXIT;
+			}
+			cleanComets();
 			drawGame();
 		}
 
 		float frameTicks = SDL_GetTicks() - startTicks;
 
 		if (MainGame::frameCount % 60 == 0) {
-			// std::cout << MainGame::frameCount << std::endl;
+			 //std::cout << MainGame::frameCount << std::endl;
 		}
 
 		if (1000.0f / _maxFPS > frameTicks) {
@@ -143,6 +157,8 @@ void MainGame::processInput() {
 			_gameState = GameState::EXIT;
 			break;
 		case SDL_MOUSEMOTION:
+			_mouseX = evnt.motion.x;
+			_mouseY = evnt.motion.y;
 			// std::cout << evnt.motion.x << " " << evnt.motion.y << std::endl;
 			if (evnt.motion.x == 0) {
 				pause = true;
@@ -168,19 +184,25 @@ void MainGame::drawGame() {
 	SDL_RenderClear(_renderer);
 
 	for (_starI = _stars.begin(); _starI != _stars.end(); ++_starI) {  // render stars first, before anything else, so they are in the bkg
-		_starI->fixRect();
-		SDL_Rect temprect = _starI->getRect();
+		SDL_Rect temprect = _starI->getFixedRect();
 		SDL_RenderCopy(_renderer, Star::starTexture, NULL, &temprect);
 		// std::cout << "Star copying @ X:" << _starI->_x << " Y: " << _starI->_y << " W: " << _starI->_w << " H: " << _starI->_h << " TXT: " << _starI->texture << std::endl;
 	}
 	for (_cometI = _comets.begin(); _cometI != _comets.end(); ++_cometI) {
-		_cometI->fixRect();
-		SDL_Rect temprect = _cometI->getRect();
+		SDL_Rect temprect = _cometI->getFixedRect();
 		SDL_RenderCopy(_renderer, Comet::cometTexture, NULL, &temprect);
+	}
+	for (_playerI = _players.begin(); _playerI != _players.end(); ++_playerI) {
+		SDL_Rect temprect = _playerI->getFixedRect();
+		SDL_RenderCopy(_renderer, Player::playerTexture, NULL, &temprect);
 	}
 
 	SDL_RenderPresent(_renderer);
 	// std::cout << "DONE!" << std::endl;
+}
+
+void MainGame::movePlayer() {
+	_players[0].setPixelPos(_mouseX, Constants::SCREEN_HEIGHT_CALC - _mouseY);
 }
 
 void MainGame::moveStuff() {
@@ -200,25 +222,31 @@ void MainGame::moveStuff() {
 	}
 
 	if (MainGame::frameCount % 3 == 0) {
-		//makeComet();
+		makeComet();
 		//std::cout << _comets.size() << std::endl;
 		//std::cout << "Frame: " << MainGame::frameCount << std::endl;
 	}
 }
 
 void MainGame::fixCollision() {
-	for (int i = 0; i < _comets.size(); i++) {
-		for (int j = i + 1; j < _comets.size(); j++) {
-			if (_comets[i].isColliding(&_comets[j])) {
-				_comets[i].resolveCollision(&_comets[j]);
+	for (int k = 0; k < _players.size(); k++) {
+		for (int i = 0; i < _comets.size(); i++) {
+			if (_comets[i].isColliding(&_players[k])) {
+				_players[k].resolveCollision();
+			}
+			for (int j = i + 1; j < _comets.size(); j++) {
+				if (_comets[i].isColliding(&_comets[j])) {
+					_comets[i].resolveCollision(&_comets[j]);
+				}
 			}
 		}
 	}
+	
 }
 
 void MainGame::cleanComets() {
 	for (_cometI = _comets.begin(); _cometI != _comets.end(); /*++_cometI*/) {
-		if (!_cometI->isAlive) {
+		if (!_cometI->isAlive()) {
 			_cometI = _comets.erase(_cometI);
 		} else {
 			++_cometI;
@@ -247,4 +275,20 @@ void MainGame::makeComet() {
 		}
 	} while (!canExist);
 	_comets.push_back(testComet);
+}
+
+bool MainGame::checkPlayers() {
+	for (_playerI = _players.begin(); _playerI != _players.end(); /*++_cometI*/) {
+		std::cout << _playerI->isAlive() << std::endl;
+		if (!_playerI->isAlive()) {
+			_playerI = _players.erase(_playerI);
+		}
+		else {
+			++_playerI;
+		}
+	}
+	if (_players.size() < 1) {
+		return false;
+	}
+	return true;
 }

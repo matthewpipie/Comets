@@ -1,2 +1,3 @@
-﻿  Comet.cpp
+﻿  Comets.cpp
+c:\users\matth\source\repos\comets\comets\comets\comets.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Comets.vcxproj -> C:\Users\matth\Source\Repos\Comets\Comets\Debug\Comets.exe

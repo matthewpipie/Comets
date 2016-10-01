@@ -27,7 +27,7 @@ void Star::initStarTexture(SDL_Renderer *rend) {
 	}
 }
 
-void Star::initStar(SDL_Renderer *rend) {
+void Star::initStar() {
 	makeNewActionFrame();
 	setAttributes(static_cast<double>(rand() % 101),
 		static_cast<double>(rand() % 101),
