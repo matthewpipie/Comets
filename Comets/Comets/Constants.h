@@ -8,15 +8,16 @@
 #pragma once
 class Constants {
 	public:
-		// Screen dimension constants
-		static const int SCREEN_WIDTH;
-		static const int SCREEN_HEIGHT;
-		static const int SCREEN_WIDTH_CALC;
-		static const int SCREEN_HEIGHT_CALC;
+		// Screen dimension "constants"
+		static int SCREEN_WIDTH;
+		static int SCREEN_HEIGHT;
+		static int SCREEN_WIDTH_CALC;
+		static int SCREEN_HEIGHT_CALC;
 
 		// Multipliers
 		static const double COMET_SPEED_MULTIPLIER_MAX;
 		static const double COMET_SPEED_MULTIPLIER_MIN;
+		static const int COMET_SPAWN_RATE;
 
 		// Counts
 		static const int STAR_COUNT;

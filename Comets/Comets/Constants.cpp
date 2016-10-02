@@ -9,14 +9,15 @@
 #include "Constants.h"
 
 // Screen dimension constants
-const int Constants::SCREEN_WIDTH = 1600;
-const int Constants::SCREEN_HEIGHT = 900;
-const int Constants::SCREEN_WIDTH_CALC = SCREEN_WIDTH - 1;
-const int Constants::SCREEN_HEIGHT_CALC = SCREEN_HEIGHT - 1;
+int Constants::SCREEN_WIDTH = 1024;
+int Constants::SCREEN_HEIGHT = 576;
+int Constants::SCREEN_WIDTH_CALC = SCREEN_WIDTH - 1;
+int Constants::SCREEN_HEIGHT_CALC = SCREEN_HEIGHT - 1;
 
-// Multipliers
-const double Constants::COMET_SPEED_MULTIPLIER_MAX = 1.6;
-const double Constants::COMET_SPEED_MULTIPLIER_MIN = 0.8;
+// Comet specific stuff
+const double Constants::COMET_SPEED_MULTIPLIER_MAX = 1.4;
+const double Constants::COMET_SPEED_MULTIPLIER_MIN = 0.6;
+const int Constants::COMET_SPAWN_RATE = 4; //every COMET_SPAWN_RATE frames a comet will spawn
 
 // Cou qnts
 const int Constants::STAR_COUNT = 30;
@@ -31,7 +32,7 @@ const int Constants::STAR_TWINKLE_TIME = 20;  // Frames
 const int Constants::COMET_SIZE = 9;
 const int Constants::STAR_SIZE = 2;
 const int Constants::STAR_SIZE_TWINKLE = 3;
-const int Constants::PLAYER_SIZE = 6;
+const int Constants::PLAYER_SIZE = 4;
 
 // Speed
 const int Constants::COMET_SPEED = 1;  // pix-units

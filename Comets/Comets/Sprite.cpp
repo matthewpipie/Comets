@@ -132,8 +132,8 @@ bool Sprite::isAlive() {
 }
 void Sprite::setAlive(bool newAlive) {
 	_alive = newAlive;
-	std::cout << "set dedaefasdf" << std::endl;
-	std::cout << newAlive << std::endl;
+	//std::cout << "set dedaefasdf" << std::endl;
+	//std::cout << newAlive << std::endl;
 
 }
 
@@ -156,7 +156,7 @@ bool Sprite::isColliding(Sprite *testComet) {
 	bool areColliding = distanceBetweenCometsSquared <= maxCollisionDistanceSquared;
 
 	if (areColliding) {
-		std::cout << "collision!" << std::endl;
+		//std::cout << "collision!" << std::endl;
 		return true;
 	}
 	return false;

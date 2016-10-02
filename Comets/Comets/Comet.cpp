@@ -179,6 +179,6 @@ double Comet::getFrameSpeed() {
 }
 
 void Comet::setAngle(double angle) {
-	std::cout << "setting angle to " << angle << std::endl;
+	//std::cout << "setting angle to " << angle << std::endl;
 	_initDegree = angle;
 }

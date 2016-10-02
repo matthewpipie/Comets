@@ -34,5 +34,5 @@ void Player::movePlayer(double x, double y) {
 }
 void Player::resolveCollision() {
 	setAlive(false);
-	std::cout << "set ded" << std::endl;
+	//std::cout << "set ded" << std::endl;
 }

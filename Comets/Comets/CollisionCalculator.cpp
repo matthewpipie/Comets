@@ -94,7 +94,7 @@ double CollisionCalculator::getFinalX() {
 }
 
 double CollisionCalculator::formatCollisionAngle() {
-	std::cout << getCollisionAngle() * 180.0 / M_PI << std::endl;
+	//std::cout << getCollisionAngle() * 180.0 / M_PI << std::endl;
 	return getCollisionAngle();
 }
 

@@ -17,6 +17,7 @@ MainGame::MainGame() : _window(nullptr),
 	_maxFPS(60.0f), 
 	_gameState(GameState::PLAY), 
 	pause(false),
+	fullscreenMode(0),
 	_mouseX(Constants::SCREEN_WIDTH_CALC / 2.0),
 	_mouseY(Constants::SCREEN_HEIGHT_CALC / 2.0) {}
 
@@ -97,6 +98,7 @@ void MainGame::makeComets() {
 }
 
 void MainGame::makeStars() {
+	_stars.resize(0);
 	for (int i = 0; i < Constants::STAR_COUNT; i++) {
 		_stars.push_back(Star());
 		_stars[i].initStar();
@@ -160,6 +162,23 @@ void MainGame::processInput() {
 		case SDL_QUIT:
 			_gameState = GameState::EXIT;
 			break;
+		case SDL_KEYDOWN:
+			if (evnt.key.keysym.sym == SDLK_f) {
+				fullscreenMode = !fullscreenMode;
+				SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
+				int h;
+				int w;
+				SDL_GetRendererOutputSize(_renderer, &w, &h);
+				std::cout << w << " " << h << std::endl;
+				Constants::SCREEN_WIDTH = w;
+				Constants::SCREEN_WIDTH_CALC = Constants::SCREEN_WIDTH - 1;
+				Constants::SCREEN_HEIGHT = h;
+				Constants::SCREEN_HEIGHT_CALC = Constants::SCREEN_HEIGHT - 1;
+				makeStars();
+				makePlayers();
+				movePlayer();
+			}
+			break;
 		case SDL_MOUSEMOTION:
 			_mouseX = evnt.motion.x;
 			_mouseY = evnt.motion.y;
@@ -206,6 +225,7 @@ void MainGame::drawGame() {
 }
 
 void MainGame::movePlayer() {
+	//std::cout << _mouseX << Constants::SCREEN_HEIGHT_CALC - _mouseY << std::endl;
 	_players[0].setPixelPos(_mouseX, Constants::SCREEN_HEIGHT_CALC - _mouseY);
 }
 
@@ -225,7 +245,7 @@ void MainGame::moveStuff() {
 		_cometI->moveComet();
 	}
 
-	if (MainGame::frameCount % 3 == 0) {
+	if (MainGame::frameCount % Constants::COMET_SPAWN_RATE == 0) {
 		makeComet();
 		//std::cout << _comets.size() << std::endl;
 		//std::cout << "Frame: " << MainGame::frameCount << std::endl;
@@ -273,7 +293,7 @@ void MainGame::makeComet() {
 			}
 		}
 		count++;
-		std::cout << "Looked for comet space " << count << " times." << std::endl;
+		//std::cout << "Looked for comet space " << count << " times." << std::endl;
 		if (count > 2000) {
 			fatalError("Error: Could not find spawn location for comet.");
 		}
@@ -283,7 +303,7 @@ void MainGame::makeComet() {
 
 bool MainGame::checkPlayers() {
 	for (_playerI = _players.begin(); _playerI != _players.end(); /*++_cometI*/) {
-		std::cout << _playerI->isAlive() << std::endl;
+		//std::cout << _playerI->isAlive() << std::endl;
 		if (!_playerI->isAlive()) {
 			_playerI = _players.erase(_playerI);
 		}

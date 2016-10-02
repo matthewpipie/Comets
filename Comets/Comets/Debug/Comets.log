@@ -1,9 +1,9 @@
 ﻿  MainGame.cpp
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(116): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(236): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(237): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(241): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(269): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(118): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(256): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(257): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(261): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(289): warning C4018: '<': signed/unsigned mismatch
   Comets.vcxproj -> C:\Users\matth\Source\Repos\Comets\Comets\Debug\Comets.exe

@@ -52,6 +52,7 @@ class MainGame {
 		std::vector<Comet>::iterator _cometI;
 		std::vector<Star> _stars;
 		std::vector<Star>::iterator _starI;
+		int fullscreenMode;
 		// std::vector<Sprite> _sprites;
 		// std::vector<Sprite>::iterator _spriteI;
 };
