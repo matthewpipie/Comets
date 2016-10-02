@@ -165,7 +165,7 @@ void MainGame::processInput() {
 			_mouseY = evnt.motion.y;
 			// std::cout << evnt.motion.x << " " << evnt.motion.y << std::endl;
 			if (evnt.motion.x == 0) {
-				pause = true;
+				//pause = true;
 			} else {
 				pause = false;
 			}
