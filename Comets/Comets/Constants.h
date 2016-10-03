@@ -19,6 +19,7 @@ class Constants {
 
 		// Colors
 		static Uint8 shipColors[4][3];
+		static const Uint8 textColor[3];
 
 		// Multipliers
 		static const double COMET_SPEED_MULTIPLIER_MAX;

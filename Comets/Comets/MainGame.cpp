@@ -14,13 +14,17 @@
 int MainGame::frameCount = 0;
 
 MainGame::MainGame() : _window(nullptr), 
+	_renderer(nullptr),
+	_textFont(nullptr),
+	_textSurface(nullptr),
+	_textTexture(nullptr),
 	_maxFPS(60.0f), 
 	_gameState(GameState::PLAY), 
 	pause(false),
 	fullscreenMode(0),
 	_mouseX(0),
 	_mouseY(0) {
-	std::fill(_keysPressed, _keysPressed + sizeof(_keysPressed), 0);
+	std::fill(_keysPressed, _keysPressed + sizeof(_keysPressed), false);
 }
 
 MainGame::~MainGame() {
@@ -59,6 +63,8 @@ void MainGame::initSDL() {
 	}
 	SDL_GL_SetSwapInterval(0);
 	SDL_ShowCursor(0);
+	IMG_Init();
+	TTF_Init();
 }
 
 void MainGame::makeWindow() {
@@ -83,6 +89,7 @@ void MainGame::loadTextures() {
 }
 
 void MainGame::restartGame() {
+	score = 0;
 	makeComets();
 	makeStars();
 	makePlayers();
@@ -142,6 +149,9 @@ void MainGame::gameLoop() {
 
 		float frameTicks = SDL_GetTicks() - startTicks;
 
+		if (MainGame::frameCount % 6 == 0) {
+			_score++;
+		}
 		if (MainGame::frameCount % 60 == 0) {
 			 //std::cout << MainGame::frameCount << std::endl;
 		}
@@ -156,8 +166,12 @@ void MainGame::gameLoop() {
 	// X button pressed
 	SDL_DestroyTexture(Star::starTexture);
 	SDL_DestroyTexture(Comet::cometTexture);
+	SDL_DestroyTexture(Player::playerTexture);
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
+	TTF_CloseFont(_textFont);
+	TTF_Quit();
+	IMG_Quit();
 	SDL_Quit();
 	exit(0);
 }
@@ -248,6 +262,8 @@ void MainGame::drawGame() {
 		SDL_Rect temprect = _playerI->getFixedRect();
 		SDL_RenderCopy(_renderer, Player::playerTexture, NULL, &temprect);
 	}
+
+	
 
 	SDL_RenderPresent(_renderer);
 	// std::cout << "DONE!" << std::endl;
