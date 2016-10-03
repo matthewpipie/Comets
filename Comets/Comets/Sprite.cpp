@@ -79,6 +79,12 @@ void Sprite::setPos(double x, double y) {
 	setPixelPos(x * .01 * static_cast<double>(Constants::SCREEN_WIDTH_CALC), y
 	* .01 * static_cast<double>(Constants::SCREEN_HEIGHT_CALC));
 }
+void Sprite::setPercentX(double x) {
+	setPos(x, getPercentY());
+}
+void Sprite::setPercentY(double y) {
+	setPos(getPercentX(), y);
+}
 
 void Sprite::setSize(double w, double h) {
 	setPixelAttributes(getX(), getY(), w * .01

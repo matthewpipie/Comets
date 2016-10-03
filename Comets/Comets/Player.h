@@ -17,7 +17,7 @@ class Player :
 			void initPos();
 			void resolveCollision();
 			void movePlayer(double x, double y);
-
+			int playerNumber;
 			static SDL_Texture *playerTexture;
 			static void initPlayerTexture(SDL_Renderer *rend);
 		private:

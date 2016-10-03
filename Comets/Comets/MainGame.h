@@ -29,8 +29,8 @@ class MainGame {
 		void initSDL();
 		void makeWindow();
 		void makeRenderer();
-		void moveStuff();
-		void movePlayer();
+		void moveComets();
+		void movePlayers();
 		void makeComets();
 		void makeStars();
 		void makePlayers();
@@ -40,6 +40,7 @@ class MainGame {
 		void makeComet();
 		bool checkPlayers();
 
+		bool _keysPressed[323];
 		int _mouseX;
 		int _mouseY;
 		SDL_Window *_window;

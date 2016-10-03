@@ -41,4 +41,10 @@ class Constants {
 		static const char *COMET_TEXTURE;
 		static const char *STAR_TEXTURE;
 		static const char *PLAYER_TEXTURE;
+
+		//Controls
+		static const int CONTROL_UP[3];
+		static const int CONTROL_LEFT[3];
+		static const int CONTROL_DOWN[3];
+		static const int CONTROL_RIGHT[3];
 };

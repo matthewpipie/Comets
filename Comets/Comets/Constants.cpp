@@ -22,7 +22,7 @@ const int Constants::COMET_SPAWN_RATE = 4; //every COMET_SPAWN_RATE frames a com
 // Cou qnts
 const int Constants::STAR_COUNT = 30;
 const int Constants::COMET_COUNT = 20;
-const int Constants::PLAYER_COUNT = 1;
+const int Constants::PLAYER_COUNT = 2;
 
 // Time stuffs
 const int Constants::STAR_MAX_NONTWINKLE_TIME = 5 * 60;  // Frames
@@ -41,3 +41,9 @@ const int Constants::COMET_SPEED = 1;  // pix-units
 const char *Constants::COMET_TEXTURE = "resources/comet.bmp";
 const char *Constants::STAR_TEXTURE = "resources/star.bmp";
 const char *Constants::PLAYER_TEXTURE = "resources/ship.bmp";
+
+//Controls
+const int Constants::CONTROL_UP[] = { SDLK_w, SDLK_j, SDLK_UP };
+const int Constants::CONTROL_LEFT[] = { SDLK_a, SDLK_h, SDLK_LEFT };
+const int Constants::CONTROL_DOWN[] = { SDLK_s, SDLK_k, SDLK_DOWN };
+const int Constants::CONTROL_RIGHT[] = { SDLK_d, SDLK_l, SDLK_RIGHT };

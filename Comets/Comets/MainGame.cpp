@@ -18,8 +18,10 @@ MainGame::MainGame() : _window(nullptr),
 	_gameState(GameState::PLAY), 
 	pause(false),
 	fullscreenMode(0),
-	_mouseX(Constants::SCREEN_WIDTH_CALC / 2.0),
-	_mouseY(Constants::SCREEN_HEIGHT_CALC / 2.0) {}
+	_mouseX(0),
+	_mouseY(0) {
+	std::fill(_keysPressed, _keysPressed + sizeof(_keysPressed), 0);
+}
 
 MainGame::~MainGame() {
 }
@@ -110,6 +112,7 @@ void MainGame::makePlayers() {
 	for (int i = 0; i < Constants::PLAYER_COUNT; i++) {
 		_players.push_back(Player());
 		_players[i].initPos();
+		_players[i].playerNumber = i;
 	}
 }
 
@@ -119,8 +122,8 @@ void MainGame::gameLoop() {
 
 		processInput();
 		if (!pause) {
-			moveStuff();
-			movePlayer();
+			moveComets();
+			movePlayers();
 			fixCollision();
 			if (!checkPlayers()) {
 				makeComets();
@@ -159,39 +162,55 @@ void MainGame::processInput() {
 	// Will keep looping until there are no more events to process
 	while (SDL_PollEvent(&evnt)) {
 		switch (evnt.type) {
-		case SDL_QUIT:
-			_gameState = GameState::EXIT;
-			break;
-		case SDL_KEYDOWN:
-			if (evnt.key.keysym.sym == SDLK_f) {
-				fullscreenMode = !fullscreenMode;
-				SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
-				int h;
-				int w;
-				SDL_GetRendererOutputSize(_renderer, &w, &h);
-				std::cout << w << " " << h << std::endl;
-				Constants::SCREEN_WIDTH = w;
-				Constants::SCREEN_WIDTH_CALC = Constants::SCREEN_WIDTH - 1;
-				Constants::SCREEN_HEIGHT = h;
-				Constants::SCREEN_HEIGHT_CALC = Constants::SCREEN_HEIGHT - 1;
-				makeStars();
-				makePlayers();
-				movePlayer();
-			}
-			break;
-		case SDL_MOUSEMOTION:
-			_mouseX = evnt.motion.x;
-			_mouseY = evnt.motion.y;
-			// std::cout << evnt.motion.x << " " << evnt.motion.y << std::endl;
-			if (evnt.motion.x == 0) {
-				//pause = true;
-			} else {
-				pause = false;
-			}
-			// _sprites[0].setMiddlePixelPos(evnt.motion.x, evnt.motion.y);
-			break;
+			case SDL_QUIT:
+				_gameState = GameState::EXIT;
+				break;
+			case SDL_KEYDOWN:
+				if (evnt.key.keysym.sym > 127) {
+					evnt.key.keysym.sym -= 1073741753;
+				}
+				_keysPressed[evnt.key.keysym.sym] = true;
+				std::cout << evnt.key.keysym.sym << std::endl;
+				break;
+			case SDL_KEYUP:
+				if (evnt.key.keysym.sym > 127) {
+					evnt.key.keysym.sym -= 1073741753;
+				}
+				_keysPressed[evnt.key.keysym.sym] = false;
+				break;
+			case SDL_MOUSEMOTION:
+				_mouseX = evnt.motion.x;
+				_mouseY = evnt.motion.y;
+				/*// std::cout << evnt.motion.x << " " << evnt.motion.y << std::endl;
+				if (evnt.motion.x == 0) {
+					//pause = true;
+				} else {
+					pause = false;
+				}
+				// _sprites[0].setMiddlePixelPos(evnt.motion.x, evnt.motion.y); */
+				break;
 		}
 	}
+
+	if (_keysPressed[SDLK_f]) {
+		fullscreenMode = !fullscreenMode;
+		SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
+		int h;
+		int w;
+		SDL_GetRendererOutputSize(_renderer, &w, &h);
+		std::cout << w << " " << h << std::endl;
+		Constants::SCREEN_WIDTH = w;
+		Constants::SCREEN_WIDTH_CALC = Constants::SCREEN_WIDTH - 1;
+		Constants::SCREEN_HEIGHT = h;
+		Constants::SCREEN_HEIGHT_CALC = Constants::SCREEN_HEIGHT - 1;
+		makeStars();
+		makePlayers();
+		movePlayers();
+	}
+	if (_keysPressed[SDLK_ESCAPE]) {
+		_gameState = GameState::EXIT;
+	}
+
 }
 
 void MainGame::drawGame() {
@@ -224,12 +243,67 @@ void MainGame::drawGame() {
 	// std::cout << "DONE!" << std::endl;
 }
 
-void MainGame::movePlayer() {
+void MainGame::movePlayers() {
 	//std::cout << _mouseX << Constants::SCREEN_HEIGHT_CALC - _mouseY << std::endl;
-	_players[0].setPixelPos(_mouseX, Constants::SCREEN_HEIGHT_CALC - _mouseY);
+	std::vector<double> xMovements;
+	std::vector<double> yMovements;
+	//int al
+	for (_playerI = _players.begin(); _playerI != _players.end(); ++_playerI) {
+		if (_playerI->playerNumber != 0) {
+
+		}
+
+		switch (_playerI->playerNumber) {
+		case 1:
+			if (_keysPressed[SDLK_w]) {
+				xMovements.push_back(0);
+				yMovements.push_back(1);
+			}
+			else if (_keysPressed[SDLK_a]) {
+				xMovements.push_back(-1);
+				yMovements.push_back(0);
+			}
+			else if (_keysPressed[SDLK_s]) {
+				xMovements.push_back(0);
+				yMovements.push_back(-1);
+			}
+			else if (_keysPressed[SDLK_d]) {
+				xMovements.push_back(1);
+				yMovements.push_back(0);
+			}
+			else {
+				xMovements.push_back(0);
+				yMovements.push_back(0);
+			}
+			break;
+		case 0:
+			_playerI->setPixelPos(_mouseX, Constants::SCREEN_HEIGHT_CALC - _mouseY);
+		default:
+			xMovements.push_back(0);
+			yMovements.push_back(0);
+			break;
+		}
+	}
+	for (int i = 0; i < _players.size(); i++) {
+		_players[i].move(xMovements[i], yMovements[i]);
+	}
+	for (_playerI = _players.begin(); _playerI != _players.end(); ++_playerI) {
+		if (_playerI->getPercentX() > 100) {
+			_playerI->setPercentX(100);
+		}
+		else if (_playerI->getPercentX() < 0) {
+			_playerI->setPercentX(0);
+		}
+		if (_playerI->getPercentY() > 100) {
+			_playerI->setPercentY(100);
+		}
+		else if (_playerI->getPercentY() < 0) {
+			_playerI->setPercentY(0);
+		}
+	}
 }
 
-void MainGame::moveStuff() {
+void MainGame::moveComets() {
 	/*
 	if (MainGame::frameCount % 1 == 0) {
 		for (_i = _sprites.begin(); _i != _sprites.end(); ++_i) {

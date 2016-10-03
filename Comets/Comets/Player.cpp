@@ -26,7 +26,7 @@ void Player::initPlayerTexture(SDL_Renderer *rend) { // Static method
 }
 
 void Player::initPos() {
-	setSize(Constants::PLAYER_SIZE, Constants::PLAYER_SIZE);
+	setAttributes(50.0, 50.0, Constants::PLAYER_SIZE, Constants::PLAYER_SIZE);
 }
 
 void Player::movePlayer(double x, double y) {

@@ -1,9 +1,29 @@
 ﻿  MainGame.cpp
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(118): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(256): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(257): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(261): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(289): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(121): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(287): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(330): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(331): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(335): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(363): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\xutility(2755): warning C4800: 'const int': forcing value to bool 'true' or 'false' (performance warning)
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xutility(2769): note: see reference to function template instantiation 'void std::_Fill_unchecked1<_FwdIt,_Ty>(_FwdIt,_FwdIt,const _Ty &,std::false_type)' being compiled
+          with
+          [
+              _FwdIt=bool *,
+              _Ty=int
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xutility(2777): note: see reference to function template instantiation 'void std::_Fill_unchecked<_Iter,_Ty>(_FwdIt,_FwdIt,const _Ty &)' being compiled
+          with
+          [
+              _Iter=bool *,
+              _Ty=int,
+              _FwdIt=bool *
+          ]
+  c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(23): note: see reference to function template instantiation 'void std::fill<bool*,int>(_FwdIt,_FwdIt,const _Ty &)' being compiled
+          with
+          [
+              _FwdIt=bool *,
+              _Ty=int
+          ]
   Comets.vcxproj -> C:\Users\matth\Source\Repos\Comets\Comets\Debug\Comets.exe

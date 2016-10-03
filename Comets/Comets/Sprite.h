@@ -21,7 +21,9 @@ class Sprite {
 		void setMiddlePixelPos(double x, double y);
 		void movePixel(double x, double y);
 		void move(double x, double y);  // relative move
-		void setPos(double x, double y);  // absolute move
+		void setPos(double x, double y);  // absolute move on new coord system
+		void setPercentX(double x);
+		void setPercentY(double y);
 		void setSize(double w, double h);
 		void fixRect();
 		void querySize();
