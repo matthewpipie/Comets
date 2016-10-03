@@ -8,11 +8,17 @@
 #pragma once
 class Constants {
 	public:
+		//SDL weirdness
+		static const int CONSTANT_SDL_CONTROL_NUMBER;
+		
 		// Screen dimension "constants"
 		static int SCREEN_WIDTH;
 		static int SCREEN_HEIGHT;
 		static int SCREEN_WIDTH_CALC;
 		static int SCREEN_HEIGHT_CALC;
+
+		// Colors
+		static Uint8 shipColors[4][3];
 
 		// Multipliers
 		static const double COMET_SPEED_MULTIPLIER_MAX;
@@ -43,8 +49,11 @@ class Constants {
 		static const char *PLAYER_TEXTURE;
 
 		//Controls
-		static const int CONTROL_UP[3];
-		static const int CONTROL_LEFT[3];
-		static const int CONTROL_DOWN[3];
-		static const int CONTROL_RIGHT[3];
+		static const int CONTROL_UP[4];
+		static const int CONTROL_LEFT[4];
+		static const int CONTROL_DOWN[4];
+		static const int CONTROL_RIGHT[4];
+		static int PLAYER_CONTROLS[4];
+
+		
 };

@@ -39,6 +39,7 @@ class MainGame {
 		void cleanComets();
 		void makeComet();
 		bool checkPlayers();
+		void restartGame();
 
 		bool _keysPressed[323];
 		int _mouseX;

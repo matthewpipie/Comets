@@ -31,9 +31,8 @@ void MainGame::run() {
 	makeWindow();
 	makeRenderer();
 	loadTextures();
-	makeComets();
-	makeStars();
-	makePlayers();
+	
+	restartGame();
 
 	// _sprites[0].initTexture(_renderer);
 	// _sprites[1].initTexture(_renderer, "resources/comet.bmp");
@@ -83,6 +82,12 @@ void MainGame::loadTextures() {
 	Player::initPlayerTexture(_renderer);
 }
 
+void MainGame::restartGame() {
+	makeComets();
+	makeStars();
+	makePlayers();
+}
+
 void MainGame::makeComets() {
 	_comets.resize(0);
 	for (int i = 0; i < Constants::COMET_COUNT; i++) {
@@ -111,8 +116,8 @@ void MainGame::makePlayers() {
 	_players.resize(0);
 	for (int i = 0; i < Constants::PLAYER_COUNT; i++) {
 		_players.push_back(Player());
-		_players[i].initPos();
 		_players[i].playerNumber = i;
+		_players[i].initPos();
 	}
 }
 
@@ -126,8 +131,7 @@ void MainGame::gameLoop() {
 			movePlayers();
 			fixCollision();
 			if (!checkPlayers()) {
-				makeComets();
-				makePlayers();
+				restartGame();
 				continue;
 			}
 			cleanComets();
@@ -167,16 +171,29 @@ void MainGame::processInput() {
 				break;
 			case SDL_KEYDOWN:
 				if (evnt.key.keysym.sym > 127) {
-					evnt.key.keysym.sym -= 1073741753;
+					evnt.key.keysym.sym -= Constants::CONSTANT_SDL_CONTROL_NUMBER;
 				}
 				_keysPressed[evnt.key.keysym.sym] = true;
-				std::cout << evnt.key.keysym.sym << std::endl;
+				//std::cout << evnt.key.keysym.sym << std::endl;
+				if (evnt.key.keysym.sym == SDLK_f) {
+					fullscreenMode = !fullscreenMode;
+					SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
+					int h, w;
+					SDL_GetRendererOutputSize(_renderer, &w, &h);
+					//std::cout << w << " " << h << std::endl;
+					Constants::SCREEN_WIDTH = w;
+					Constants::SCREEN_WIDTH_CALC = Constants::SCREEN_WIDTH - 1;
+					Constants::SCREEN_HEIGHT = h;
+					Constants::SCREEN_HEIGHT_CALC = Constants::SCREEN_HEIGHT - 1;
+					restartGame();
+				}
 				break;
 			case SDL_KEYUP:
 				if (evnt.key.keysym.sym > 127) {
-					evnt.key.keysym.sym -= 1073741753;
+					evnt.key.keysym.sym -= Constants::CONSTANT_SDL_CONTROL_NUMBER;
 				}
 				_keysPressed[evnt.key.keysym.sym] = false;
+				//std::cout << evnt.key.keysym.sym << " is rip" << std::endl;
 				break;
 			case SDL_MOUSEMOTION:
 				_mouseX = evnt.motion.x;
@@ -185,28 +202,13 @@ void MainGame::processInput() {
 				if (evnt.motion.x == 0) {
 					//pause = true;
 				} else {
-					pause = false;
+					pause = false; 
 				}
 				// _sprites[0].setMiddlePixelPos(evnt.motion.x, evnt.motion.y); */
 				break;
 		}
 	}
 
-	if (_keysPressed[SDLK_f]) {
-		fullscreenMode = !fullscreenMode;
-		SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
-		int h;
-		int w;
-		SDL_GetRendererOutputSize(_renderer, &w, &h);
-		std::cout << w << " " << h << std::endl;
-		Constants::SCREEN_WIDTH = w;
-		Constants::SCREEN_WIDTH_CALC = Constants::SCREEN_WIDTH - 1;
-		Constants::SCREEN_HEIGHT = h;
-		Constants::SCREEN_HEIGHT_CALC = Constants::SCREEN_HEIGHT - 1;
-		makeStars();
-		makePlayers();
-		movePlayers();
-	}
 	if (_keysPressed[SDLK_ESCAPE]) {
 		_gameState = GameState::EXIT;
 	}
@@ -235,6 +237,8 @@ void MainGame::drawGame() {
 		SDL_RenderCopy(_renderer, Comet::cometTexture, NULL, &temprect);
 	}
 	for (_playerI = _players.begin(); _playerI != _players.end(); ++_playerI) {
+		int playerNumber = _playerI->playerNumber;
+		SDL_SetTextureColorMod(Player::playerTexture, Constants::shipColors[playerNumber][0], Constants::shipColors[playerNumber][1], Constants::shipColors[playerNumber][2]);
 		SDL_Rect temprect = _playerI->getFixedRect();
 		SDL_RenderCopy(_renderer, Player::playerTexture, NULL, &temprect);
 	}
@@ -249,25 +253,21 @@ void MainGame::movePlayers() {
 	std::vector<double> yMovements;
 	//int al
 	for (_playerI = _players.begin(); _playerI != _players.end(); ++_playerI) {
-		if (_playerI->playerNumber != 0) {
-
-		}
-
-		switch (_playerI->playerNumber) {
-		case 1:
-			if (_keysPressed[SDLK_w]) {
+		int playerNumber = _playerI->playerNumber;
+		if (playerNumber != 0) {
+			if (_keysPressed[Constants::CONTROL_UP[Constants::PLAYER_CONTROLS[playerNumber]]]) {
 				xMovements.push_back(0);
 				yMovements.push_back(1);
 			}
-			else if (_keysPressed[SDLK_a]) {
+			else if (_keysPressed[Constants::CONTROL_LEFT[Constants::PLAYER_CONTROLS[playerNumber]]]) {
 				xMovements.push_back(-1);
 				yMovements.push_back(0);
 			}
-			else if (_keysPressed[SDLK_s]) {
+			else if (_keysPressed[Constants::CONTROL_DOWN[Constants::PLAYER_CONTROLS[playerNumber]]]) {
 				xMovements.push_back(0);
 				yMovements.push_back(-1);
 			}
-			else if (_keysPressed[SDLK_d]) {
+			else if (_keysPressed[Constants::CONTROL_RIGHT[Constants::PLAYER_CONTROLS[playerNumber]]]) {
 				xMovements.push_back(1);
 				yMovements.push_back(0);
 			}
@@ -275,14 +275,16 @@ void MainGame::movePlayers() {
 				xMovements.push_back(0);
 				yMovements.push_back(0);
 			}
-			break;
-		case 0:
-			_playerI->setPixelPos(_mouseX, Constants::SCREEN_HEIGHT_CALC - _mouseY);
-		default:
+		}
+		else {
+			if (playerNumber == 0) {
+				_playerI->setPixelPos(_mouseX, Constants::SCREEN_HEIGHT_CALC - _mouseY);
+			}
 			xMovements.push_back(0);
 			yMovements.push_back(0);
-			break;
 		}
+
+
 	}
 	for (int i = 0; i < _players.size(); i++) {
 		_players[i].move(xMovements[i], yMovements[i]);
