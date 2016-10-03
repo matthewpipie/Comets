@@ -63,7 +63,6 @@ void MainGame::initSDL() {
 	}
 	SDL_GL_SetSwapInterval(0);
 	SDL_ShowCursor(0);
-	IMG_Init();
 	TTF_Init();
 }
 
@@ -83,13 +82,14 @@ void MainGame::makeRenderer() {
 }
 
 void MainGame::loadTextures() {
+
 	Comet::initCometTexture(_renderer);
 	Star::initStarTexture(_renderer);
 	Player::initPlayerTexture(_renderer);
 }
 
 void MainGame::restartGame() {
-	score = 0;
+	_score = 0;
 	makeComets();
 	makeStars();
 	makePlayers();
@@ -357,6 +357,7 @@ void MainGame::fixCollision() {
 		for (int i = 0; i < _comets.size(); i++) {
 			if (_comets[i].isColliding(&_players[k])) {
 				_players[k].resolveCollision();
+				_comets[i].setAlive(false);
 			}
 			for (int j = i + 1; j < _comets.size(); j++) {
 				if (_comets[i].isColliding(&_comets[j])) {

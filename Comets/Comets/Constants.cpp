@@ -24,7 +24,7 @@ Uint8 Constants::shipColors[][3] = {
 	{ 0, 255, 0 }, //player 3
 	{ 255, 0, 0 } //player 4
 };
-const Uint8 Constants::textColor[] = { 255, 255, 255 }
+const Uint8 Constants::textColor[] = { 255, 255, 255 };
 
 // Comet specific stuff
 const double Constants::COMET_SPEED_MULTIPLIER_MAX = 1.4;

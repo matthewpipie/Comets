@@ -8,6 +8,8 @@
 #pragma once
 
 #include <SDL.h>
+//SDL_image only in sprite or something else
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <cmath>
 #include <ctime>
