@@ -130,12 +130,14 @@ void MainGame::gameLoop() {
 			moveComets();
 			movePlayers();
 			fixCollision();
-			if (!checkPlayers()) {
+			bool shouldContinue = checkPlayers();
+			cleanComets();
+			drawGame();
+			if (!shouldContinue) {
+				pause = true;
 				restartGame();
 				continue;
 			}
-			cleanComets();
-			drawGame();
 		}
 
 		float frameTicks = SDL_GetTicks() - startTicks;
@@ -178,6 +180,7 @@ void MainGame::processInput() {
 				if (evnt.key.keysym.sym == SDLK_f) {
 					fullscreenMode = !fullscreenMode;
 					SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
+					SDL_RenderPresent(_renderer);
 					int h, w;
 					SDL_GetRendererOutputSize(_renderer, &w, &h);
 					//std::cout << w << " " << h << std::endl;
@@ -211,6 +214,9 @@ void MainGame::processInput() {
 
 	if (_keysPressed[SDLK_ESCAPE]) {
 		_gameState = GameState::EXIT;
+	}
+	if (_keysPressed[SDLK_SPACE]) {
+		pause = false;
 	}
 
 }
@@ -255,23 +261,25 @@ void MainGame::movePlayers() {
 	for (_playerI = _players.begin(); _playerI != _players.end(); ++_playerI) {
 		int playerNumber = _playerI->playerNumber;
 		if (playerNumber != 0) {
+			int currentLen = xMovements.size();
 			if (_keysPressed[Constants::CONTROL_UP[Constants::PLAYER_CONTROLS[playerNumber]]]) {
 				xMovements.push_back(0);
 				yMovements.push_back(1);
-			}
-			else if (_keysPressed[Constants::CONTROL_LEFT[Constants::PLAYER_CONTROLS[playerNumber]]]) {
-				xMovements.push_back(-1);
-				yMovements.push_back(0);
 			}
 			else if (_keysPressed[Constants::CONTROL_DOWN[Constants::PLAYER_CONTROLS[playerNumber]]]) {
 				xMovements.push_back(0);
 				yMovements.push_back(-1);
 			}
+
+			if (_keysPressed[Constants::CONTROL_LEFT[Constants::PLAYER_CONTROLS[playerNumber]]]) {
+				xMovements.push_back(-1);
+				yMovements.push_back(0);
+			}
 			else if (_keysPressed[Constants::CONTROL_RIGHT[Constants::PLAYER_CONTROLS[playerNumber]]]) {
 				xMovements.push_back(1);
 				yMovements.push_back(0);
 			}
-			else {
+			if (currentLen == xMovements.size()) {
 				xMovements.push_back(0);
 				yMovements.push_back(0);
 			}
