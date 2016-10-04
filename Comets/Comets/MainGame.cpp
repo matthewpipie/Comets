@@ -16,8 +16,6 @@ int MainGame::frameCount = 0;
 MainGame::MainGame() : _window(nullptr), 
 	_renderer(nullptr),
 	_textFont(nullptr),
-	_textSurface(nullptr),
-	_textTexture(nullptr),
 	_maxFPS(60.0f), 
 	_gameState(GameState::PLAY), 
 	pause(false),
@@ -32,6 +30,7 @@ MainGame::~MainGame() {
 
 void MainGame::run() {
 	initSDL();
+	initFont();
 	makeWindow();
 	makeRenderer();
 	loadTextures();
@@ -63,7 +62,19 @@ void MainGame::initSDL() {
 	}
 	SDL_GL_SetSwapInterval(0);
 	SDL_ShowCursor(0);
-	TTF_Init();
+	if (TTF_Init() < 0) {
+		fatalError("SDL TTF could not initialize! TTF_Error: " + std::string(TTF_GetError()));
+	}
+}
+
+void MainGame::initFont() {
+	if (_textFont != nullptr) {
+		TTF_CloseFont(_textFont);
+	}
+	_textFont = TTF_OpenFont(Constants::FONT_PATH, Constants::FONT_SIZE);
+	if (_textFont == nullptr) {
+		fatalError("SDL TTF could not find the font! TTF_Error: " + std::string(TTF_GetError()));
+	}
 }
 
 void MainGame::makeWindow() {
@@ -82,7 +93,6 @@ void MainGame::makeRenderer() {
 }
 
 void MainGame::loadTextures() {
-
 	Comet::initCometTexture(_renderer);
 	Star::initStarTexture(_renderer);
 	Player::initPlayerTexture(_renderer);
@@ -90,6 +100,7 @@ void MainGame::loadTextures() {
 
 void MainGame::restartGame() {
 	_score = 0;
+	_gameStart = MainGame::frameCount;
 	makeComets();
 	makeStars();
 	makePlayers();
@@ -149,7 +160,7 @@ void MainGame::gameLoop() {
 
 		float frameTicks = SDL_GetTicks() - startTicks;
 
-		if (MainGame::frameCount % 6 == 0) {
+		if (MainGame::frameCount % 6 == (_gameStart + 1) % 6) {
 			_score++;
 		}
 		if (MainGame::frameCount % 60 == 0) {
@@ -198,12 +209,12 @@ void MainGame::processInput() {
 					int h, w;
 					SDL_GetRendererOutputSize(_renderer, &w, &h);
 					//std::cout << w << " " << h << std::endl;
-					Constants::SCREEN_WIDTH = w;
-					Constants::SCREEN_WIDTH_CALC = Constants::SCREEN_WIDTH - 1;
-					Constants::SCREEN_HEIGHT = h;
-					Constants::SCREEN_HEIGHT_CALC = Constants::SCREEN_HEIGHT - 1;
+					Constants::setScreenSize(w, h);
+					initFont();
 					restartGame();
 				}
+			case SDL_MOUSEBUTTONDOWN:
+				pause = false;
 				break;
 			case SDL_KEYUP:
 				if (evnt.key.keysym.sym > 127) {
@@ -258,12 +269,36 @@ void MainGame::drawGame() {
 	}
 	for (_playerI = _players.begin(); _playerI != _players.end(); ++_playerI) {
 		int playerNumber = _playerI->playerNumber;
-		SDL_SetTextureColorMod(Player::playerTexture, Constants::shipColors[playerNumber][0], Constants::shipColors[playerNumber][1], Constants::shipColors[playerNumber][2]);
+		SDL_SetTextureColorMod(Player::playerTexture, Constants::SHIP_COLORS[playerNumber][0], Constants::SHIP_COLORS[playerNumber][1], Constants::SHIP_COLORS[playerNumber][2]);
 		SDL_Rect temprect = _playerI->getFixedRect();
 		SDL_RenderCopy(_renderer, Player::playerTexture, NULL, &temprect);
 	}
 
-	
+	//Score
+	SDL_Rect scoreRect;
+	char scoreCStr[20]; //TODO maybe make this smarter?
+	itoa(_score, scoreCStr, 10);
+	SDL_Color textColor;
+	textColor.a = 255;
+	textColor.r = Constants::TEXT_COLOR[0];
+	textColor.g = Constants::TEXT_COLOR[1];
+	textColor.b = Constants::TEXT_COLOR[2];
+	SDL_Surface *scoreSurface = TTF_RenderText_Solid(_textFont, scoreCStr, textColor);
+	if (scoreSurface == nullptr) {
+		fatalError("SDL could not load score surface! SDL_Error: " + std::string(SDL_GetError()));
+	}
+	SDL_Texture *scoreTexture = SDL_CreateTextureFromSurface(_renderer, scoreSurface);
+	if (scoreTexture == nullptr) {
+		fatalError("SDL could not load score texture! SDL_Error: " + std::string(SDL_GetError()));
+	}
+	scoreRect.w = scoreSurface->w;
+	scoreRect.h = scoreSurface->h;
+	scoreRect.y = 0;
+	scoreRect.x = Constants::SCREEN_WIDTH_CALC - scoreRect.w;
+	SDL_FreeSurface(scoreSurface);
+	SDL_RenderCopy(_renderer, scoreTexture, NULL, &scoreRect);
+
+	std::cout << scoreRect.h << " " << Constants::FONT_SIZE << std::endl;
 
 	SDL_RenderPresent(_renderer);
 	// std::cout << "DONE!" << std::endl;
@@ -276,36 +311,33 @@ void MainGame::movePlayers() {
 	//int al
 	for (_playerI = _players.begin(); _playerI != _players.end(); ++_playerI) {
 		int playerNumber = _playerI->playerNumber;
-		if (playerNumber != 0) {
-			int currentLen = xMovements.size();
+		if (Constants::PLAYER_CONTROLS[playerNumber] != 0) {
+			int currentLenX = xMovements.size();
+			int currentLenY = yMovements.size();
 			if (_keysPressed[Constants::CONTROL_UP[Constants::PLAYER_CONTROLS[playerNumber]]]) {
-				xMovements.push_back(0);
 				yMovements.push_back(1);
 			}
 			else if (_keysPressed[Constants::CONTROL_DOWN[Constants::PLAYER_CONTROLS[playerNumber]]]) {
-				xMovements.push_back(0);
 				yMovements.push_back(-1);
 			}
 
 			if (_keysPressed[Constants::CONTROL_LEFT[Constants::PLAYER_CONTROLS[playerNumber]]]) {
 				xMovements.push_back(-1);
-				yMovements.push_back(0);
 			}
 			else if (_keysPressed[Constants::CONTROL_RIGHT[Constants::PLAYER_CONTROLS[playerNumber]]]) {
 				xMovements.push_back(1);
-				yMovements.push_back(0);
 			}
-			if (currentLen == xMovements.size()) {
+			if (currentLenX == xMovements.size()) {
 				xMovements.push_back(0);
+			}
+			if (currentLenY == yMovements.size()) {
 				yMovements.push_back(0);
 			}
 		}
 		else {
-			if (playerNumber == 0) {
-				_playerI->setPixelPos(_mouseX, Constants::SCREEN_HEIGHT_CALC - _mouseY);
-			}
-			xMovements.push_back(0);
-			yMovements.push_back(0);
+			_playerI->setPixelPos(_mouseX, Constants::SCREEN_HEIGHT_CALC - _mouseY);
+			xMovements.push_back(0); //failsafe (should never happen)
+			yMovements.push_back(0); //failsafe (should never happen)
 		}
 
 

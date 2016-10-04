@@ -18,8 +18,8 @@ class Constants {
 		static int SCREEN_HEIGHT_CALC;
 
 		// Colors
-		static Uint8 shipColors[4][3];
-		static const Uint8 textColor[3];
+		static Uint8 SHIP_COLORS[4][3];
+		static const Uint8 TEXT_COLOR[3];
 
 		// Multipliers
 		static const double COMET_SPEED_MULTIPLIER_MAX;
@@ -48,6 +48,7 @@ class Constants {
 		static const char *COMET_TEXTURE;
 		static const char *STAR_TEXTURE;
 		static const char *PLAYER_TEXTURE;
+		static const char *FONT_PATH;
 
 		//Controls
 		static const int CONTROL_UP[4];
@@ -56,5 +57,9 @@ class Constants {
 		static const int CONTROL_RIGHT[4];
 		static int PLAYER_CONTROLS[4];
 
+		//Size thingo
+		static const double STATIC_FONT_SIZE;
+		static double FONT_SIZE;
 		
+		static void setScreenSize(int w, int h);
 };

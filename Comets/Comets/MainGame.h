@@ -27,6 +27,7 @@ class MainGame {
 		void processInput();
 		void drawGame();
 		void initSDL();
+		void initFont();
 		void makeWindow();
 		void makeRenderer();
 		void moveComets();
@@ -42,14 +43,13 @@ class MainGame {
 		void restartGame();
 
 		int _score;
+		int _gameStart;
 		bool _keysPressed[323];
 		int _mouseX;
 		int _mouseY;
 		SDL_Window *_window;
 		SDL_Renderer *_renderer;
 		TTF_Font *_textFont;
-		SDL_Surface *_textSurface;
-		SDL_Texture *_textTexture;
 		int _maxFPS;
 		GameState _gameState;
 		std::vector<Player> _players;

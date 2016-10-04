@@ -96,5 +96,49 @@
     <Image Include="resources\star.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="resources\bettership.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\bettership2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\bettership3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\bettership4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\open-sans\OpenSans-Bold.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\open-sans\OpenSans-BoldItalic.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\open-sans\OpenSans-ExtraBold.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\open-sans\OpenSans-ExtraBoldItalic.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\open-sans\OpenSans-Italic.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\open-sans\OpenSans-Light.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\open-sans\OpenSans-LightItalic.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\open-sans\OpenSans-Regular.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\open-sans\OpenSans-Semibold.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\open-sans\OpenSans-SemiboldItalic.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>
