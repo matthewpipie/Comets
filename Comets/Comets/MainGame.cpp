@@ -284,7 +284,8 @@ void MainGame::drawGame() {
 	//Score
 	SDL_Rect scoreRect;
 	char scoreCStr[20]; //TODO maybe make this smarter?
-	itoa(_score, scoreCStr, 10);
+	//itoa(_score, scoreCStr, 10);
+	sprintf(scoreCStr, "%u", _score);
 	SDL_Color textColor;
 	textColor.a = 255;
 	textColor.r = Constants::TEXT_COLOR[0];
@@ -305,7 +306,7 @@ void MainGame::drawGame() {
 	SDL_FreeSurface(scoreSurface);
 	SDL_RenderCopy(_renderer, scoreTexture, NULL, &scoreRect);
 
-	std::cout << scoreRect.h << " " << Constants::FONT_SIZE << std::endl;
+	//std::cout << scoreRect.h << " " << Constants::FONT_SIZE << std::endl;
 
 	SDL_RenderPresent(_renderer);
 	// std::cout << "DONE!" << std::endl;

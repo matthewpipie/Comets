@@ -42,7 +42,7 @@ class MainGame {
 		bool checkPlayers();
 		void restartGame();
 
-		int _score;
+		unsigned int _score;
 		int _gameStart;
 		bool _keysPressed[323];
 		int _mouseX;
