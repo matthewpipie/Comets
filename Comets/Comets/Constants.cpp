@@ -34,7 +34,7 @@ const int Constants::COMET_SPAWN_RATE = 6; //every COMET_SPAWN_RATE frames a com
 // Cou qnts
 const int Constants::STAR_COUNT = 30;
 const int Constants::COMET_COUNT = 10;
-const int Constants::PLAYER_COUNT = 1;
+const int Constants::PLAYER_COUNT = 2;
 
 // Time stuffs
 const int Constants::STAR_MAX_NONTWINKLE_TIME = 5 * 60;  // Frames

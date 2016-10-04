@@ -101,6 +101,7 @@ void MainGame::loadTextures() {
 void MainGame::restartGame() {
 	_score = 0;
 	_gameStart = MainGame::frameCount;
+	pause = false;
 	makeComets();
 	makeStars();
 	makePlayers();
@@ -140,27 +141,27 @@ void MainGame::makePlayers() {
 }
 
 void MainGame::gameLoop() {
+	bool shouldContinue = true;
 	while (_gameState != GameState::EXIT) {
 		float startTicks = SDL_GetTicks();
 
 		processInput();
+		shouldContinue = true;
 		if (!pause) {
 			moveComets();
 			movePlayers();
 			fixCollision();
-			bool shouldContinue = checkPlayers();
+			shouldContinue = checkPlayers();
 			cleanComets();
-			drawGame();
-			if (!shouldContinue) {
-				pause = true;
-				restartGame();
-				continue;
-			}
 		}
+		drawGame();
+		if (!pause && !shouldContinue) {
+				pause = true; // DED
+			}
 
 		float frameTicks = SDL_GetTicks() - startTicks;
 
-		if (MainGame::frameCount % 6 == (_gameStart + 1) % 6) {
+		if (!pause && MainGame::frameCount % 6 == (_gameStart + 1) % 6) {
 			_score++;
 		}
 		if (MainGame::frameCount % 60 == 0) {
@@ -213,8 +214,12 @@ void MainGame::processInput() {
 					initFont();
 					restartGame();
 				}
+				break;
 			case SDL_MOUSEBUTTONDOWN:
-				pause = false;
+				if (pause) {
+					restartGame();
+				}
+				
 				break;
 			case SDL_KEYUP:
 				if (evnt.key.keysym.sym > 127) {
@@ -241,7 +246,9 @@ void MainGame::processInput() {
 		_gameState = GameState::EXIT;
 	}
 	if (_keysPressed[SDLK_SPACE]) {
-		pause = false;
+		if (pause) {
+			restartGame();
+		}
 	}
 
 }
