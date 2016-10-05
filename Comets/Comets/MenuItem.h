@@ -4,9 +4,11 @@ class MenuItem
 {
 public:
 	MenuItem();
-	MenuItem(std::string newText);
+	MenuItem(std::string id);
+	MenuItem(std::string id, std::string newText);
 	~MenuItem();
 	std::string text;
 	SDL_Rect *rect;
+	std::string id;
 };
 
