@@ -1,12 +1,12 @@
-#include "MenuGroup.h"
+#include "MenuManager.h"
 
 
 
-MenuGroup::MenuGroup()
+MenuManager::MenuManager()
 {
 }
 
 
-MenuGroup::~MenuGroup()
+MenuManager::~MenuManager()
 {
 }
