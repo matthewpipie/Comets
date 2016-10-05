@@ -13,6 +13,7 @@
 #include "Comet.h"
 #include "Star.h"
 #include "Player.h"
+#include "MenuGroup.h"
 
 class MainGame {
 	public:
@@ -30,6 +31,7 @@ class MainGame {
 		void initFont();
 		void makeWindow();
 		void makeRenderer();
+		void makeMenus();
 		void moveComets();
 		void movePlayers();
 		void makeComets();
@@ -42,7 +44,12 @@ class MainGame {
 		bool checkPlayers();
 		void restartGame();
 
-		unsigned int _score;
+		MenuGroup _mainMenu;
+		MenuGroup _options;
+		MenuGroup _difficulties;
+		MenuGroup _credits;
+
+		int _score;
 		int _gameStart;
 		bool _keysPressed[323];
 		int _mouseX;

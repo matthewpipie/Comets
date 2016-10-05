@@ -92,6 +92,33 @@ void MainGame::makeRenderer() {
 	}
 }
 
+void MainGame::makeMenus() {
+	_mainMenu.menuButtons.push_back(MenuItem("Play"));
+	_mainMenu.menuButtons.push_back(MenuItem("Options"));
+	_mainMenu.menuButtons.push_back(MenuItem("Credits"));
+	_mainMenu.actionButtons.push_back(MenuItem("Quit"));
+
+	_difficulties.actionButtons.push_back(MenuItem("Easy"));
+	_difficulties.actionButtons.push_back(MenuItem("Medium"));
+	_difficulties.actionButtons.push_back(MenuItem("Hard"));
+	_difficulties.actionButtons.push_back(MenuItem("Crazy"));
+	_difficulties.actionButtons.push_back(MenuItem("Insane"));
+	_difficulties.actionButtons.push_back(MenuItem("Actually Impossible"));
+	_difficulties.actionButtons.push_back(MenuItem("Back"));
+
+	_options.actionButtons.push_back(MenuItem("Back"));
+	_options.actionButtons.push_back(MenuItem("Music"));
+	_options.actionButtons.push_back(MenuItem("Player 1 Controls"));
+	_options.actionButtons.push_back(MenuItem("Player 2 Controls"));
+	_options.actionButtons.push_back(MenuItem("Player 3 Controls"));
+	_options.actionButtons.push_back(MenuItem("Player 4 Controls"));
+	_options.actionButtons.push_back(MenuItem("WASD")); //TODO: CHANGE MENUITEM CONSTRUCTOR TO HAVE ID AND SECOND ARGUMENT INIT TEXT
+	_options.actionButtons.push_back(MenuItem("Player 1 Controls"));
+	_options.actionButtons.push_back(MenuItem("Player 1 Controls"));
+	_options.actionButtons.push_back(MenuItem("Player 1 Controls"));
+
+}
+
 void MainGame::loadTextures() {
 	Comet::initCometTexture(_renderer);
 	Star::initStarTexture(_renderer);
@@ -99,6 +126,7 @@ void MainGame::loadTextures() {
 }
 
 void MainGame::restartGame() {
+	_gameState = GameState::PLAY;
 	_score = 0;
 	_gameStart = MainGame::frameCount;
 	pause = false;
@@ -146,24 +174,31 @@ void MainGame::gameLoop() {
 		float startTicks = SDL_GetTicks();
 
 		processInput();
-		shouldContinue = true;
-		if (!pause) {
-			moveComets();
-			movePlayers();
-			fixCollision();
-			shouldContinue = checkPlayers();
-			cleanComets();
-		}
-		drawGame();
-		if (!pause && !shouldContinue) {
-				pause = true; // DED
+		//if (_gameState == GameState::PLAY) {
+			shouldContinue = true;
+			if (!pause) {
+				moveComets();
+				movePlayers();
+				fixCollision();
+				shouldContinue = checkPlayers();
+				cleanComets();
 			}
+			drawGame();
+			if (!pause && !shouldContinue) {
+					pause = true; // DED
+				}
+
+			if (!pause && MainGame::frameCount % 6 == (_gameStart + 1) % 6) {
+				_score++;
+			}
+		//}
+		//else {
+		//	_score = -1;
+		//	drawGame();
+		//}
 
 		float frameTicks = SDL_GetTicks() - startTicks;
 
-		if (!pause && MainGame::frameCount % 6 == (_gameStart + 1) % 6) {
-			_score++;
-		}
 		if (MainGame::frameCount % 60 == 0) {
 			 //std::cout << MainGame::frameCount << std::endl;
 		}
@@ -214,6 +249,14 @@ void MainGame::processInput() {
 					initFont();
 					restartGame();
 				}
+
+				if (evnt.key.keysym.sym == SDLK_ESCAPE && _gameState == GameState::PLAY) {
+					_gameState = GameState::MENU;
+				}
+				else if (evnt.key.keysym.sym == SDLK_ESCAPE && _gameState == GameState::MENU) {
+					_gameState = GameState::EXIT;
+				}
+
 				break;
 			case SDL_MOUSEBUTTONDOWN:
 				if (pause) {
@@ -242,15 +285,11 @@ void MainGame::processInput() {
 		}
 	}
 
-	if (_keysPressed[SDLK_ESCAPE]) {
-		_gameState = GameState::EXIT;
-	}
 	if (_keysPressed[SDLK_SPACE]) {
 		if (pause) {
 			restartGame();
 		}
 	}
-
 }
 
 void MainGame::drawGame() {
@@ -262,6 +301,16 @@ void MainGame::drawGame() {
 
 	// Update the surface
 	SDL_UpdateWindowSurface(_window);*/
+
+	Uint8 dimColor = 255;
+	if (static_cast<bool>(_gameState)) {
+		dimColor = Constants::DIM_COLOR_MENU;
+	}
+	else if (pause) {
+		dimColor = Constants::DIM_COLOR_LOSE;
+	}
+	SDL_SetTextureColorMod(Star::starTexture, dimColor, dimColor, dimColor);
+	SDL_SetTextureColorMod(Comet::cometTexture, dimColor, dimColor, dimColor);
 
 	SDL_RenderClear(_renderer);
 
@@ -282,30 +331,45 @@ void MainGame::drawGame() {
 	}
 
 	//Score
-	SDL_Rect scoreRect;
-	char scoreCStr[20]; //TODO maybe make this smarter?
-	//itoa(_score, scoreCStr, 10);
-	sprintf(scoreCStr, "%u", _score);
-	SDL_Color textColor;
-	textColor.a = 255;
-	textColor.r = Constants::TEXT_COLOR[0];
-	textColor.g = Constants::TEXT_COLOR[1];
-	textColor.b = Constants::TEXT_COLOR[2];
-	SDL_Surface *scoreSurface = TTF_RenderText_Solid(_textFont, scoreCStr, textColor);
-	if (scoreSurface == nullptr) {
-		fatalError("SDL could not load score surface! SDL_Error: " + std::string(SDL_GetError()));
+	if (_score != -1) {
+		SDL_Rect scoreRect;
+		char scoreCStr[20]; //TODO maybe make this smarter?
+							//itoa(_score, scoreCStr, 10);
+		sprintf(scoreCStr, "%u", _score);
+		SDL_Color textColor;
+		textColor.a = 255;
+		textColor.r = Constants::TEXT_COLOR[0];
+		textColor.g = Constants::TEXT_COLOR[1];
+		textColor.b = Constants::TEXT_COLOR[2];
+		SDL_Surface *scoreSurface = TTF_RenderText_Solid(_textFont, scoreCStr, textColor);
+		if (scoreSurface == nullptr) {
+			fatalError("SDL could not load score surface! SDL_Error: " + std::string(SDL_GetError()));
+		}
+		SDL_Texture *scoreTexture = SDL_CreateTextureFromSurface(_renderer, scoreSurface);
+		if (scoreTexture == nullptr) {
+			fatalError("SDL could not load score texture! SDL_Error: " + std::string(SDL_GetError()));
+		}
+		scoreRect.w = scoreSurface->w;
+		scoreRect.h = scoreSurface->h;
+		if (!pause) {
+			scoreRect.y = 0;
+			scoreRect.x = Constants::SCREEN_WIDTH_CALC - scoreRect.w;
+		}
+		else { //Center on death
+			scoreRect.y = (Constants::SCREEN_HEIGHT_CALC - scoreRect.h) / 2.0;
+			scoreRect.x = (Constants::SCREEN_WIDTH_CALC - scoreRect.w) / 2.0;
+		}
+		
+		SDL_FreeSurface(scoreSurface);
+		SDL_RenderCopy(_renderer, scoreTexture, NULL, &scoreRect);
 	}
-	SDL_Texture *scoreTexture = SDL_CreateTextureFromSurface(_renderer, scoreSurface);
-	if (scoreTexture == nullptr) {
-		fatalError("SDL could not load score texture! SDL_Error: " + std::string(SDL_GetError()));
-	}
-	scoreRect.w = scoreSurface->w;
-	scoreRect.h = scoreSurface->h;
-	scoreRect.y = 0;
-	scoreRect.x = Constants::SCREEN_WIDTH_CALC - scoreRect.w;
-	SDL_FreeSurface(scoreSurface);
-	SDL_RenderCopy(_renderer, scoreTexture, NULL, &scoreRect);
+	else {
+		//Menu options:
+		//Play:
+			//Easy
 
+	}
+	
 	//std::cout << scoreRect.h << " " << Constants::FONT_SIZE << std::endl;
 
 	SDL_RenderPresent(_renderer);

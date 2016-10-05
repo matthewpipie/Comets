@@ -17,6 +17,8 @@
     <ClInclude Include="Errors.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="MenuGroup.h" />
+    <ClInclude Include="MenuItem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RNGCalculator.h" />
     <ClInclude Include="Side.h" />
@@ -31,6 +33,8 @@
     <ClCompile Include="Errors.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Comets.cpp" />
+    <ClCompile Include="MenuGroup.cpp" />
+    <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RNGCalculator.cpp" />
     <ClCompile Include="Sprite.cpp" />

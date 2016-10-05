@@ -50,6 +50,12 @@
     <ClInclude Include="RNGCalculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MenuItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionCalculator.cpp">
@@ -83,6 +89,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RNGCalculator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

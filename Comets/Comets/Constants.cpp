@@ -25,16 +25,18 @@ Uint8 Constants::SHIP_COLORS[][3] = {
 	{ 255, 0, 0 } //player 4
 };
 const Uint8 Constants::TEXT_COLOR[] = { 255, 255, 255 };
+const Uint8 Constants::DIM_COLOR_MENU = 105;
+const Uint8 Constants::DIM_COLOR_LOSE = 105;
 
 // Comet specific stuff
 const double Constants::COMET_SPEED_MULTIPLIER_MAX = 1.4;
 const double Constants::COMET_SPEED_MULTIPLIER_MIN = 0.6;
 const int Constants::COMET_SPAWN_RATE = 6; //every COMET_SPAWN_RATE frames a comet will spawn
 
-// Cou qnts
+// Counts
 const int Constants::STAR_COUNT = 30;
 const int Constants::COMET_COUNT = 10;
-const int Constants::PLAYER_COUNT = 2;
+int Constants::PLAYER_COUNT = 2;
 
 // Time stuffs
 const int Constants::STAR_MAX_NONTWINKLE_TIME = 5 * 60;  // Frames
@@ -72,4 +74,22 @@ void Constants::setScreenSize(int w, int h) {
 	SCREEN_HEIGHT = h;
 	SCREEN_HEIGHT_CALC = SCREEN_HEIGHT - 1;
 	FONT_SIZE = STATIC_FONT_SIZE / static_cast<double>(SCREEN_HEIGHT);
+}
+void Constants::changeShipColors(int ship, int rgb, int newColor) {
+	SHIP_COLORS[ship][rgb] = newColor;
+}
+void Constants::changeNumberOfPlayers(int newNumber) {
+	PLAYER_COUNT = newNumber;
+}
+void Constants::changeControls(int player, int newControls) {
+	//i want player player to have controls newControls
+	int i;
+	for (i = 0; i < 4; i++) {
+		if (PLAYER_CONTROLS[i] == newControls) { 
+			break;
+		}
+	}
+	int temp = PLAYER_CONTROLS[player];
+	PLAYER_CONTROLS[player] = newControls;
+	PLAYER_CONTROLS[i] = temp;
 }

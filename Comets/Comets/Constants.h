@@ -20,6 +20,8 @@ class Constants {
 		// Colors
 		static Uint8 SHIP_COLORS[4][3];
 		static const Uint8 TEXT_COLOR[3];
+		static const Uint8 DIM_COLOR_MENU;
+		static const Uint8 DIM_COLOR_LOSE;
 
 		// Multipliers
 		static const double COMET_SPEED_MULTIPLIER_MAX;
@@ -29,7 +31,7 @@ class Constants {
 		// Counts
 		static const int STAR_COUNT;
 		static const int COMET_COUNT;
-		static const int PLAYER_COUNT;
+		static int PLAYER_COUNT;
 
 		// Time stuffs
 		static const int STAR_MAX_NONTWINKLE_TIME;  // Frames
@@ -62,4 +64,7 @@ class Constants {
 		static double FONT_SIZE;
 		
 		static void setScreenSize(int w, int h);
+		static void changeShipColors(int ship, int rgb, int newColor);
+		static void changeNumberOfPlayers(int newNumber);
+		static void changeControls(int player, int newControls);
 };
