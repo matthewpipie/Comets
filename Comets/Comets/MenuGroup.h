@@ -8,6 +8,6 @@ public:
 	~MenuGroup();
 	std::vector<MenuItem> actionButtons;
 	std::vector<MenuItem> menuButtons;
-	std::vector<MenuItem> text;
+	std::vector<MenuItem> textButtons;
 };
 

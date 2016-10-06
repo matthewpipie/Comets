@@ -11,6 +11,10 @@ public:
 	MenuGroup _options;
 	MenuGroup _difficulties;
 	MenuGroup _credits;
+	
+	void defineMenus();
+	void setMenuLocations();
+	MenuGroup *findMenuGroup(std::string idToFind);
 
 };
 

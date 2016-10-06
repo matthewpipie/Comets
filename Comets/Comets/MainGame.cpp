@@ -93,29 +93,7 @@ void MainGame::makeRenderer() {
 }
 
 void MainGame::makeMenus() {
-	_mainMenu.menuButtons.push_back(MenuItem("Play"));
-	_mainMenu.menuButtons.push_back(MenuItem("Options"));
-	_mainMenu.menuButtons.push_back(MenuItem("Credits"));
-	_mainMenu.actionButtons.push_back(MenuItem("Quit"));
-
-	_difficulties.actionButtons.push_back(MenuItem("Easy"));
-	_difficulties.actionButtons.push_back(MenuItem("Medium"));
-	_difficulties.actionButtons.push_back(MenuItem("Hard"));
-	_difficulties.actionButtons.push_back(MenuItem("Crazy"));
-	_difficulties.actionButtons.push_back(MenuItem("Insane"));
-	_difficulties.actionButtons.push_back(MenuItem("Actually Impossible"));
-	_difficulties.actionButtons.push_back(MenuItem("Back"));
-
-	_options.actionButtons.push_back(MenuItem("Back"));
-	_options.actionButtons.push_back(MenuItem("Music"));
-	_options.actionButtons.push_back(MenuItem("Player 1 Controls"));
-	_options.actionButtons.push_back(MenuItem("Player 2 Controls"));
-	_options.actionButtons.push_back(MenuItem("Player 3 Controls"));
-	_options.actionButtons.push_back(MenuItem("Player 4 Controls"));
-	_options.actionButtons.push_back(MenuItem("WASD")); //TODO: CHANGE MENUITEM CONSTRUCTOR TO HAVE ID AND SECOND ARGUMENT INIT TEXT
-	_options.actionButtons.push_back(MenuItem("Player 1 Controls"));
-	_options.actionButtons.push_back(MenuItem("Player 1 Controls"));
-	_options.actionButtons.push_back(MenuItem("Player 1 Controls"));
+	
 
 }
 
