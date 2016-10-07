@@ -22,7 +22,6 @@ class MainGame {
 		~MainGame();
 		void run();
 		static int frameCount;
-		bool pause;
 
 	private:
 		void gameLoop();

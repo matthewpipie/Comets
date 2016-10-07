@@ -9,7 +9,8 @@ MusicManager::MusicManager() :
 	_hard(nullptr),
 	_crazy(nullptr),
 	_insane(nullptr),
-	_actuallyImpossible(nullptr) {
+	_actuallyImpossible(nullptr),
+	_currentlyPlaying(-1) {
 }
 
 
@@ -62,9 +63,13 @@ void MusicManager::quitMusic() {
 	Mix_Quit();
 }
 
-void MusicManager::startMusic(int difficulty) {
-	Mix_HaltMusic();
-	Mix_Music **musicPointer = difficultyToMusic(difficulty);
+void MusicManager::startMusic(int gameState, bool forceRestart) {
+	if (forceRestart) {
+		Mix_HaltMusic();
+	}		
+	setCurrentlyPlaying(gameState);
+
+	Mix_Music **musicPointer = gameStateToMusic(gameState);
 	Mix_PlayMusic(*musicPointer, -1);
 }
 
@@ -80,8 +85,19 @@ void MusicManager::stopMusic() {
 	Mix_HaltMusic();
 }
 
-Mix_Music **MusicManager::difficultyToMusic(int difficulty) {
-	switch (difficulty) {
+Mix_Music **MusicManager::gameStateToMusic(int gameState) {
+	auto errorOut = [](int gameState) {fatalError("gameState could not be found by MusicManager!  gameState: " + gameState); };
+	if (gameState == 0) {
+		errorOut(gameState);
+	}
+	else if (gameState < 0) {
+		gameState = 0;
+	}
+	else if (gameState > 10) {
+		gameState -= 10;
+	}
+
+	switch (gameState) {
 	case 0:
 		return &_menu;
 		break;
@@ -104,6 +120,6 @@ Mix_Music **MusicManager::difficultyToMusic(int difficulty) {
 		return &_actuallyImpossible;
 		break;
 	default:
-		fatalError("Difficulty could not be found!  Difficulty: " + difficulty);
+		errorOut(gameState);
 	}
 }

@@ -12,13 +12,15 @@ public:
 	void unloadMusic(); //call at death of game
 	void quitMusic(); //end
 
-	void startMusic(int difficulty); //pass in 0-6, use only when loading from main menu, 0=main menu
+	void startMusic(int gameState, bool forceRestart); //pass in 0-6, use only when loading from main menu, 0=main menu
 	void pauseMusic(); //use on death
 	void resumeMusic(); //use on restart
 	void stopMusic(); //use on back to main menu
 
 private:
-	Mix_Music **difficultyToMusic(int difficulty);
+	int _currentlyPlaying;
+
+	Mix_Music **gameStateToMusic(int gameState);
 
 	Mix_Music *_menu;
 	Mix_Music *_easy;

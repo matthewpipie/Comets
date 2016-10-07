@@ -113,7 +113,7 @@ void MainGame::loadMusic() {
 	_musicManager.loadMusic();
 }
 
-void MainGame::restartGame() {
+void MainGame::resumeGame() {
 	_gameState = GameState::PLAY;
 	_score = 0;
 	_gameStart = MainGame::frameCount;
@@ -183,6 +183,7 @@ void MainGame::gameLoop() {
 		}
 		else if (_gameState == GameState::MENU) {
 			_score = -1;
+			pause = false;
 			moveComets();
 			fixCollision();
 			cleanComets();
