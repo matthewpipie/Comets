@@ -8,8 +8,8 @@ public:
 	~MenuManager();
 
 	MenuGroup _mainMenu;
-	MenuGroup _options;
 	MenuGroup _difficulties;
+	MenuGroup _options;
 	MenuGroup _credits;
 	
 	void defineMenus();

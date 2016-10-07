@@ -31,9 +31,11 @@ MainGame::~MainGame() {
 void MainGame::run() {
 	initSDL();
 	initFont();
+	initMusic();
 	makeWindow();
 	makeRenderer();
 	loadTextures();
+	loadMusic();
 	
 	restartGame();
 
@@ -77,6 +79,10 @@ void MainGame::initFont() {
 	}
 }
 
+void MainGame::initMusic() {
+	_musicManager.initMusic();
+}
+
 void MainGame::makeWindow() {
 	_window = SDL_CreateWindow("SDL Fun", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (_window == nullptr) {
@@ -101,6 +107,10 @@ void MainGame::loadTextures() {
 	Comet::initCometTexture(_renderer);
 	Star::initStarTexture(_renderer);
 	Player::initPlayerTexture(_renderer);
+}
+
+void MainGame::loadMusic() {
+	_musicManager.loadMusic();
 }
 
 void MainGame::restartGame() {
@@ -148,11 +158,12 @@ void MainGame::makePlayers() {
 
 void MainGame::gameLoop() {
 	bool shouldContinue = true;
+	_musicManager.startMusic(1);
 	while (_gameState != GameState::EXIT) {
 		float startTicks = SDL_GetTicks();
 
 		processInput();
-		//if (_gameState == GameState::PLAY) {
+		if (_gameState == GameState::PLAY) {
 			shouldContinue = true;
 			if (!pause) {
 				moveComets();
@@ -169,11 +180,14 @@ void MainGame::gameLoop() {
 			if (!pause && MainGame::frameCount % 6 == (_gameStart + 1) % 6) {
 				_score++;
 			}
-		//}
-		//else {
-		//	_score = -1;
-		//	drawGame();
-		//}
+		}
+		else if (_gameState == GameState::MENU) {
+			_score = -1;
+			moveComets();
+			fixCollision();
+			cleanComets();
+			drawGame();
+		}
 
 		float frameTicks = SDL_GetTicks() - startTicks;
 
@@ -215,7 +229,7 @@ void MainGame::processInput() {
 					evnt.key.keysym.sym -= Constants::CONSTANT_SDL_CONTROL_NUMBER;
 				}
 				_keysPressed[evnt.key.keysym.sym] = true;
-				//std::cout << evnt.key.keysym.sym << std::endl;
+				// std::cout << evnt.key.keysym.sym << std::endl;
 				if (evnt.key.keysym.sym == SDLK_f) {
 					fullscreenMode = !fullscreenMode;
 					SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
@@ -233,6 +247,22 @@ void MainGame::processInput() {
 				}
 				else if (evnt.key.keysym.sym == SDLK_ESCAPE && _gameState == GameState::MENU) {
 					_gameState = GameState::EXIT;
+				}
+				if (evnt.key.keysym.sym == SDLK_1) {
+					Constants::PLAYER_COUNT = 1;
+					restartGame();
+				}
+				else if (evnt.key.keysym.sym == SDLK_2) {
+					Constants::PLAYER_COUNT = 2;
+					restartGame();
+				}
+				else if (evnt.key.keysym.sym == SDLK_3) {
+					Constants::PLAYER_COUNT = 3;
+					restartGame();
+				}
+				else if (evnt.key.keysym.sym == SDLK_4) {
+					Constants::PLAYER_COUNT = 4;
+					restartGame();
 				}
 
 				break;
@@ -267,6 +297,9 @@ void MainGame::processInput() {
 		if (pause) {
 			restartGame();
 		}
+	}
+	if (_keysPressed[SDLK_RETURN]) {
+		_gameState = GameState::PLAY;
 	}
 }
 

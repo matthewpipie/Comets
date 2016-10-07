@@ -1,12 +1,15 @@
 ﻿  MainGame.cpp
 c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(74): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(144): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(280): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdlib.h(1316): note: see declaration of 'itoa'
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(345): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(388): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(389): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(394): warning C4018: '<': signed/unsigned mismatch
-c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(422): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(76): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(163): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(317): warning C4800: 'GameState': forcing value to bool 'true' or 'false' (performance warning)
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(370): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(371): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(349): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(428): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(471): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(472): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(477): warning C4018: '<': signed/unsigned mismatch
+c:\users\matth\source\repos\comets\comets\comets\maingame.cpp(505): warning C4018: '<': signed/unsigned mismatch
   Comets.vcxproj -> C:\Users\matth\Source\Repos\Comets\Comets\Debug\Comets.exe

@@ -8,7 +8,8 @@
 #pragma once
 
 #include <SDL.h>
-//SDL_image only in sprite or something else
+//SDL_image only in sprite or something else i forgot
+//SDL_mixer in MusicManager.h
 #include <SDL_ttf.h>
 #include <stdio.h>
 #include <cmath>

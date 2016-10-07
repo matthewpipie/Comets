@@ -21,6 +21,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_325DAC5311B045E19A777E3F9B624833"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3421BFC063A44AD3987EA332BEA1CF70"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_463CEE7D2C1D4DF8A095DF0D83917BE8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_493A35D7BB6D4923B623B93FEA5B0081"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -33,7 +51,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5C34637DA82944E4A06D9568FE1731AE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6103EA8E39D345A0BFB2D05BA7B4536E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6AFCEFF01D424DC28C1E791FAC615798"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -45,13 +75,37 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7C09F713A1E7473B925602B916D1BB18"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9C7DEC28079B4873BB88AFB49336E8C7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_9EF358B83B4B4A72B99142944BD39004"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A039E16D06B04A88A404D4BA5FA04084"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A7C3D5F8D877485DA20B8C578E0A51CF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C60718A3D202485CB053F847A6C66A4B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -64,6 +118,18 @@
         "Entry"
         {
         "MsmKey" = "8:_EC94AE47DD4244F19E10E6F4BDFFCBC6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F95584FE2F5B4EA3BEDDDA0A23D061B9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FB6FA0CAF2BE430E9B837215C9CDFFB9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -174,6 +240,66 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_325DAC5311B045E19A777E3F9B624833"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-Semibold.ttf"
+            "TargetName" = "8:OpenSans-Semibold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3421BFC063A44AD3987EA332BEA1CF70"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-ExtraBold.ttf"
+            "TargetName" = "8:OpenSans-ExtraBold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_463CEE7D2C1D4DF8A095DF0D83917BE8"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-BoldItalic.ttf"
+            "TargetName" = "8:OpenSans-BoldItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_493A35D7BB6D4923B623B93FEA5B0081"
             {
             "SourcePath" = "8:..\\Release\\SDL2_image.dll"
@@ -214,12 +340,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5C34637DA82944E4A06D9568FE1731AE"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-Italic.ttf"
+            "TargetName" = "8:OpenSans-Italic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6103EA8E39D345A0BFB2D05BA7B4536E"
             {
             "SourcePath" = "8:..\\Release\\SDL2.dll"
             "TargetName" = "8:SDL2.dll"
             "Tag" = "8:"
             "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6AFCEFF01D424DC28C1E791FAC615798"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-LightItalic.ttf"
+            "TargetName" = "8:OpenSans-LightItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -254,6 +420,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7C09F713A1E7473B925602B916D1BB18"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-ExtraBoldItalic.ttf"
+            "TargetName" = "8:OpenSans-ExtraBoldItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C7DEC28079B4873BB88AFB49336E8C7"
             {
             "SourcePath" = "8:..\\Comets\\resources\\star.bmp"
@@ -274,12 +460,72 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9EF358B83B4B4A72B99142944BD39004"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\LICENSE.txt"
+            "TargetName" = "8:LICENSE.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A039E16D06B04A88A404D4BA5FA04084"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-Regular.ttf"
+            "TargetName" = "8:OpenSans-Regular.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A7C3D5F8D877485DA20B8C578E0A51CF"
             {
             "SourcePath" = "8:..\\Debug\\libfreetype-6.dll"
             "TargetName" = "8:libfreetype-6.dll"
             "Tag" = "8:"
             "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C60718A3D202485CB053F847A6C66A4B"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-SemiboldItalic.ttf"
+            "TargetName" = "8:OpenSans-SemiboldItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -320,6 +566,46 @@
             "TargetName" = "8:zlib1.dll"
             "Tag" = "8:"
             "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F95584FE2F5B4EA3BEDDDA0A23D061B9"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-Bold.ttf"
+            "TargetName" = "8:OpenSans-Bold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FB6FA0CAF2BE430E9B837215C9CDFFB9"
+            {
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-Light.ttf"
+            "TargetName" = "8:OpenSans-Light.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -392,6 +678,17 @@
                     "Property" = "8:_3418F2B4785A492D9E4BD05ECAEF61B2"
                         "Folders"
                         {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_59A147FF2157483FB1B3779D186AEE0D"
+                            {
+                            "Name" = "8:open-sans"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_EBA67575CC274A69BF30A1A765E5918C"
+                                "Folders"
+                                {
+                                }
+                            }
                         }
                     }
                 }
@@ -412,15 +709,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Comets"
-        "ProductCode" = "8:{C66A2987-E1F5-48F3-9D5C-401F1680CBCE}"
-        "PackageCode" = "8:{1AA7B263-4014-4844-B413-4A47E2D3BA7C}"
+        "ProductCode" = "8:{68F09CBF-29C5-41AE-BE37-965E07BDD895}"
+        "PackageCode" = "8:{170FF97D-79C1-42FA-9402-48D67D8C0636}"
         "UpgradeCode" = "8:{160C8838-DDF1-4262-AE72-163A991C02F2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.1.3"
         "Manufacturer" = "8:matthewpipie"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -934,7 +1231,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4F9899A8CACD40BA86283B25FC0D3873"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\Release\\Comets.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"

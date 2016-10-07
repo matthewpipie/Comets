@@ -9,7 +9,7 @@ public:
 	void resetRect();
 	~MenuItem();
 	std::string text;
-	SDL_Rect *rect;
+	SDL_Rect rect;
 	std::string id;
 };
 

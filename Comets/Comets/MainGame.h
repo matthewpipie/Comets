@@ -14,6 +14,7 @@
 #include "Star.h"
 #include "Player.h"
 #include "MenuManager.h"
+#include "MusicManager.h"
 
 class MainGame {
 	public:
@@ -29,6 +30,7 @@ class MainGame {
 		void drawGame();
 		void initSDL();
 		void initFont();
+		void initMusic();
 		void makeWindow();
 		void makeRenderer();
 		void makeMenus();
@@ -38,6 +40,7 @@ class MainGame {
 		void makeStars();
 		void makePlayers();
 		void loadTextures();
+		void loadMusic();
 		void fixCollision();
 		void cleanComets();
 		void makeComet();
@@ -45,6 +48,7 @@ class MainGame {
 		void restartGame();
 
 		MenuManager _menuManager;
+		MusicManager _musicManager;
 
 		int _score;
 		int _gameStart;

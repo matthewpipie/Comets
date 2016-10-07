@@ -46,11 +46,22 @@ class Constants {
 		// Speed
 		static const int COMET_SPEED;
 
-		// Files
+		// Texture files
 		static const char *COMET_TEXTURE;
 		static const char *STAR_TEXTURE;
 		static const char *PLAYER_TEXTURE;
+
+		// Font files
 		static const char *FONT_PATH;
+
+		// Music files
+		static const char *MUSIC_MENU;
+		static const char *MUSIC_EASY;
+		static const char *MUSIC_MEDIUM;
+		static const char *MUSIC_HARD;
+		static const char *MUSIC_CRAZY;
+		static const char *MUSIC_INSANE;
+		static const char *MUSIC_ACTUALLY_IMPOSSIBLE;
 
 		//Controls
 		static const int CONTROL_UP[4];

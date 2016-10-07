@@ -51,16 +51,27 @@ const int Constants::PLAYER_SIZE = 4;
 // Speed
 const int Constants::COMET_SPEED = 1;  // pix-units
 
-// Files
+// Texture files
 const char *Constants::COMET_TEXTURE = "resources/comet.bmp";
 const char *Constants::STAR_TEXTURE = "resources/star.bmp";
-const char *Constants::PLAYER_TEXTURE = "resources/bettership4.bmp";
 const char *Constants::FONT_PATH = "resources/open-sans/OpenSans-Regular.ttf";
+
+// Font files
+const char *Constants::PLAYER_TEXTURE = "resources/bettership4.bmp";
+
+// Music files
+const char *Constants::MUSIC_MENU = "";
+const char *Constants::MUSIC_EASY = "resources/music/easy.wav";
+const char *Constants::MUSIC_MEDIUM = "";
+const char *Constants::MUSIC_HARD = "";
+const char *Constants::MUSIC_CRAZY = "";
+const char *Constants::MUSIC_INSANE = "";
+const char *Constants::MUSIC_ACTUALLY_IMPOSSIBLE = "";
 
 //Controls
 const int Constants::CONTROL_UP[] = { -1, SDLK_w, SDLK_j, SDLK_UP - CONSTANT_SDL_CONTROL_NUMBER };
-const int Constants::CONTROL_LEFT[] = { -1, SDLK_a, SDLK_h, SDLK_LEFT - CONSTANT_SDL_CONTROL_NUMBER };
-const int Constants::CONTROL_DOWN[] = { -1, SDLK_s, SDLK_k, SDLK_DOWN - CONSTANT_SDL_CONTROL_NUMBER };
+const int Constants::CONTROL_LEFT[] = { -1, SDLK_a, SDLK_k, SDLK_LEFT - CONSTANT_SDL_CONTROL_NUMBER };
+const int Constants::CONTROL_DOWN[] = { -1, SDLK_s, SDLK_h, SDLK_DOWN - CONSTANT_SDL_CONTROL_NUMBER };
 const int Constants::CONTROL_RIGHT[] = { -1, SDLK_d, SDLK_l, SDLK_RIGHT - CONSTANT_SDL_CONTROL_NUMBER };
 int Constants::PLAYER_CONTROLS[] = { 0, 1, 3, 2 }; // Player 2 gets WASD, player 3 gets arrows, player 4 gets hjkl
 

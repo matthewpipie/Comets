@@ -45,6 +45,7 @@ MenuManager::~MenuManager()
 
 MenuGroup *MenuManager::findMenuGroup(std::string idToFind) {
 	//will find MenuGroup (out of the 4) containing idToFind
+	return &_options;
 }
 
 void MenuManager::setMenuLocations() {
