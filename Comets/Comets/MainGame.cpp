@@ -130,6 +130,13 @@ void MainGame::endGame() {
 	_gameState = GameState::MENU_DIFFICULTY;
 }
 
+bool isInGame() {
+	if (_gameState > 0 && _gameState < 11) {
+		return true;
+	}
+	return false;
+}
+
 void MainGame::makeComets() {
 	_comets.resize(0);
 	for (int i = 0; i < Constants::COMET_COUNT; i++) {
@@ -170,7 +177,7 @@ void MainGame::gameLoop() {
 		float startTicks = SDL_GetTicks();
 
 		processInput();
-		if (_gameState > 0) { // In game
+		if (_gameState > 0) { // In game, dead or alive
 			shouldContinue = true;
 			if (_gameState < 11) {
 				moveComets();
@@ -180,11 +187,11 @@ void MainGame::gameLoop() {
 				cleanComets();
 			}
 			drawGame();
-			if (!pause && !shouldContinue) {
+			if (isInGame() && !shouldContinue) {
 					pause = true; // DED
 				}
 
-			if (!pause && MainGame::frameCount % 6 == (_gameStart + 1) % 6) {
+			if (isInGame() && MainGame::frameCount % 6 == (_gameStart + 1) % 6) {
 				_score++;
 			}
 		}

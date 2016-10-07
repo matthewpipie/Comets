@@ -47,6 +47,7 @@ class MainGame {
 		void startGame(int difficulty); // 1-6
 		void restartGame();
 		void endGame();
+		bool isInGame();
 
 		MenuManager _menuManager;
 		MusicManager _musicManager;
