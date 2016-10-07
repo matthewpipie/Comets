@@ -17,8 +17,7 @@ MainGame::MainGame() : _window(nullptr),
 	_renderer(nullptr),
 	_textFont(nullptr),
 	_maxFPS(60.0f), 
-	_gameState(GameState::PLAY), 
-	pause(false),
+	_gameState(GameState::MENU_MAIN), 
 	fullscreenMode(0),
 	_mouseX(0),
 	_mouseY(0) {
@@ -113,14 +112,22 @@ void MainGame::loadMusic() {
 	_musicManager.loadMusic();
 }
 
+void MainGame::startGame(int difficulty) {
+	_gameState = (GameState)difficulty;
+	resumeGame();
+}
 void MainGame::resumeGame() {
-	_gameState = GameState::PLAY;
+	if (_gameState > 10) {
+		_gameState -= 10;
+	}
 	_score = 0;
 	_gameStart = MainGame::frameCount;
-	pause = false;
 	makeComets();
 	makeStars();
 	makePlayers();
+}
+void MainGame::endGame() {
+	_gameState = GameState::MENU_DIFFICULTY;
 }
 
 void MainGame::makeComets() {
@@ -163,9 +170,9 @@ void MainGame::gameLoop() {
 		float startTicks = SDL_GetTicks();
 
 		processInput();
-		if (_gameState == GameState::PLAY) {
+		if (_gameState > 0) { // In game
 			shouldContinue = true;
-			if (!pause) {
+			if (_gameState < 11) {
 				moveComets();
 				movePlayers();
 				fixCollision();
@@ -181,9 +188,8 @@ void MainGame::gameLoop() {
 				_score++;
 			}
 		}
-		else if (_gameState == GameState::MENU) {
+		else if (_gameState < 0) { // If in menu
 			_score = -1;
-			pause = false;
 			moveComets();
 			fixCollision();
 			cleanComets();

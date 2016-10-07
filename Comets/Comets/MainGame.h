@@ -44,7 +44,9 @@ class MainGame {
 		void cleanComets();
 		void makeComet();
 		bool checkPlayers();
+		void startGame(int difficulty); // 1-6
 		void restartGame();
+		void endGame();
 
 		MenuManager _menuManager;
 		MusicManager _musicManager;
