@@ -21,7 +21,6 @@ MainGame::MainGame() : _window(nullptr),
 	fullscreenMode(0),
 	_mouseX(0),
 	_mouseY(0) {
-	std::fill(_keysPressed, _keysPressed + sizeof(_keysPressed), false);
 }
 
 MainGame::~MainGame() {
@@ -117,8 +116,8 @@ void MainGame::startGame(int difficulty) {
 	resumeGame();
 }
 void MainGame::resumeGame() {
-	if (_gameState > 10) {
-		_gameState -= 10;
+	if ((int)_gameState > 10) {
+		_gameState = (GameState)((int)_gameState - 10);
 	}
 	_score = 0;
 	_gameStart = MainGame::frameCount;
@@ -127,11 +126,11 @@ void MainGame::resumeGame() {
 	makePlayers();
 }
 void MainGame::endGame() {
-	_gameState = GameState::MENU_DIFFICULTY;
+	_gameState = GameState::MENU_DIFFICULTIES;
 }
 
-bool isInGame() {
-	if (_gameState > 0 && _gameState < 11) {
+bool MainGame::isInGame() {
+	if ((int)_gameState > 0 && (int)_gameState < 11) {
 		return true;
 	}
 	return false;
@@ -188,8 +187,8 @@ void MainGame::gameLoop() {
 			}
 			drawGame();
 			if (isInGame() && !shouldContinue) {
-					pause = true; // DED
-				}
+				_gameState = (GameState)((int)_gameState + 10);//bad
+			}
 
 			if (isInGame() && MainGame::frameCount % 6 == (_gameStart + 1) % 6) {
 				_score++;

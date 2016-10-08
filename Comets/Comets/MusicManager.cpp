@@ -67,7 +67,7 @@ void MusicManager::startMusic(int gameState, bool forceRestart) {
 	if (forceRestart) {
 		Mix_HaltMusic();
 	}		
-	setCurrentlyPlaying(gameState);
+	//setCurrentlyPlaying(gameState);
 
 	Mix_Music **musicPointer = gameStateToMusic(gameState);
 	Mix_PlayMusic(*musicPointer, -1);

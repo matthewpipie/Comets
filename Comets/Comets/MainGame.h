@@ -46,6 +46,8 @@ class MainGame {
 		bool checkPlayers();
 		void startGame(int difficulty); // 1-6
 		void restartGame();
+		void pauseGame();
+		void resumeGame();
 		void endGame();
 		bool isInGame();
 
@@ -54,7 +56,6 @@ class MainGame {
 
 		int _score;
 		int _gameStart;
-		bool _keysPressed[323];
 		int _mouseX;
 		int _mouseY;
 		SDL_Window *_window;

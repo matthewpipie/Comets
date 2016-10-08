@@ -16,6 +16,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Errors.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MenuGroup.h" />
     <ClInclude Include="MenuItem.h" />
@@ -33,6 +34,7 @@
     <ClCompile Include="Comet.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Errors.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Comets.cpp" />
     <ClCompile Include="MenuGroup.cpp" />
