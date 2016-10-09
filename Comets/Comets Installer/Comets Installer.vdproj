@@ -15,7 +15,37 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_079F645F635D49F7864E2B9612A9D7F8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_119C49ECF63B42028592468F11C29C52"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_13E6BD4055014F90A1F2D21F1E5008FB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_143ECF301725423C9F81B7051DC2DB5D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1600DBEEA459455083A294D3D6F40172"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2F4CF12FF84C43CB80DC6FCA68E87783"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,12 +69,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_493A35D7BB6D4923B623B93FEA5B0081"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5B064A41DDC04DE78868E279E4FEB6A6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -57,13 +81,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6103EA8E39D345A0BFB2D05BA7B4536E"
+        "MsmKey" = "8:_6AFCEFF01D424DC28C1E791FAC615798"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6AFCEFF01D424DC28C1E791FAC615798"
+        "MsmKey" = "8:_6BB3D73F33CF415BA6500D10583FF005"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6E93B75A88774E008352B466C9EB5467"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -76,6 +106,12 @@
         "Entry"
         {
         "MsmKey" = "8:_7C09F713A1E7473B925602B916D1BB18"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_963293548C6E4487A3F1A5A00EC2AF32"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -99,7 +135,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A7C3D5F8D877485DA20B8C578E0A51CF"
+        "MsmKey" = "8:_C434EC7F8FF9456EBDF671BF92985EF2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -111,19 +147,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E9922019F38C444C969F180502903E8C"
+        "MsmKey" = "8:_EDCAD9E1EE1941A58851702B36FCB8BE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EC94AE47DD4244F19E10E6F4BDFFCBC6"
+        "MsmKey" = "8:_EFD5BD1D25764E56B68019BD81DF0A10"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F0FB7B684BA145E6B426B9341AE52C12"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F780022613F54987A4FAE93D57D189B0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -226,12 +268,112 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_079F645F635D49F7864E2B9612A9D7F8"
+            {
+            "SourcePath" = "8:..\\Debug\\libvorbisfile-3.dll"
+            "TargetName" = "8:libvorbisfile-3.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_119C49ECF63B42028592468F11C29C52"
+            {
+            "SourcePath" = "8:..\\Debug\\SDL2_mixer.dll"
+            "TargetName" = "8:SDL2_mixer.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_13E6BD4055014F90A1F2D21F1E5008FB"
+            {
+            "SourcePath" = "8:..\\Debug\\libfreetype-6.dll"
+            "TargetName" = "8:libfreetype-6.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_143ECF301725423C9F81B7051DC2DB5D"
             {
             "SourcePath" = "8:..\\Comets\\resources\\ship.bmp"
             "TargetName" = "8:ship.bmp"
             "Tag" = "8:"
             "Folder" = "8:_34EB16F33F054EECA9DD1DD52EE76C40"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1600DBEEA459455083A294D3D6F40172"
+            {
+            "SourcePath" = "8:..\\Debug\\zlib1.dll"
+            "TargetName" = "8:zlib1.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2F4CF12FF84C43CB80DC6FCA68E87783"
+            {
+            "SourcePath" = "8:..\\Debug\\smpeg2.dll"
+            "TargetName" = "8:smpeg2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -306,26 +448,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_493A35D7BB6D4923B623B93FEA5B0081"
-            {
-            "SourcePath" = "8:..\\Release\\SDL2_image.dll"
-            "TargetName" = "8:SDL2_image.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B064A41DDC04DE78868E279E4FEB6A6"
             {
             "SourcePath" = "8:..\\Comets\\resources\\comet.bmp"
@@ -366,10 +488,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6103EA8E39D345A0BFB2D05BA7B4536E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6AFCEFF01D424DC28C1E791FAC615798"
             {
-            "SourcePath" = "8:..\\Release\\SDL2.dll"
-            "TargetName" = "8:SDL2.dll"
+            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-LightItalic.ttf"
+            "TargetName" = "8:OpenSans-LightItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6BB3D73F33CF415BA6500D10583FF005"
+            {
+            "SourcePath" = "8:..\\Debug\\libmodplug-1.dll"
+            "TargetName" = "8:libmodplug-1.dll"
             "Tag" = "8:"
             "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
             "Condition" = "8:"
@@ -386,12 +528,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6AFCEFF01D424DC28C1E791FAC615798"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E93B75A88774E008352B466C9EB5467"
             {
-            "SourcePath" = "8:..\\Comets\\resources\\open-sans\\OpenSans-LightItalic.ttf"
-            "TargetName" = "8:OpenSans-LightItalic.ttf"
+            "SourcePath" = "8:..\\Debug\\libvorbis-0.dll"
+            "TargetName" = "8:libvorbis-0.dll"
             "Tag" = "8:"
-            "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -432,6 +574,26 @@
             "TargetName" = "8:OpenSans-ExtraBoldItalic.ttf"
             "Tag" = "8:"
             "Folder" = "8:_59A147FF2157483FB1B3779D186AEE0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_963293548C6E4487A3F1A5A00EC2AF32"
+            {
+            "SourcePath" = "8:..\\Debug\\SDL2_image.dll"
+            "TargetName" = "8:SDL2_image.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -506,10 +668,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A7C3D5F8D877485DA20B8C578E0A51CF"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C434EC7F8FF9456EBDF671BF92985EF2"
             {
-            "SourcePath" = "8:..\\Debug\\libfreetype-6.dll"
-            "TargetName" = "8:libfreetype-6.dll"
+            "SourcePath" = "8:..\\Debug\\libFLAC-8.dll"
+            "TargetName" = "8:libFLAC-8.dll"
             "Tag" = "8:"
             "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
             "Condition" = "8:"
@@ -546,10 +708,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E9922019F38C444C969F180502903E8C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EDCAD9E1EE1941A58851702B36FCB8BE"
             {
-            "SourcePath" = "8:..\\Debug\\SDL2_ttf.dll"
-            "TargetName" = "8:SDL2_ttf.dll"
+            "SourcePath" = "8:..\\Debug\\SDL2.dll"
+            "TargetName" = "8:SDL2.dll"
             "Tag" = "8:"
             "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
             "Condition" = "8:"
@@ -566,10 +728,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EC94AE47DD4244F19E10E6F4BDFFCBC6"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EFD5BD1D25764E56B68019BD81DF0A10"
             {
-            "SourcePath" = "8:..\\Debug\\zlib1.dll"
-            "TargetName" = "8:zlib1.dll"
+            "SourcePath" = "8:..\\Debug\\libogg-0.dll"
+            "TargetName" = "8:libogg-0.dll"
             "Tag" = "8:"
             "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
             "Condition" = "8:"
@@ -592,6 +754,26 @@
             "TargetName" = "8:easy.wav"
             "Tag" = "8:"
             "Folder" = "8:_0BD84392E1F843ADB6C2FE080CFEB818"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F780022613F54987A4FAE93D57D189B0"
+            {
+            "SourcePath" = "8:..\\Debug\\SDL2_ttf.dll"
+            "TargetName" = "8:SDL2_ttf.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -747,7 +929,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Comets"
         "ProductCode" = "8:{68F09CBF-29C5-41AE-BE37-965E07BDD895}"
-        "PackageCode" = "8:{170FF97D-79C1-42FA-9402-48D67D8C0636}"
+        "PackageCode" = "8:{B04632A0-EF8B-476B-ADE4-92C3EAE09508}"
         "UpgradeCode" = "8:{160C8838-DDF1-4262-AE72-163A991C02F2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -867,6 +1049,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_02F7ADB8AD434E6F8A90799C5912BD93"
+            {
+            "Name" = "8:Comets"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_4F9899A8CACD40BA86283B25FC0D3873"
+            "Folder" = "8:_041EA90AA1C646DF9CA10039971138D4"
+            "WorkingFolder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D566F8A5941940B98D61915DA9D6FC89"
+            {
+            "Name" = "8:Comets"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_4F9899A8CACD40BA86283B25FC0D3873"
+            "Folder" = "8:_DD0A08DE0329481EAC4DEBCF672DC061"
+            "WorkingFolder" = "8:_94A3868A87FE4E6FBCDD6EF89B9DFF76"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
@@ -1288,34 +1498,6 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:Release|Win32"
             "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{5EA9C9C3-F8ED-4506-BEB8-C55A21133439}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A8E2DF5962A349AF9AA85ACDD918151B"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_041EA90AA1C646DF9CA10039971138D4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:ContentFiles"
             "OutputProjectGuid" = "8:{5EA9C9C3-F8ED-4506-BEB8-C55A21133439}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
