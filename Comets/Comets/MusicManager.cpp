@@ -10,7 +10,7 @@ MusicManager::MusicManager() :
 	_crazy(nullptr),
 	_insane(nullptr),
 	_actuallyImpossible(nullptr),
-	_currentlyPlaying(-1) {
+	_currentlyPlaying(nullptr) {
 }
 
 
@@ -66,10 +66,15 @@ void MusicManager::quitMusic() {
 void MusicManager::startMusic(int gameState, bool forceRestart) {
 	if (forceRestart) {
 		Mix_HaltMusic();
-	}		
+	}
 	//setCurrentlyPlaying(gameState);
 
 	Mix_Music **musicPointer = gameStateToMusic(gameState);
+
+	if ((musicPointer == _currentlyPlaying && !forceRestart && musicPointer != nullptr)) {
+		return;
+	}
+	_currentlyPlaying = musicPointer;
 	Mix_PlayMusic(*musicPointer, -1);
 }
 

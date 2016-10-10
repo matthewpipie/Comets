@@ -52,6 +52,8 @@ void InputManager::pollInput() {
 				_mouseDown = KeyState::KEY_JUST_DOWN;
 			}
 			break;
+		case SDL_MOUSEBUTTONUP:
+			_mouseDown = KeyState::KEY_UP;
 		case SDL_KEYUP:
 			int key = evnt.key.keysym.sym;
 			rectifyKey(key);

@@ -18,7 +18,7 @@ public:
 	void stopMusic(); //use on back to main menu
 
 private:
-	int _currentlyPlaying;
+	Mix_Music **_currentlyPlaying;
 
 	Mix_Music **gameStateToMusic(int gameState);
 

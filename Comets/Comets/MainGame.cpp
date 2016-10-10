@@ -229,54 +229,41 @@ void MainGame::gameLoop() {
 }
 
 void MainGame::processInput() {
-	SDL_Event evnt;
+	_inputManager.pollInput();
+	if (_inputManager.isKeyJustDown(SDLK_f)) {
+		fullscreenMode = !fullscreenMode;
+		SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
+		SDL_RenderPresent(_renderer);
+		int h, w;
+		SDL_GetRendererOutputSize(_renderer, &w, &h);
+		//std::cout << w << " " << h << std::endl;
+		Constants::setScreenSize(w, h);
+		initFont();
+		restartGame();
+	}
+	if (_inputManager.isKeyJustDown(SDLK_1)) {
+		Constants::PLAYER_COUNT = 1;
+		restartGame();
+	}
+	if (_inputManager.isKeyJustDown(SDLK_2)) {
+		Constants::PLAYER_COUNT = 2;
+		restartGame();
+	}
+	if (_inputManager.isKeyJustDown(SDLK_3)) {
+		Constants::PLAYER_COUNT = 3;
+		restartGame();
+	}
+	if (_inputManager.isKeyJustDown(SDLK_4)) {
+		Constants::PLAYER_COUNT = 4;
+		restartGame();
+	}
 
-	// Will keep looping until there are no more events to process
-	while (SDL_PollEvent(&evnt)) {
-		switch (evnt.type) {
-			case SDL_QUIT:
-				_gameState = GameState::EXIT;
-				break;
-			case SDL_KEYDOWN:
-				if (evnt.key.keysym.sym > 127) {
-					evnt.key.keysym.sym -= Constants::CONSTANT_SDL_CONTROL_NUMBER;
-				}
-				_keysPressed[evnt.key.keysym.sym] = true;
-				// std::cout << evnt.key.keysym.sym << std::endl;
-				if (evnt.key.keysym.sym == SDLK_f) {
-					fullscreenMode = !fullscreenMode;
-					SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
-					SDL_RenderPresent(_renderer);
-					int h, w;
-					SDL_GetRendererOutputSize(_renderer, &w, &h);
-					//std::cout << w << " " << h << std::endl;
-					Constants::setScreenSize(w, h);
-					initFont();
-					restartGame();
-				}
-
-				if (evnt.key.keysym.sym == SDLK_ESCAPE && _gameState == GameState::PLAY) {
-					_gameState = GameState::MENU;
-				}
-				else if (evnt.key.keysym.sym == SDLK_ESCAPE && _gameState == GameState::MENU) {
-					_gameState = GameState::EXIT;
-				}
-				if (evnt.key.keysym.sym == SDLK_1) {
-					Constants::PLAYER_COUNT = 1;
-					restartGame();
-				}
-				else if (evnt.key.keysym.sym == SDLK_2) {
-					Constants::PLAYER_COUNT = 2;
-					restartGame();
-				}
-				else if (evnt.key.keysym.sym == SDLK_3) {
-					Constants::PLAYER_COUNT = 3;
-					restartGame();
-				}
-				else if (evnt.key.keysym.sym == SDLK_4) {
-					Constants::PLAYER_COUNT = 4;
-					restartGame();
-				}
+	if (_inputManager.isKeyJustDown(SDLK_ESCAPE)) {
+		_gameState = GameState::MENU; // TODO: POP STACK
+	}
+	else if (evnt.key.keysym.sym == SDLK_ESCAPE && _gameState == GameState::MENU) {
+		_gameState = GameState::EXIT;
+	}
 
 				break;
 			case SDL_MOUSEBUTTONDOWN:

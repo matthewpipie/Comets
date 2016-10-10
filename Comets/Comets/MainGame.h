@@ -15,6 +15,7 @@
 #include "Player.h"
 #include "MenuManager.h"
 #include "MusicManager.h"
+#include "InputManager.h"
 
 class MainGame {
 	public:
@@ -53,11 +54,10 @@ class MainGame {
 
 		MenuManager _menuManager;
 		MusicManager _musicManager;
+		InputManager _inputManager;
 
 		int _score;
 		int _gameStart;
-		int _mouseX;
-		int _mouseY;
 		SDL_Window *_window;
 		SDL_Renderer *_renderer;
 		TTF_Font *_textFont;
