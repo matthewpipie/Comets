@@ -104,3 +104,10 @@ void Constants::changeControls(int player, int newControls) {
 	PLAYER_CONTROLS[player] = newControls;
 	PLAYER_CONTROLS[i] = temp;
 }
+
+void Constants::changeCometSpawnRate(double newSpawnRate) {
+	COMET_SPAWN_RATE = newSpawnRate;
+}
+void Constants::changeCometSpawnRateBPM(double bpm) {//literally dimentional analysis, assuming 1 beat = 1 comet
+	changeCometSpawnRate(pow(bpm, -1.0) * 3600.0);
+}

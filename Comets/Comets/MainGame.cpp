@@ -186,7 +186,7 @@ void MainGame::gameLoop() {
 				cleanComets();
 			}
 			drawGame();
-			if (isInGame() && !shouldContinue) {
+			if (isInGame() && !shouldContinue) {//ded
 				_gameState = (GameState)((int)_gameState + 10);//bad
 			}
 
@@ -292,6 +292,8 @@ void MainGame::processInput() {
 				break;
 		}
 	}
+
+	
 
 	if (_keysPressed[SDLK_SPACE]) {
 		if (pause) {

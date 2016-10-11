@@ -26,7 +26,7 @@ class Constants {
 		// Multipliers
 		static const double COMET_SPEED_MULTIPLIER_MAX;
 		static const double COMET_SPEED_MULTIPLIER_MIN;
-		static const int COMET_SPAWN_RATE;
+		static double COMET_SPAWN_RATE;
 
 		// Counts
 		static const int STAR_COUNT;
@@ -54,8 +54,9 @@ class Constants {
 		// Font files
 		static const char *FONT_PATH;
 
-		// Music files
+		// Music stuff
 		static const char *MUSIC_MENU;
+		static const double MUSIC_MENU_BPM;
 		static const char *MUSIC_EASY;
 		static const char *MUSIC_MEDIUM;
 		static const char *MUSIC_HARD;
@@ -78,4 +79,6 @@ class Constants {
 		static void changeShipColors(int ship, int rgb, int newColor);
 		static void changeNumberOfPlayers(int newNumber);
 		static void changeControls(int player, int newControls);
+		static void changeCometSpawnRate(double newSpawnRate);
+		static void changeCometSpawnRateBPM(double bpm);
 };
