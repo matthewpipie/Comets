@@ -25,7 +25,13 @@ void MusicManager::initMusic() {
 }
 
 void MusicManager::loadMusic() {
+	_menu = Mix_LoadMUS(Constants::MUSIC_MENU);
 	_easy = Mix_LoadMUS(Constants::MUSIC_EASY);
+	_medium = Mix_LoadMUS(Constants::MUSIC_MEDIUM);
+	_hard = Mix_LoadMUS(Constants::MUSIC_HARD);
+	_crazy = Mix_LoadMUS(Constants::MUSIC_CRAZY);
+	_insane = Mix_LoadMUS(Constants::MUSIC_INSANE);
+	_actuallyImpossible = Mix_LoadMUS(Constants::MUSIC_ACTUALLY_IMPOSSIBLE);
 }
 
 void MusicManager::unloadMusic() {
@@ -90,19 +96,20 @@ void MusicManager::stopMusic() {
 	Mix_HaltMusic();
 }
 
-Mix_Music **MusicManager::gameStateToMusic(int gameState) {
-	auto errorOut = [](int gameState) {fatalError("gameState could not be found by MusicManager!  gameState: " + gameState); };
-	if (gameState == 0) {
+Mix_Music **MusicManager::gameStateToMusic(GameState gameState) {
+	auto errorOut = [](GameState gameState) {fatalError("gameState could not be found by MusicManager!  gameState: " + gameState); };
+	int newState = (int)gameState;
+	if (gameState == GameState::EXIT) {
 		errorOut(gameState);
 	}
-	else if (gameState < 0) {
-		gameState = 0;
+	else if ((int)gameState < 0) { // In menu
+		newState = 0;
 	}
-	else if (gameState > 10) {
-		gameState -= 10;
+	else if (gameState > 10) { //paused
+		newState -= 10;
 	}
 
-	switch (gameState) {
+	switch (newState) {
 	case 0:
 		return &_menu;
 		break;
