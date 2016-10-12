@@ -23,7 +23,9 @@
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MusicManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RNGCalculator.h" />
+    <ClInclude Include="SDLManager.h" />
     <ClInclude Include="Side.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Star.h" />
@@ -42,7 +44,9 @@
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MusicManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RNGCalculator.cpp" />
+    <ClCompile Include="SDLManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="stdafx.cpp" />
