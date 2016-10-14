@@ -55,21 +55,13 @@ class MainGame {
 		MenuManager _menuManager;
 		MusicManager _musicManager;
 		InputManager _inputManager;
-
+		SDLManager _sdlManager;
+		ResourceManager _resourceManager;
+		
 		int _score;
 		int _gameStart;
-		SDL_Window *_window;
-		SDL_Renderer *_renderer;
-		TTF_Font *_textFont;
 		int _maxFPS;
 		GameState _gameState;
-		std::vector<Player> _players;
-		std::vector<Player>::iterator _playerI;
-		std::vector<Comet> _comets;
-		std::vector<Comet>::iterator _cometI;
-		std::vector<Star> _stars;
-		std::vector<Star>::iterator _starI;
-		int fullscreenMode;
 		// std::vector<Sprite> _sprites;
 		// std::vector<Sprite>::iterator _spriteI;
 };
