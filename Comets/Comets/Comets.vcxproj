@@ -14,7 +14,9 @@
     <ClInclude Include="CollisionCalculator.h" />
     <ClInclude Include="Comet.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Errors.h" />
+    <ClInclude Include="FontManager.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MainGame.h" />
@@ -35,7 +37,9 @@
     <ClCompile Include="CollisionCalculator.cpp" />
     <ClCompile Include="Comet.cpp" />
     <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Errors.cpp" />
+    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Comets.cpp" />

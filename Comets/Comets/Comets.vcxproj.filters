@@ -71,6 +71,12 @@
     <ClInclude Include="SDLManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionCalculator.cpp">
@@ -125,6 +131,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SDLManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
