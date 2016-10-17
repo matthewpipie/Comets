@@ -10,7 +10,16 @@ public:
 	SDLManager();
 	~SDLManager();
 	static int totalFrames;
-	void start();
+	void init();
+
+	Uint32 getCurrentFrame();
+	void sleep(Uint32 ms);
+	void toggleFullScreen();
+	void drawGame();
+
+	void quit();
+
+private:
 
 	void initSDL();
 	void initWindow();
@@ -18,7 +27,6 @@ public:
 	void loadTextures();
 	void loadMusic();
 
-private:
 	SDL_Window *_mainWindow;
 	SDL_Renderer *_mainRenderer;
 	FontManager _fontManager;

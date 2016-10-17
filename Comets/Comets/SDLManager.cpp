@@ -14,13 +14,45 @@ SDLManager::~SDLManager()
 {
 }
 
-void SDLManager::start() {
+void SDLManager::init() {
 	initSDL();
 	initWindow();
 	initRenderer();
 	loadTextures();
 	loadMusic();
 }
+
+Uint32 SDLManager::getCurrentFrame() {
+	return SDL_GetTicks();
+}
+
+void SDLManager::sleep(Uint32 ms) {
+	SDL_Delay(ms);
+}
+
+void SDLManager::toggleFullScreen() {
+	_fullscreenMode = !_fullscreenMode;
+	SDL_SetWindowFullscreen(_mainWindow, _fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
+	SDL_RenderPresent(_mainRenderer);
+	int h, w;
+	SDL_GetRendererOutputSize(_mainRenderer, &w, &h);
+	//std::cout << w << " " << h << std::endl;
+	Constants::setScreenSize(w, h);
+	_fontManager.resetFontSize();
+}
+
+void SDLManager::quit() {
+	_resourceManager.quit(); //free textures and IMG_Quit()
+	_fontManager.quit(); //TTF_Quit() & closefont
+	if (_mainRenderer != nullptr) {
+		SDL_DestroyRenderer(_mainRenderer);
+	}
+	if (_mainWindow != nullptr) {
+		SDL_DestroyWindow(_mainWindow);
+	}
+	SDL_Quit();
+}
+
 
 void SDLManager::initSDL() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -57,3 +89,4 @@ void SDLManager::loadTextures() {
 void SDLManager::loadMusic() {
 	_musicManager.loadMusic();
 }
+

@@ -55,18 +55,10 @@ void MainGame::run() {
 	gameLoop();
 }
 
-void MainGame::initSDL() {
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		fatalError("SDL could not initialize! SDL_Error: " + std::string(SDL_GetError()));
-	}
-	SDL_GL_SetSwapInterval(0);
-	SDL_ShowCursor(0);
+void MainGame::initFont() {
 	if (TTF_Init() < 0) {
 		fatalError("SDL TTF could not initialize! TTF_Error: " + std::string(TTF_GetError()));
 	}
-}
-
-void MainGame::initFont() {
 	if (_textFont != nullptr) {
 		TTF_CloseFont(_textFont);
 	}
@@ -76,24 +68,6 @@ void MainGame::initFont() {
 	}
 }
 
-void MainGame::initMusic() {
-	_musicManager.initMusic();
-}
-
-void MainGame::makeWindow() {
-	_window = SDL_CreateWindow("SDL Fun", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	if (_window == nullptr) {
-		fatalError("SDL Window could not initialize! SDL_Error: " + std::string(SDL_GetError()));
-	}
-}
-
-void MainGame::makeRenderer() {
-	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
-	if (_renderer == nullptr) {
-		SDL_DestroyWindow(_window);
-		fatalError("SDL Renderer could not initialize! SDL_Error: " + std::string(SDL_GetError()));
-	}
-}
 
 void MainGame::makeMenus() {
 	
@@ -172,7 +146,7 @@ void MainGame::gameLoop() {
 	bool shouldContinue = true;
 	_musicManager.startMusic(1);
 	while (_gameState != GameState::EXIT) {
-		float startTicks = SDL_GetTicks();
+		float startTicks = _sdlManager.getCurrentFrame();
 
 		processInput();
 		if (_gameState > 0) { // In game, dead or alive
@@ -230,14 +204,7 @@ void MainGame::gameLoop() {
 void MainGame::processInput() {
 	_inputManager.pollInput();
 	if (_inputManager.isKeyJustDown(SDLK_f)) {
-		fullscreenMode = !fullscreenMode;
-		SDL_SetWindowFullscreen(_window, fullscreenMode == 0 ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
-		SDL_RenderPresent(_renderer);
-		int h, w;
-		SDL_GetRendererOutputSize(_renderer, &w, &h);
-		//std::cout << w << " " << h << std::endl;
-		Constants::setScreenSize(w, h);
-		initFont();
+		_sdlManager.toggleFullScreen();
 		restartGame();
 	}
 	if (_inputManager.isKeyJustDown(SDLK_1)) {
