@@ -47,7 +47,6 @@ void MainGame::run() {
 	// _sprites[2].setPixelAttributes(16 + 32, 0, 63, 63);
 	// _sprites[3].setPixelAttributes(16 + 32 + 63, 0, 126, 126);
 	// _sprites[0].setAttributes(16 + 32 + 63 + 126, 0, 20, 20);
-	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
 	/*_sprites[0].rect.x = 0;
 	_sprites[0].rect.y = 0;
 	_sprites[0].rect.w = 100;

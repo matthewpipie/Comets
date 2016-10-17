@@ -8,6 +8,9 @@
 #include "stdafx.h"
 #include "Constants.h"
 
+const char *Constants::GAME_NAME = "Comets";
+const char *Constants::GAME_VERSION = "1.1";
+
  //SDL weirdness
 const int Constants::CONSTANT_SDL_CONTROL_NUMBER = 1073741753;
 

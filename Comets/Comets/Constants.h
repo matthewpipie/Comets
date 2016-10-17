@@ -8,6 +8,10 @@
 #pragma once
 class Constants {
 	public:
+
+		static const char *GAME_NAME;
+		static const char *GAME_VERSION;
+
 		//SDL weirdness
 		static const int CONSTANT_SDL_CONTROL_NUMBER;
 		

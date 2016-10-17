@@ -7,7 +7,7 @@ class MusicManager
 public:
 	MusicManager();
 	~MusicManager();
-	void initMusic(); //start
+	void init(); //start
 	void loadMusic(); //call at loading
 	void unloadMusic(); //call at death of game
 	void quitMusic(); //end
