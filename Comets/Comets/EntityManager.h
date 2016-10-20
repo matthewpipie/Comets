@@ -13,10 +13,10 @@ public:
 	void eraseDeadPlayers();
 	bool arePlayersAlive();
 private:
-	template<class SPRITE>
-	void eraseDeadSprites(SPRITE &sprite);
-	std::vector<Player> _players;
-	std::vector<Comet> _comets;
-	std::vector<Star> _stars;
+	template<class SPRITES>
+	void eraseDeadSprites(SPRITES &sprites);
+	std::vector<std::auto_ptr<Player>> _players;
+	std::vector<std::auto_ptr<Comet>> _comets;
+	std::vector<std::auto_ptr<Star>> _stars;
 };
 
