@@ -452,51 +452,5 @@ void MainGame::fixCollision() {
 	
 }
 
-void MainGame::cleanComets() {
-	for (_cometI = _comets.begin(); _cometI != _comets.end(); /*++_cometI*/) {
-		if (!_cometI->isAlive()) {
-			_cometI = _comets.erase(_cometI);
-		} else {
-			++_cometI;
-		}
-	}
-	// std::cout << _comets.size() << std::endl;
-}
 
-void MainGame::makeComet() {
-	bool canExist = false;
-	Comet testComet;
-	int count = 0;
-	do {
-		canExist = true;
-		testComet.initPos();
-		for (int i = 0; i < _comets.size(); i++) {
-			if (testComet.isColliding(&_comets[i])) {
-				canExist = false;
-				break;
-			}
-		}
-		count++;
-		//std::cout << "Looked for comet space " << count << " times." << std::endl;
-		if (count > 2000) {
-			fatalError("Error: Could not find spawn location for comet.");
-		}
-	} while (!canExist);
-	_comets.push_back(testComet);
-}
 
-bool MainGame::checkPlayers() {
-	for (_playerI = _players.begin(); _playerI != _players.end(); /*++_cometI*/) {
-		//std::cout << _playerI->isAlive() << std::endl;
-		if (!_playerI->isAlive()) {
-			_playerI = _players.erase(_playerI);
-		}
-		else {
-			++_playerI;
-		}
-	}
-	if (_players.size() < 1) {
-		return false;
-	}
-	return true;
-}
