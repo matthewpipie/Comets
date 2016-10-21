@@ -39,7 +39,7 @@ class Sprite {
 		double getR();
 		bool isAlive();
 		void setAlive(bool newAlive);
-		bool isColliding(Sprite *testComet);
+		bool isColliding(Sprite &testSprite);
 
 	private:
 		SDL_Texture *_texture;

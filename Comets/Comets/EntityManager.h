@@ -12,11 +12,12 @@ public:
 	void eraseDeadComets();
 	void eraseDeadPlayers();
 	bool arePlayersAlive();
+	void detectCollision();
 private:
 	template<class SPRITES>
 	void eraseDeadSprites(SPRITES &sprites);
-	std::vector<std::auto_ptr<Player>> _players;
-	std::vector<std::auto_ptr<Comet>> _comets;
-	std::vector<std::auto_ptr<Star>> _stars;
+	std::vector<std::unique_ptr<Player>> _players;
+	std::vector<std::unique_ptr<Comet>> _comets;
+	std::vector<std::unique_ptr<Star>> _stars;
 };
 

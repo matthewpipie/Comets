@@ -435,22 +435,3 @@ void MainGame::moveComets() {
 	}
 }
 
-void MainGame::fixCollision() {
-	for (int k = 0; k < _players.size(); k++) {
-		for (int i = 0; i < _comets.size(); i++) {
-			if (_comets[i].isColliding(&_players[k])) {
-				_players[k].resolveCollision();
-				_comets[i].setAlive(false);
-			}
-			for (int j = i + 1; j < _comets.size(); j++) {
-				if (_comets[i].isColliding(&_comets[j])) {
-					_comets[i].resolveCollision(&_comets[j]);
-				}
-			}
-		}
-	}
-	
-}
-
-
-

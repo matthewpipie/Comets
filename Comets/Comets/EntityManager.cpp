@@ -13,13 +13,14 @@ EntityManager::~EntityManager()
 
 void EntityManager::makeComet() {
 	bool canExist = false;
-	std::auto_ptr<Comet> testComet;
+	std::unique_ptr<Comet> testComet;
 	int count = 0;
 	do {
 		canExist = true;
 		testComet->initPos();
 		for (int i = 0; i < _comets.size(); i++) {
-			if (testComet->isColliding(&*_comets[i])) {
+			Comet tempComet = *(_comets[i].get());
+			if (testComet->isColliding(tempComet)) {
 				canExist = false;
 				break;
 			}
@@ -47,6 +48,26 @@ bool EntityManager::arePlayersAlive() {
 	}
 	return true;
 }
+
+void EntityManager::detectCollision() {
+	for (int k = 0; k < _players.size(); k++) {
+		for (int i = 0; i < _comets.size(); i++) {
+			if (_comets[i]->isColliding(&_players[k])) {
+				_players[k]->resolveCollision();
+				_comets[i]->setAlive(false);
+			}
+			for (int j = i + 1; j < _comets.size(); j++) {
+				if (_comets[i]->isColliding(_comets[j])) {
+					_comets[i]->resolveCollision(*_comets[j]);
+				}
+			}
+		}
+	}
+
+}
+
+
+
 
 template<class SPRITES>
 void EntityManager::eraseDeadSprites(SPRITES &sprites) {
