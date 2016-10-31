@@ -148,14 +148,14 @@ SDL_Rect Sprite::getFixedRect() {
 	return getRect();
 }
 
-bool Sprite::isColliding(Sprite &testSprite) {
+bool Sprite::isColliding(Sprite *testSprite) {
 
-	if (!isAlive() || !testSprite.isAlive()) {
+	if (!isAlive() || !testSprite->isAlive()) {
 		return false;
 	}
 
-	double distanceBetweenCometsSquared = std::pow(getX() - testSprite.getX(), 2.0) + std::pow(getY() - testSprite.getY(), 2.0);
-	double maxCollisionDistanceSquared = std::pow(getR() + testSprite.getR(), 2.0);
+	double distanceBetweenCometsSquared = std::pow(getX() - testSprite->getX(), 2.0) + std::pow(getY() - testSprite->getY(), 2.0);
+	double maxCollisionDistanceSquared = std::pow(getR() + testSprite->getR(), 2.0);
 
 	//std::cout << maxCollisionDistanceSquared << " " << distanceBetweenCometsSquared << std::endl;
 

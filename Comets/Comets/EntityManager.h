@@ -9,15 +9,21 @@ public:
 	EntityManager();
 	~EntityManager();
 	void makeComet();
-	void eraseDeadComets();
-	void eraseDeadPlayers();
+	void clean();
 	bool arePlayersAlive();
 	void detectCollision();
+
 private:
+	void eraseDeadComets();
+	void eraseDeadPlayers();
+
 	template<class SPRITES>
 	void eraseDeadSprites(SPRITES &sprites);
-	std::vector<std::unique_ptr<Player>> _players;
-	std::vector<std::unique_ptr<Comet>> _comets;
-	std::vector<std::unique_ptr<Star>> _stars;
+	void tryToTwinkleStars();
+	void moveComets();
+	void tryToMakeComet();
+	std::vector<Player> _players;
+	std::vector<Comet> _comets;
+	std::vector<Star> _stars;
 };
 

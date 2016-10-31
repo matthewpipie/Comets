@@ -19,7 +19,7 @@ class Comet :
 			void modifyTrueAngle(double xSpeed, double ySpeed, double collisionAngle, double initSpeed, double altSpeed); // OLD
 			void setSpeed(double newSpeed);
 			double getSpeed();
-			void resolveCollision(Comet &resolveComet);
+			void resolveCollision(Comet *resolveComet);
 			double getXSpeed();
 			double getYSpeed();
 			double getFrameSpeed();

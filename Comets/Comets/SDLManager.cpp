@@ -38,12 +38,12 @@ void SDLManager::toggleFullScreen() {
 	SDL_GetRendererOutputSize(_mainRenderer, &w, &h);
 	//std::cout << w << " " << h << std::endl;
 	Constants::setScreenSize(w, h);
-	_fontManager.resetFontSize();
+	_ttfManager.resetFont();
 }
 
 void SDLManager::quit() {
-	_resourceManager.quit(); //free textures and IMG_Quit()
-	_fontManager.quit(); //TTF_Quit() & closefont
+	_textureManager.quit(); //free textures and IMG_Quit()
+	_ttfManager.quit(); //TTF_Quit() & closefont
 	if (_mainRenderer != nullptr) {
 		SDL_DestroyRenderer(_mainRenderer);
 	}
@@ -60,10 +60,10 @@ void SDLManager::initSDL() {
 	}
 	SDL_GL_SetSwapInterval(0); //Disable V-Sync
 	SDL_ShowCursor(0);
-	_fontManager.init();
+	_ttfManager.init();
 	//_inputManager.init();
 	_musicManager.init();
-	_resourceManager.init();
+	_textureManager.init();
 }
 
 void SDLManager::initWindow() {
@@ -84,7 +84,7 @@ void SDLManager::initRenderer() {
 }
 
 void SDLManager::loadTextures() {
-	_resourceManager.loadTextures();
+	_textureManager.loadTextures();
 }
 void SDLManager::loadMusic() {
 	_musicManager.loadMusic();

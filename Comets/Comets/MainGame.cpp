@@ -55,19 +55,6 @@ void MainGame::run() {
 	gameLoop();
 }
 
-void MainGame::initFont() {
-	if (TTF_Init() < 0) {
-		fatalError("SDL TTF could not initialize! TTF_Error: " + std::string(TTF_GetError()));
-	}
-	if (_textFont != nullptr) {
-		TTF_CloseFont(_textFont);
-	}
-	_textFont = TTF_OpenFont(Constants::FONT_PATH, Constants::FONT_SIZE);
-	if (_textFont == nullptr) {
-		fatalError("SDL TTF could not find the font! TTF_Error: " + std::string(TTF_GetError()));
-	}
-}
-
 
 void MainGame::makeMenus() {
 	
@@ -78,10 +65,6 @@ void MainGame::loadTextures() {
 	Comet::initCometTexture(_renderer);
 	Star::initStarTexture(_renderer);
 	Player::initPlayerTexture(_renderer);
-}
-
-void MainGame::loadMusic() {
-	_musicManager.loadMusic();
 }
 
 void MainGame::startGame(int difficulty) {
@@ -109,7 +92,7 @@ bool MainGame::isInGame() {
 	return false;
 }
 
-void MainGame::makeComets() {
+void MainGame::makeComets() { // INTO _entityManager.initResources
 	_comets.resize(0);
 	for (int i = 0; i < Constants::COMET_COUNT; i++) {
 		makeComet();
@@ -125,7 +108,7 @@ void MainGame::makeComets() {
 	_comets[1].setSpeed(.011);*/
 }
 
-void MainGame::makeStars() {
+void MainGame::makeStars() {// INTO _entityManager.initResources
 	_stars.resize(0);
 	for (int i = 0; i < Constants::STAR_COUNT; i++) {
 		_stars.push_back(Star());
@@ -133,7 +116,7 @@ void MainGame::makeStars() {
 	}
 }
 
-void MainGame::makePlayers() {
+void MainGame::makePlayers() {// INTO _entityManager.initResources
 	_players.resize(0);
 	for (int i = 0; i < Constants::PLAYER_COUNT; i++) {
 		_players.push_back(Player());
@@ -320,7 +303,7 @@ void MainGame::drawGame() {
 		textColor.r = Constants::TEXT_COLOR[0];
 		textColor.g = Constants::TEXT_COLOR[1];
 		textColor.b = Constants::TEXT_COLOR[2];
-		SDL_Surface *scoreSurface = TTF_RenderText_Solid(_textFont, scoreCStr, textColor);
+		/*SDL_Surface *textSurface = TTF_RenderText_Solid(_textFont, scoreCStr, textColor);
 		if (scoreSurface == nullptr) {
 			fatalError("SDL could not load score surface! SDL_Error: " + std::string(SDL_GetError()));
 		}
@@ -329,7 +312,8 @@ void MainGame::drawGame() {
 			fatalError("SDL could not load score texture! SDL_Error: " + std::string(SDL_GetError()));
 		}
 		scoreRect.w = scoreSurface->w;
-		scoreRect.h = scoreSurface->h;
+		scoreRect.h = scoreSurface->h; DONE BY TTFMANAGER */ 
+		
 		if (!pause) {
 			scoreRect.y = 0;
 			scoreRect.x = Constants::SCREEN_WIDTH_CALC - scoreRect.w;
@@ -339,7 +323,7 @@ void MainGame::drawGame() {
 			scoreRect.x = (Constants::SCREEN_WIDTH_CALC - scoreRect.w) / 2.0;
 		}
 		
-		SDL_FreeSurface(scoreSurface);
+		//SDL_FreeSurface(scoreSurface); DONE BY TTFMANAGER
 		SDL_RenderCopy(_renderer, scoreTexture, NULL, &scoreRect);
 	}
 	else {
@@ -409,29 +393,6 @@ void MainGame::movePlayers() {
 		else if (_playerI->getPercentY() < 0) {
 			_playerI->setPercentY(0);
 		}
-	}
-}
-
-void MainGame::moveComets() {
-	/*
-	if (MainGame::frameCount % 1 == 0) {
-		for (_i = _sprites.begin(); _i != _sprites.end(); ++_i) {
-			_i->setPos(MainGame::frameCount % 100, 0);
-		}
-	}*/
-
-	for (_starI = _stars.begin(); _starI != _stars.end(); ++_starI) {
-		_starI->twinkle();
-	}
-
-	for (_cometI = _comets.begin(); _cometI != _comets.end(); ++_cometI) {
-		_cometI->moveComet();
-	}
-
-	if (MainGame::frameCount % Constants::COMET_SPAWN_RATE == 0) {
-		makeComet();
-		//std::cout << _comets.size() << std::endl;
-		//std::cout << "Frame: " << MainGame::frameCount << std::endl;
 	}
 }
 

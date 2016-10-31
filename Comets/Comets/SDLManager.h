@@ -1,9 +1,9 @@
 #pragma once
 #include "stdafx.h"
-#include "FontManager.h"
+#include "TTFManager.h"
 #include "InputManager.h"
 #include "MusicManager.h"
-#include "ResourceManager.h"
+#include "TextureManager.h"
 class SDLManager
 {
 public:
@@ -29,11 +29,11 @@ private:
 
 	SDL_Window *_mainWindow;
 	SDL_Renderer *_mainRenderer;
-	FontManager _fontManager;
+
+	TTFManager _ttfManager;
 	InputManager _inputManager;
 	MusicManager _musicManager;
-	ResourceManager _resourceManager;
+	TextureManager _textureManager;
 	
 	int _fullscreenMode;
 };
-

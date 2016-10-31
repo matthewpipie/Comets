@@ -105,16 +105,16 @@ void Comet::moveComet() {
 	}*/
 }
 
-void Comet::resolveCollision(Comet &resolveComet) {
+void Comet::resolveCollision(Comet *resolveComet) {
 
-	double totalSpeed = getSpeed() + resolveComet.getSpeed();
-	double xDist = getPercentX() - resolveComet.getPercentX();
-	double yDist = getPercentY() - resolveComet.getPercentY();
+	double totalSpeed = getSpeed() + resolveComet->getSpeed();
+	double xDist = getPercentX() - resolveComet->getPercentX();
+	double yDist = getPercentY() - resolveComet->getPercentY();
 	double distance = std::sqrt(std::pow(xDist, 2.0) + std::pow(yDist, 2.0));
-	CollisionCalculator tempColl(this, &resolveComet);
+	CollisionCalculator tempColl(this, resolveComet);
 	double collisionAngle = tempColl.getCollisionAngle();
 
-	double intersectingSpace = getR() + resolveComet.getR() - distance;
+	double intersectingSpace = getR() + resolveComet->getR() - distance;
 	double xTotalIntersect = intersectingSpace * std::cos(collisionAngle);
 	double yTotalIntersect = intersectingSpace * std::sin(collisionAngle);
 	//TODO: determine which one to move negative?
@@ -122,14 +122,14 @@ void Comet::resolveCollision(Comet &resolveComet) {
 
 	Comet temp = *this;
 
-	setCollision(this, &resolveComet);
+	setCollision(this, resolveComet);
 
-	resolveComet.setCollision(&resolveComet, &temp);
+	resolveComet->setCollision(resolveComet, &temp);
 
 
 	//while (isColliding(resolveComet)) { //TODO: make this not make comets move a lot more than they should when they collide badly
 		moveComet();
-		resolveComet.moveComet();
+		resolveComet->moveComet();
 	//}
 
 }

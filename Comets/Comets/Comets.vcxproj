@@ -16,7 +16,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Errors.h" />
-    <ClInclude Include="FontManager.h" />
+    <ClInclude Include="TTFManager.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MainGame.h" />
@@ -25,7 +25,7 @@
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MusicManager.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="RNGCalculator.h" />
     <ClInclude Include="SDLManager.h" />
     <ClInclude Include="Side.h" />
@@ -39,7 +39,7 @@
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Errors.cpp" />
-    <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="TTFManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Comets.cpp" />
@@ -48,7 +48,7 @@
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MusicManager.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="RNGCalculator.cpp" />
     <ClCompile Include="SDLManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
